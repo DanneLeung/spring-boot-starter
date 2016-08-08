@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WelcomeController {
@@ -16,14 +17,16 @@ public class WelcomeController {
 
 	@GetMapping("/")
 	public String welcome(Map<String, Object> model) {
+		model.put("appName", "Spring boot starter");
 		model.put("time", new Date());
 		model.put("message", this.message);
 		return "welcome";
 	}
 
+	@ResponseBody
 	@RequestMapping("/foo")
 	public String foo(Map<String, Object> model) {
-		throw new RuntimeException("Foo");
+		return "foo";
 	}
 
 }

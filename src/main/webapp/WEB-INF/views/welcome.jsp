@@ -13,7 +13,8 @@
 		var="springUrl" />
 	Spring URL: ${springUrl} at ${time}
 	<br> JSTL URL: ${url}
-	<br> Message: ${message}
+	<br> Message: ${message} !!!!!!!
+	<br> ${appName}
 </body>
 
 </html>
