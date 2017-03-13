@@ -6,4 +6,7 @@ import com.xcesys.extras.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    User findByUsername(String username);
+
+    User findByIdNotAndUsername(Long id, String username);
 }

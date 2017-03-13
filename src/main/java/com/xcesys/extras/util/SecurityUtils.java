@@ -8,8 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.xcesys.extras.entity.enums.Role;
-
 public class SecurityUtils {
 
 	public static boolean hasAuthority(String authority) {
@@ -24,25 +22,10 @@ public class SecurityUtils {
 		return getAuthorities().contains(role);
 	}
 
-	public static boolean hasRole(Role role) {
-		return getAuthorities().contains(role.toString());
-	}
-
 	public static boolean hasAnyRole(String... roles) {
 		Set<String> authorities = getAuthorities();
 		for (String role : roles) {
 			if (authorities.contains(role)) {
-				return true;
-			}
-		}
-		// No roles matches
-		return false;
-	}
-
-	public static boolean hasAnyRole(Role... roles) {
-		Set<String> authorities = getAuthorities();
-		for (Role role : roles) {
-			if (authorities.contains(role.toString())) {
 				return true;
 			}
 		}

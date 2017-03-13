@@ -13,7 +13,7 @@ public class RegexUtils {
             try {
                 return matcher.group(1);
             } catch (IndexOutOfBoundsException ex) {
-                // Group is missing in regexp, create group around regex and try again
+                // Role is missing in regexp, create group around regex and try again
                 return parse(url, "(" + regex + ")");
             }
         } else {
