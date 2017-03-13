@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title th:text="|${applicationName} - Page Not Found!|">Page Not Found!</title>
+        <!-- Page Stylesheet -->
+        <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/pages/pagenotfound.css|}" href="../../../../resources/stylesheets/pages/pagenotfound.css"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1><span class="error-message" th:text="${errorMessage}">Page Not Found</span> <span class="error-status-code" th:text="${errorStatusCode}">404</span></h1>
+        </div>
+
+    </body>
+</html>

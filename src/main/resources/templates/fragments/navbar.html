@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="navbar">
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a th:text="${applicationName}" th:href="@{/home}"
+					class="navbar-brand" href="#">Application Name</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/home}" href="#"><span
+							class="glyphicon glyphicon-home" /> Home</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOPER')"
+						class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">System <b class="caret"></b></a> <!--                             <ul class="dropdown-menu"> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-header">Admin</li> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/system/groups}" href="/system/groups">Groups</a></li> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/system/users}" href="/system/users">Users</a></li> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')" class="dropdown-header">Developer</li> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')" th:classappend="${isProductionEnvironment} ? 'disabled'"><a th:href="@{/system/database}" href="/system/database">Database</a></li> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/javamelody}" href="/system/javamelody">Java Melody</a></li> -->
+						<!--                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/errors}" href="/system/errors">Errors</a></li> -->
+						<!--                             </ul> --></li>
+					<li sec:authorize="isAuthenticated()" class="dropdown"><a
+						href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+							class="glyphicon glyphicon-user" /> <span
+							sec:authentication="name">Username</span> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/user/settings}" href="/user/settings">Settings</a></li>
+							<li sec:authorize="hasRole('ROLE_ROOT')"><a
+								th:href="@{/switchuser}" href="/switchuser">Switch User</a></li>
+							<li><a th:href="@{/logout}" href="/logout">Logout</a></li>
+						</ul></li>
+					<li sec:authorize="not isAuthenticated()"><a
+						th:href="@{/login}" href="/login">Login</a></li>
+					<li><a href="#search"><span
+							class="glyphicon glyphicon-search" /></a></li>
+				</ul>
+			</div>
+			<!-- /navbar-collapse -->
+		</div>
+	</div>
+
+</body>
+</html>

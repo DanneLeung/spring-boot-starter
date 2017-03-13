@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
+    <head>
+        <title>Switch User</title>
+        <!-- Page Stylesheet -->
+        <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/pages/switchuser.css|}" href="../../../../resources/stylesheets/pages/switchuser.css"/>
+    </head>
+    <body>
+
+        <th:block layout:fragment="content">
+            <form class="form-switchuser" th:action="@{/switchuserto}" action="/switchuserto" method="post">
+                <h2 class="form-switchuser-heading">Please switch user</h2>
+                <input name="username" type="text" class="form-control" placeholder="Email address" autofocus="autofocus" value="user"/>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Switch User</button>
+                <div th:text="${message}" id="message" th:if="${message}"/>
+            </form>
+        </th:block>
+
+    </body>
+</html>

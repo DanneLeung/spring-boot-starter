@@ -20,7 +20,12 @@ public class WelcomeController {
 		model.put("appName", "Spring boot starter");
 		model.put("time", new Date());
 		model.put("message", this.message);
-		return "welcome";
+		return "pages/home";
+	}
+
+	@GetMapping("/login")
+	public String login(Map<String, Object> model) {
+		return "pages/login";
 	}
 
 	@ResponseBody
