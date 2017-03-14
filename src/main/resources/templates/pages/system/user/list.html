@@ -80,10 +80,10 @@
 									render: function (data, type, row, meta) {
 										var result = '';
 										if (data) {
-											result = '<a class="btn btn-xs key" title="激活/禁用" href="/system/user/enable/' + row._id +
+											result = '<a class="btn btn-xs key" title="激活/禁用" href="/system/user/enable/' + row.id +
 												'"><i class="fa fa-check-square"/></a>';
 										} else {
-											result = '<a class="btn btn-xs key" title="有效/无效" href="/system/user/enable/' + row._id +
+											result = '<a class="btn btn-xs key" title="有效/无效" href="/system/user/enable/' + row.id +
 												'"><i class="fa fa-square-o"/></a>';
 										}
 										return result;
@@ -94,7 +94,7 @@
 									'class': 'text-center',
 									render: function (data, type, row, meta) {
 										return '<div class="btn-group">' +
-											'<a class="btn btn-default btn-sm key" title="修改" href="/system/user/edit/' + row._id + '"><i class="fa fa-edit"></i></a>' +
+											'<a class="btn btn-default btn-sm key" title="修改" href="/system/user/edit?id=' + row.id + '"><i class="fa fa-edit"></i></a>' +
 											'<a class="btn btn-default btn-sm key del" title="删除" href="#"><i class="fa fa-trash-o"></i></a>' +
 											'</div>';
 									}

@@ -78,4 +78,8 @@ public class User extends IdEntity implements UserDetails, Serializable {
 		}
 		return grantedAuthorities;
 	}
+
+	public boolean isNuw() {
+		return this.getId() == null || this.getId() == 0;
+	}
 }

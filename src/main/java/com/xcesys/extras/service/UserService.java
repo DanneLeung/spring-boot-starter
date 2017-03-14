@@ -22,6 +22,10 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	public User findOne(Long id) {
+		return userRepository.findOne(id);
+	}
+
 	public User create(User user) {
 		log.info("Creating {} user", user.getUsername());
 
