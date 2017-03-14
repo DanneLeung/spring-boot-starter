@@ -1,6 +1,6 @@
 package com.xcesys.extras.config.springsecurity;
 
-import static com.xcesys.extras.util.StringUtils.quote;
+import static com.xcesys.extras.framework.util.StringUtils.quote;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.session.SessionDestroyedEvent;

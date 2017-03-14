@@ -4,17 +4,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.xcesys.extras.util.ApplicationEnvironmentUtils;
+import com.xcesys.extras.framework.util.ApplicationEnvironmentUtils;
 
 @ControllerAdvice
 public class ApplicationControllerAdvice {
 
+	@Value("${application.environment}")
+	private String applicationEnvironment;
 	@Value("${application.name}")
 	private String applicationName;
 	@Value("${application.version}")
 	private String applicationVersion;
-	@Value("${application.environment}")
-	private String applicationEnvironment;
+
+	@ModelAttribute("applicationEnvironment")
+	public String getApplicationEnvironment() {
+		return applicationEnvironment;
+	}
 
 	@ModelAttribute("applicationName")
 	public String getApplicationName() {
@@ -26,9 +31,9 @@ public class ApplicationControllerAdvice {
 		return applicationVersion;
 	}
 
-	@ModelAttribute("applicationEnvironment")
-	public String getApplicationEnvironment() {
-		return applicationEnvironment;
+	@ModelAttribute("isDevelopmentEnvironment")
+	public boolean isDevelopmentEnvironment() {
+		return ApplicationEnvironmentUtils.isDevelopmentEnvironment();
 	}
 
 	@ModelAttribute("isLocalhostEnvironment")
@@ -36,18 +41,13 @@ public class ApplicationControllerAdvice {
 		return ApplicationEnvironmentUtils.isLocalhostEnvironment();
 	}
 
-	@ModelAttribute("isDevelopmentEnvironment")
-	public boolean isDevelopmentEnvironment() {
-		return ApplicationEnvironmentUtils.isDevelopmentEnvironment();
+	@ModelAttribute("isProductionEnvironment")
+	public boolean isProductionEnvironment() {
+		return ApplicationEnvironmentUtils.isProductionEnvironment();
 	}
 
 	@ModelAttribute("isTestEnvironment")
 	public boolean isTestEnvironment() {
 		return ApplicationEnvironmentUtils.isTestEnvironment();
-	}
-
-	@ModelAttribute("isProductionEnvironment")
-	public boolean isProductionEnvironment() {
-		return ApplicationEnvironmentUtils.isProductionEnvironment();
 	}
 }

@@ -3,7 +3,6 @@ package com.xcesys.extras.config.springsecurity;
 import java.util.Date;
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -27,14 +26,6 @@ public class SpringDataTokenRepositoryImpl implements PersistentTokenRepository 
 	}
 
 	@Override
-	public void updateToken(String series, String tokenValue, Date lastUsed) {
-		RememberMeToken rememberMeToken = rememberMeTookenRepository.findBySeries(series);
-		rememberMeToken.setToken(tokenValue);
-		rememberMeToken.setLastUsed(lastUsed);
-		rememberMeTookenRepository.save(rememberMeToken);
-	}
-
-	@Override
 	public PersistentRememberMeToken getTokenForSeries(String series) {
 		RememberMeToken rememberMeToken = rememberMeTookenRepository.findBySeries(series);
 		if (rememberMeToken == null) {
@@ -51,6 +42,14 @@ public class SpringDataTokenRepositoryImpl implements PersistentTokenRepository 
 		for (RememberMeToken rememberMeToken : rememberMeTookens) {
 			rememberMeTookenRepository.delete(rememberMeToken);
 		}
+	}
+
+	@Override
+	public void updateToken(String series, String tokenValue, Date lastUsed) {
+		RememberMeToken rememberMeToken = rememberMeTookenRepository.findBySeries(series);
+		rememberMeToken.setToken(tokenValue);
+		rememberMeToken.setLastUsed(lastUsed);
+		rememberMeTookenRepository.save(rememberMeToken);
 	}
 
 }

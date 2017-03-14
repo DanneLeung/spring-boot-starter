@@ -1,9 +1,9 @@
 package com.xcesys.extras.config.springsecurity;
 
-import static com.xcesys.extras.util.ApplicationUtils.getSession;
-import static com.xcesys.extras.util.ApplicationUtils.getUser;
-import static com.xcesys.extras.util.ApplicationUtils.getUsername;
-import static com.xcesys.extras.util.StringUtils.quote;
+import static com.xcesys.extras.framework.util.ApplicationUtils.getSession;
+import static com.xcesys.extras.framework.util.ApplicationUtils.getUser;
+import static com.xcesys.extras.framework.util.ApplicationUtils.getUsername;
+import static com.xcesys.extras.framework.util.StringUtils.quote;
 
 import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class LoginListener {
 	}
 
 	private void onLogin(User user) {
-		setAutomaticLogoutTime(new Period(user.getAutomaticLogoutTime()));
+		// setAutomaticLogoutTime(new Period(user.getAutomaticLogoutTime()));
 	}
 
 	private void setAutomaticLogoutTime(Period automaticLogoutTime) {

@@ -1,6 +1,5 @@
 package com.xcesys.extras.service;
 
-import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xcesys.extras.entity.User;
+import com.xcesys.extras.framework.repository.IBaseRepository;
+import com.xcesys.extras.framework.service.impl.BaseCrudService;
 import com.xcesys.extras.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,46 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 @Slf4j
-public class UserService {
+public class UserService extends BaseCrudService<User, Long> {
 	@Autowired(required = false)
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private UserRepository userRepository;
 
-	public User findOne(Long id) {
-		return userRepository.findOne(id);
-	}
+	@Override
+	public void delete(Long[] ids) {
+		// TODO Auto-generated method stub
 
-	public User create(User user) {
-		log.info("Creating {} user", user.getUsername());
-
-		if (userRepository.findByUsername(user.getUsername()) != null) {
-			throw new RuntimeException("Cannot create user with username  \"" + user.getUsername()
-					+ "\" , the username is already in use by another user.");
-		}
-
-		// Encode password
-		user.setPassword(encryptPassword(user.getPassword()));
-		user.setAccountNonExpired(true);
-		user.setAccountNonLocked(true);
-		user.setCredentialsNonExpired(true);
-		user.setEnabled(true);
-		if (user.getAutomaticLogoutTime() == null) {
-			user.setAutomaticLogoutTime(Period.hours(1));
-		}
-
-		// create entity
-		return userRepository.save(user);
-	}
-
-	public User update(User user) {
-		if (userRepository.findByIdNotAndUsername(user.getId(), user.getUsername()) != null) {
-			throw new RuntimeException("Cannot update user with username  \"" + user.getUsername()
-					+ "\" , the username is already in use by another user.");
-		}
-
-		// save entity
-		return userRepository.save(user);
 	}
 
 	public void delete(User user) {
@@ -69,5 +40,47 @@ public class UserService {
 
 	public DataTablesOutput<User> findAll(DataTablesInput input) {
 		return userRepository.findAll(input);
+	}
+
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	public User findOne(Long id) {
+		return userRepository.findOne(id);
+	}
+
+	@Override
+	public IBaseRepository<User, Long> getRepository() {
+		return userRepository;
+	}
+
+	public User save(User user) {
+		log.info("Creating {} user", user.getUsername());
+
+		if (user.isNew() && userRepository.findByUsername(user.getUsername()) != null) {
+			throw new RuntimeException("Cannot create user with username  \"" + user.getUsername()
+					+ "\" , the username is already in use by another user.");
+		}
+
+		// Encode password
+		user.setPassword(encryptPassword(user.getPassword()));
+		user.setAccountNonExpired(true);
+		user.setAccountNonLocked(true);
+		user.setCredentialsNonExpired(true);
+		user.setEnabled(true);
+
+		// create entity
+		return super.save(user);
+	}
+
+	public User update(User user) {
+		if (userRepository.findByIdNotAndUsername(user.getId(), user.getUsername()) != null) {
+			throw new RuntimeException("Cannot update user with username  \"" + user.getUsername()
+					+ "\" , the username is already in use by another user.");
+		}
+
+		// save entity
+		return userRepository.save(user);
 	}
 }

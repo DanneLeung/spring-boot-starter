@@ -75,18 +75,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 
-	@Bean
-	public SpringDataTokenRepositoryImpl springDataTokenRepository() {
-		SpringDataTokenRepositoryImpl springDataTokenRepository = new SpringDataTokenRepositoryImpl();
-		return springDataTokenRepository;
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// .expressionHandler(webSecurityExpressionHandler())
+		web.ignoring().antMatchers("/static/**").antMatchers("/static-*/**");
 	}
-//
-//	@Bean
-//	public RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
-//		RememberMeAuthenticationProvider rememberMeAuthenticationProvider = new RememberMeAuthenticationProvider(
-//				REMEMBER_ME_KEY);
-//		return rememberMeAuthenticationProvider;
-//	}
 
 	// @Bean
 	// public CustomWebSecurityExpressionHandler webSecurityExpressionHandler()
@@ -103,9 +96,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //		return anonymousAuthenticationFilter;
 //	}
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		// .expressionHandler(webSecurityExpressionHandler())
-		web.ignoring().antMatchers("/static/**").antMatchers("/static-*/**");
+	@Bean
+	public SpringDataTokenRepositoryImpl springDataTokenRepository() {
+		SpringDataTokenRepositoryImpl springDataTokenRepository = new SpringDataTokenRepositoryImpl();
+		return springDataTokenRepository;
 	}
+//
+//	@Bean
+//	public RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
+//		RememberMeAuthenticationProvider rememberMeAuthenticationProvider = new RememberMeAuthenticationProvider(
+//				REMEMBER_ME_KEY);
+//		return rememberMeAuthenticationProvider;
+//	}
 }

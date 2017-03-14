@@ -1,12 +1,11 @@
 package com.xcesys.extras.repository;
 
-import org.springframework.data.jpa.datatables.repository.DataTablesRepository;
-
 import com.xcesys.extras.entity.User;
+import com.xcesys.extras.framework.repository.IBaseRepository;
 
-public interface UserRepository extends DataTablesRepository<User, Long> {
-
-	User findByUsername(String username);
+public interface UserRepository extends IBaseRepository<User, Long> {
 
 	User findByIdNotAndUsername(Long id, String username);
+
+	User findByUsername(String username);
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import com.xcesys.extras.entity.abstracts.IdEntity;
+import com.xcesys.extras.framework.entity.IdEntity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.entity.abstracts.IdEntity;
+import com.xcesys.extras.framework.entity.IdEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,14 +32,14 @@ import lombok.Setter;
 @Getter
 public class Role extends IdEntity implements Serializable {
 	private static final long serialVersionUID = 4371762231795963170L;
+	@JsonView(DataTablesOutput.View.class)
+	private String description;
 	@Column(unique = true)
 	@NonNull
 	@JsonView(DataTablesOutput.View.class)
 	private String name;
-	@JsonView(DataTablesOutput.View.class)
-	private String description;
-	@ManyToMany(cascade = ALL, fetch = LAZY)
-	private Set<User> users = new HashSet<User>();
 	@OneToMany(fetch = EAGER)
 	private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();
+	@ManyToMany(cascade = ALL, fetch = LAZY)
+	private Set<User> users = new HashSet<User>();
 }

@@ -14,14 +14,13 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.joda.time.Period;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.entity.abstracts.IdEntity;
+import com.xcesys.extras.framework.entity.IdEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,17 +35,6 @@ import lombok.Setter;
 @Setter
 public class User extends IdEntity implements UserDetails, Serializable {
 	private static final long serialVersionUID = -6943871074854331138L;
-	@Column(unique = true)
-	@NonNull
-	@JsonView(DataTablesOutput.View.class)
-	private String username;
-	@NonNull
-	@JsonView(DataTablesOutput.View.class)
-	private String password;
-	@JsonView(DataTablesOutput.View.class)
-	private String fullname;
-	@JsonView(DataTablesOutput.View.class)
-	private String email;
 	@JsonView(DataTablesOutput.View.class)
 	private boolean accountNonExpired;
 	@JsonView(DataTablesOutput.View.class)
@@ -54,21 +42,30 @@ public class User extends IdEntity implements UserDetails, Serializable {
 	@JsonView(DataTablesOutput.View.class)
 	private boolean credentialsNonExpired;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean enabled;
-	@JsonView(DataTablesOutput.View.class)
-	private Period automaticLogoutTime;
-	@JsonView(DataTablesOutput.View.class)
-	private Locale locale;
-	@JsonView(DataTablesOutput.View.class)
 	private String dateFormat = "yyyy/MM/dd";
 	@JsonView(DataTablesOutput.View.class)
-	private String timeFormat = "HH.mm";
+	private String email;
+	@JsonView(DataTablesOutput.View.class)
+	private boolean enabled;
+	@JsonView(DataTablesOutput.View.class)
+	private String fullname;
+	@JsonView(DataTablesOutput.View.class)
+	private Locale locale;
+	@NonNull
+	@JsonView(DataTablesOutput.View.class)
+	private String password;
+	@JsonView(DataTablesOutput.View.class)
+	@OneToMany(fetch = EAGER)
+	private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();
 	@JsonView(DataTablesOutput.View.class)
 	@ManyToMany(mappedBy = "users", fetch = EAGER)
 	private Set<Role> roles = new HashSet<Role>();
 	@JsonView(DataTablesOutput.View.class)
-	@OneToMany(fetch = EAGER)
-	private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();
+	private String timeFormat = "HH.mm";
+	@Column(unique = true)
+	@NonNull
+	@JsonView(DataTablesOutput.View.class)
+	private String username;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -77,9 +74,5 @@ public class User extends IdEntity implements UserDetails, Serializable {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 		return grantedAuthorities;
-	}
-
-	public boolean isNuw() {
-		return this.getId() == null || this.getId() == 0;
 	}
 }

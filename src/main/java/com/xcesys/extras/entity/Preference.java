@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
-import com.xcesys.extras.entity.abstracts.IdEntity;
+import com.xcesys.extras.framework.entity.IdEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +21,8 @@ import lombok.Setter;
 @Getter
 public class Preference extends IdEntity implements Serializable {
 
-    @NonNull
-    private String name;
     private Boolean isGroupPreference;
     private Boolean isUserPreference;
+    @NonNull
+    private String name;
 }

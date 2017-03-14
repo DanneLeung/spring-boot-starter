@@ -1,7 +1,7 @@
 package com.xcesys.extras.config.springsecurity;
 
-import static com.xcesys.extras.util.ApplicationUtils.getSession;
-import static com.xcesys.extras.util.ApplicationUtils.getUsername;
+import static com.xcesys.extras.framework.util.ApplicationUtils.getSession;
+import static com.xcesys.extras.framework.util.ApplicationUtils.getUsername;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,12 +28,12 @@ import org.springframework.web.filter.GenericFilterBean;
 
 public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilterBean implements InitializingBean {
 
-	private UserDetailsService userDetailsService;
 	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
-	private String key;
-	private String username;
-	private Object principal;
 	private List<GrantedAuthority> authorities;
+	private String key;
+	private Object principal;
+	private UserDetailsService userDetailsService;
+	private String username;
 
 	public UserDetailsServiceAnonymousAuthenticationFilter(UserDetailsService userDetailsService) {
 		this(userDetailsService, "anonymousKey");
@@ -55,6 +55,21 @@ public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilt
 		Assert.notNull(userDetailsService, "userDetailsService must be specified");
 		Assert.hasLength(key);
 		Assert.notNull(username, "Anonymous username must be set");
+	}
+
+	@Transactional(readOnly = true)
+	protected Authentication createAuthentication(HttpServletRequest request) {
+		// Get principal and authorities from UserDetailSertvice
+		if (principal == null) {
+			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+			principal = userDetails;
+			authorities = new ArrayList(userDetails.getAuthorities());
+		}
+
+		AnonymousAuthenticationToken auth = new AnonymousAuthenticationToken(key, principal, authorities);
+		auth.setDetails(authenticationDetailsSource.buildDetails(request));
+
+		return auth;
 	}
 
 	@Override
@@ -80,32 +95,17 @@ public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilt
 		chain.doFilter(req, res);
 	}
 
-	@Transactional(readOnly = true)
-	protected Authentication createAuthentication(HttpServletRequest request) {
-		// Get principal and authorities from UserDetailSertvice
-		if (principal == null) {
-			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-			principal = userDetails;
-			authorities = new ArrayList(userDetails.getAuthorities());
-		}
-
-		AnonymousAuthenticationToken auth = new AnonymousAuthenticationToken(key, principal, authorities);
-		auth.setDetails(authenticationDetailsSource.buildDetails(request));
-
-		return auth;
-	}
-
-	public void setAuthenticationDetailsSource(
-			AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource) {
-		Assert.notNull(authenticationDetailsSource, "AuthenticationDetailsSource required");
-		this.authenticationDetailsSource = authenticationDetailsSource;
+	public List<GrantedAuthority> getAuthorities() {
+		return authorities;
 	}
 
 	public Object getPrincipal() {
 		return principal;
 	}
 
-	public List<GrantedAuthority> getAuthorities() {
-		return authorities;
+	public void setAuthenticationDetailsSource(
+			AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource) {
+		Assert.notNull(authenticationDetailsSource, "AuthenticationDetailsSource required");
+		this.authenticationDetailsSource = authenticationDetailsSource;
 	}
 }
