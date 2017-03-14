@@ -27,7 +27,6 @@
 
 	</th:block>
 	<th:block th:case="*">
-
 	</th:block>
 	<!-- Bootstrap 3.3.6 -->
 	<link rel="stylesheet"
@@ -35,23 +34,20 @@
 		href="bootstrap/css/bootstrap.min.css" />
 	<!-- Font Awesome -->
 	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
-	<!-- Ionicons -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+		href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<!-- Theme style -->
 	<link rel="stylesheet"
 		th:href="@{|/static/${applicationVersion}/themes/lte/dist/css/AdminLTE.min.css|}"
-		href="dist/css/AdminLTE.min.css" />
+		href="/themes/lte/dist/css/AdminLTE.min.css" />
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet"
 		th:href="@{|/static/${applicationVersion}/themes/lte/dist/css/skins/_all-skins.min.css|}"
-		href="dist/css/skins/_all-skins.min.css" />
+		href="/themes/lte/dist/css/skins/_all-skins.min.css" />
 	<!-- iCheck -->
 	<link rel="stylesheet"
 		th:href="@{|/static/${applicationVersion}/themes/lte/plugins/iCheck/flat/blue.css|}"
-		href="plugins/iCheck/flat/blue.css" />
+		href="/themes/lte/plugins/iCheck/flat/blue.css" />
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,6 +56,11 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </th:block>
+<style type="text/css">
+  * {font-family: Microsoft YaHei ;}
+  html,body,input,select,text-area, ul, ol, li{font-size:12px;}
+</style>
+<th:block layout:fragment="styles" />
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -70,9 +71,7 @@
 		<th:block th:include="fragments/sidebar :: sidebar" />
 		<div class="content-wrapper">
 			<!-- Content -->
-			<section class="content">
-				<th:block layout:fragment="content" />
-			</section>
+			<th:block layout:fragment="content" />
 		</div>
 
 		<!-- Footer -->
@@ -94,9 +93,11 @@
 	<!-- jQuery 2.2.3 -->
 	<script
 		th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jQuery/jquery-2.2.3.min.js|}"
-		src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		src="/themes/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- jQuery UI 1.11.4 -->
-	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script
+		th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jQueryUI/jquery-ui.min.js|}"
+		src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<script>
 		$.widget.bridge('uibutton', $.ui.button);
@@ -108,18 +109,18 @@
 	<!-- Slimscroll -->
 	<script
 		th:src="@{|/static/${applicationVersion}/themes/lte/plugins/slimScroll/jquery.slimscroll.min.js|}"
-		src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		src="/themes/lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script
-		th:src="@{|/static/${applicationVersion}/themes/lte/plugins/fastclick/fastclick.js|}"
-		src="plugins/fastclick/fastclick.js"></script>
+		th:src="@{|/static/${applicationVersion}/themes/lte/plugins/fastclick/fastclick.min.js|}"
+		src="/themes/lte/plugins/fastclick/fastclick.min.js"></script>
 	<!-- AdminLTE App -->
 	<script
 		th:src="@{|/static/${applicationVersion}/themes/lte/dist/js/app.min.js|}"
-		src="dist/js/app.min.js"></script>
+		src="/themes/lte/dist/js/app.min.js"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<!-- Page JavaScripts -->
-	<th:block layout:fragment="javascripts" />
+	<th:block layout:fragment="scripts" />
 
 </body>
 </html>

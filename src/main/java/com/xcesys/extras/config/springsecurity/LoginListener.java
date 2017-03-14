@@ -4,10 +4,8 @@ import static com.xcesys.extras.util.ApplicationUtils.getSession;
 import static com.xcesys.extras.util.ApplicationUtils.getUser;
 import static com.xcesys.extras.util.ApplicationUtils.getUsername;
 import static com.xcesys.extras.util.StringUtils.quote;
-import static com.xcesys.extras.util.TimeUtils.format;
 
-import java.util.Date;
-
+import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
@@ -56,10 +54,10 @@ public class LoginListener {
 	}
 
 	private void onLogin(User user) {
-		setAutomaticLogoutTime(user.getAutomaticLogoutTime());
+		setAutomaticLogoutTime(new Period(user.getAutomaticLogoutTime()));
 	}
 
-	private void setAutomaticLogoutTime(Date automaticLogoutTime) {
+	private void setAutomaticLogoutTime(Period automaticLogoutTime) {
 		// log.info("Setting automatic logout time to {}",
 		// format(automaticLogoutTime));
 		// int automaticLogoutTimeInSeconds =

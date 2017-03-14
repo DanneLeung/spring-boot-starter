@@ -6,7 +6,8 @@
 		<!-- Logo -->
 		<a th:href="@{/}" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-			<span class="logo-lg"><b th:text="${applicationName}">Spring Boot Starter!!</b></span>
+			<span class="logo-lg"><b th:text="${applicationName}">Spring
+					Boot Starter!!</b></span>
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
@@ -100,8 +101,8 @@
 						class="dropdown-toggle" data-toggle="dropdown"> <img
 							th:src="@{|/static/${applicationVersion}/themes/lte/dist/img/user2-160x160.jpg|}"
 							src="../../dist/img/user2-160x160.jpg" class="user-image"
-							alt="User Image" /> <span class="hidden-xs">Alexander
-								Pierce</span>
+							alt="User Image" /> <span class="hidden-xs"
+							sec:authentication="name">Alexander Pierce</span>
 					</a>
 						<ul class="dropdown-menu">
 							<!-- User image -->
@@ -134,7 +135,7 @@
 									<a href="#" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									<a href="/logout" class="btn btn-default btn-flat">退出</a>
 								</div>
 							</li>
 						</ul></li>

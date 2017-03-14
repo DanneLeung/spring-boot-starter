@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 @Slf4j
-public class UserService {
+public class RoleService {
 	@Autowired(required = false)
 	private PasswordEncoder passwordEncoder;
 	@Autowired
