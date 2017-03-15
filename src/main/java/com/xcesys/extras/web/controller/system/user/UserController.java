@@ -11,11 +11,8 @@ import com.xcesys.extras.framework.controller.BaseCrudController;
 import com.xcesys.extras.framework.service.ICrudService;
 import com.xcesys.extras.service.UserService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
 @RequestMapping("/system/user")
-@Slf4j
 public class UserController extends BaseCrudController<User, Long> {
 	@Autowired(required = false)
 	PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();

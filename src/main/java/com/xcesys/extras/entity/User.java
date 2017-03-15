@@ -36,17 +36,17 @@ import lombok.Setter;
 public class User extends IdEntity implements UserDetails, Serializable {
 	private static final long serialVersionUID = -6943871074854331138L;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean accountNonExpired;
+	private boolean accountNonExpired = false;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean accountNonLocked;
+	private boolean accountNonLocked = false;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean credentialsNonExpired;
+	private boolean credentialsNonExpired = false;
 	@JsonView(DataTablesOutput.View.class)
 	private String dateFormat = "yyyy/MM/dd";
 	@JsonView(DataTablesOutput.View.class)
 	private String email;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean enabled;
+	private boolean enabled = false;
 	@JsonView(DataTablesOutput.View.class)
 	private String fullname;
 	@JsonView(DataTablesOutput.View.class)

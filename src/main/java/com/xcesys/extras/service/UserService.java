@@ -23,31 +23,12 @@ public class UserService extends BaseCrudService<User, Long> {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Override
-	public void delete(Long[] ids) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void delete(User user) {
-		// delete entity
-		userRepository.delete(user);
-	}
-
 	private String encryptPassword(String password) {
 		return passwordEncoder != null ? passwordEncoder.encode(password) : password;
 	}
 
-	public DataTablesOutput<User> findAll(DataTablesInput input) {
-		return userRepository.findAll(input);
-	}
-
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
-	}
-
-	public User findOne(Long id) {
-		return userRepository.findOne(id);
 	}
 
 	@Override
@@ -58,10 +39,12 @@ public class UserService extends BaseCrudService<User, Long> {
 	public User save(User user) {
 		log.info("Creating {} user", user.getUsername());
 
-		if (user.isNew() && userRepository.findByUsername(user.getUsername()) != null) {
-			throw new RuntimeException("Cannot create user with username  \"" + user.getUsername()
-					+ "\" , the username is already in use by another user.");
-		}
+		// if (user.isNew() && userRepository.findByUsername(user.getUsername())
+		// != null) {
+		// throw new RuntimeException("Cannot create user with username \"" +
+		// user.getUsername()
+		// + "\" , the username is already in use by another user.");
+		// }
 
 		// Encode password
 		user.setPassword(encryptPassword(user.getPassword()));

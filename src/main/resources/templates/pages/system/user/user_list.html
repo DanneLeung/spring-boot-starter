@@ -43,6 +43,10 @@
 				</div>
 			</div>
 		</section>
+		<form id="delForm" method="post" style="display: none" th:action="@{/system/user/del}">
+			<input id="ids" type="hidden" name="ids"/>
+			<input id="_csrf" type="hidden" name="_csrf"/>
+		</form>
 	</th:block>
 	<th:block layout:fragment="scripts">
 		<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/datatables/jquery.dataTables.min.js|}" src='//cdn.bootcss.com/datatables/1.10.11/js/jquery.dataTables.min.js'></script>
@@ -65,7 +69,7 @@
 						};
 						var table = $('table#users').DataTable(
 							$.extend(opts, {
-								'ajax': '/system/user/datatable',
+								ajax: '/system/user/datatable',
 								columns: [{
 									data: 'id'
 								}, {
@@ -116,6 +120,17 @@
 							})).on('draw.dt', function () {
 							$("#tableWrapper").fadeIn();
 						});
+			      table.on('click', '.del', function () {
+			          var id = table.row($(this).parents('tr')).data().id;
+			          $("#delForm #ids").val(id);
+			          if (id) {
+			            bootbox.confirm("确定要删除数据吗?", function (result) {
+			              if (result) {
+			                $("#delForm").submit();
+			              }
+			            });
+			          }
+			        });
 					});
 		</script>
 	</th:block>

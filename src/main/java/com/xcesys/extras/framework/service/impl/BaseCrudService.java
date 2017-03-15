@@ -41,7 +41,7 @@ public abstract class BaseCrudService<T extends IdEntity, ID extends Serializabl
 
 	@Override
 	public int enabled(boolean enabled, Long... ids) {
-
+		
 		return 0;
 	}
 

@@ -36,12 +36,13 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 	public String add(Model model) {
 		setMethod(model, METHOD_ADD);
 		setAdding(model, true);
+		model.addAttribute("m", newModel());
 		return view(getPrefix() + "_form");
 	}
 
 	@ResponseBody
 	@JsonView(DataTablesOutput.View.class)
-	@GetMapping(value = "/datatable")
+	@GetMapping(value = "datatable")
 	public DataTablesOutput<T> datatable(@Valid DataTablesInput input) {
 		return getCrudService().findAll(input);
 	}
@@ -49,31 +50,44 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 	@PostMapping(value = "del")
 	public String del(ID[] ids, RedirectAttributes redirectAttributes) {
 		if (ids != null && ids.length > 0) {
-			getCrudService().delete(ids);
+			for (ID id : ids)
+				getCrudService().delete(id);
 			addSuccessMessage(redirectAttributes, "删除数据成功");
 		}
-		return "redirect:" + "list";
+		return "redirect:" + "/system/user";
 	}
 
 	@GetMapping(value = "del/{id}")
-	public String del(Model model, @ModelAttribute("m") T m, RedirectAttributes redirectAttributes) {
-		if (m != null) {
-			getCrudService().delete(m);
+	public String del(ID id, RedirectAttributes redirectAttributes) {
+		if (id != null) {
+			getCrudService().delete(id);
 			addSuccessMessage(redirectAttributes, "删除数据成功");
 		}
-		return "redirect:" + "list";
+		return "redirect:" + "/system/user";
 	}
 
+	// @GetMapping(value = "del/{id}")
+	// public String del(Model model, @ModelAttribute("m") T m,
+	// RedirectAttributes redirectAttributes) {
+	// if (m != null) {
+	// getCrudService().delete(m);
+	// addSuccessMessage(redirectAttributes, "删除数据成功");
+	// }
+	// return "redirect:" + "/system/user";
+	// }
+
 	/**
-	 * 新增或编辑
+	 * 编辑
 	 * 
 	 * @param model
+	 *            ViewModel
 	 * @return
 	 */
 	@GetMapping(value = { "edit/{id}" })
-	public String edit(Model model) {
+	public String edit(@PathVariable("id") T m, Model model) {
 		setMethod(model, METHOD_EDIT);
 		setEditing(model, true);
+		model.addAttribute("m", m);
 		return view(getPrefix() + "_form");
 	}
 
@@ -90,14 +104,14 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 		return 0;
 	}
 
-	@ModelAttribute("m")
-	public T get(Model model, @PathVariable(required = false) ID id) {
-		if (id != null) {
-			return getCrudService().getById(id);
-		} else {
-			return newModel();
-		}
-	}
+	// @ModelAttribute("m")
+	// public T get(Model model, @PathVariable(required = false) ID id) {
+	// if (id != null) {
+	// return getCrudService().getById(id);
+	// } else {
+	// return newModel();
+	// }
+	// }
 
 	protected abstract ICrudService<T, ID> getCrudService();
 
@@ -129,7 +143,7 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 	 */
 	protected abstract T newModel();
 
-	@PostMapping(value = { "save", "save/{id}" })
+	@PostMapping(value = { "save"})
 	public String save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		// 验证错误，则保持在编辑界面
@@ -140,7 +154,7 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 				msgs.add(err.getDefaultMessage());
 			}
 			super.addErrorMessage(model, msgs.toArray(new String[] {}));
-			return edit(model);
+			return edit(m, model);
 		}
 		try {
 			saveModel(m, request, redirectAttributes);
@@ -150,7 +164,7 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 			// TODO: Fixed page change logic
 			return view(getPrefix() + "_form");
 		}
-		return "redirect:" + "../";
+		return "redirect:" + "/system/user";
 	}
 
 	/**
@@ -162,7 +176,7 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 	 */
 	protected void saveModel(T m, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		getCrudService().save(m);
-		addSuccessMessage(redirectAttributes, "保存数据" + m + "成功");
+		addSuccessMessage(redirectAttributes, "数据保存成功!");
 	}
 
 	/**
