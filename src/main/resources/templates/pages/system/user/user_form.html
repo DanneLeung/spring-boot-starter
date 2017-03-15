@@ -3,133 +3,133 @@
   layout:decorator="layouts/layout">
 
 <head>
-	<title>编辑系统用户</title>
+  <title>编辑系统用户</title>
 </head>
 <th:block layout:fragment="styles">
 </th:block>
 
 <body>
-	<th:block layout:fragment="content">
-		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='编辑系统用户', subtext='编辑指定用户数据，并且可以对用户进行角色授权'" />
-		<section class="content">
-			<div class="box box-primary">
-				<div class="box-header">
-					<h3 class="box-title">编辑系统用户</h3>
-					<div class="box-tools"></div>
-				</div>
-				<div class="box-body">
-					<form id="userForm" name="userForm" th:action="@{|/system/user/save|}" method="post" class="form-horizontal" novalidate="novalidate">
-						<input id="id" type="hidden" name="id" th:value="${m.id}" /> <input id="_csrf" type="hidden" name="_csrf" value=""
-						/>
-						<div class="form-group">
-							<label class="control-label col-sm-3 required">用户名：</label>
-							<div class="col-sm-8">
-								<input id="username" name="username" th:value="${m.username}" class="form-control required" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3 required">Email：</label>
-							<div class="col-sm-8">
-								<input id="email" name="email" th:value="${m.email}" class="form-control required" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3">姓名：</label>
-							<div class="col-sm-8">
-								<input id="fullname" name="fullname" th:value="${m.fullname}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3">设定密码：</label>
-							<div class="col-sm-8">
-								<input id="password" name="password" type="password" class="form-control required" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3">重复密码：</label>
-							<div class="col-sm-8">
-								<input id="confirmPassword" name="confirmPassword" type="password" class="form-control required" />
-							</div>
-						</div>
+  <th:block layout:fragment="content">
+    <th:block th:include="fragments/pageheader :: pageheader" th:with="header='编辑系统用户', subtext='编辑指定用户数据，并且可以对用户进行角色授权'" />
+    <section class="content">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">编辑系统用户</h3>
+          <div class="box-tools"></div>
+        </div>
+        <div class="box-body">
+          <form id="userForm" name="userForm" th:action="@{|/system/user/save|}" method="post" class="form-horizontal" novalidate="novalidate">
+            <input id="id" type="hidden" name="id" th:value="${m.id}" /> <input id="_csrf" type="hidden" name="_csrf" value=""
+            />
+            <div class="form-group">
+              <label class="control-label col-sm-2 required">用户名：</label>
+              <div class="col-sm-8">
+                <input id="username" name="username" th:value="${m.username}" class="form-control required" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2 required">Email：</label>
+              <div class="col-sm-8">
+                <input id="email" name="email" th:value="${m.email}" class="form-control required" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">姓名：</label>
+              <div class="col-sm-8">
+                <input id="fullname" name="fullname" th:value="${m.fullname}" class="form-control" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">设定密码：</label>
+              <div class="col-sm-8">
+                <input id="password" name="password" type="password" class="form-control required" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">重复密码：</label>
+              <div class="col-sm-8">
+                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control required" />
+              </div>
+            </div>
 
-						<h3 class="page-header">角色授权</h3>
-						<div class="form-group">
-							<div class="col-sm-2" th:each="role : ${roles}">
-								<div class="checkbox icheck">
-									<label> 
-			              <input name="roles" type="checkbox" th:value="${role.id}" th:text="${role.name}"/> 
+            <h3 class="page-header">角色授权</h3>
+            <div class="form-group">
+              <div class="col-sm-2" th:each="role : ${roles}">
+                <div class="checkbox icheck">
+                  <label> 
+                    <input name="roles" type="checkbox" th:value="${role.id}" /> 
+                    <span th:text="${role.name}"></span>
 									</label>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<div class="col-sm-offset-3 col-sm-8">
-									<a class="btn btn-default " th:href="@{/system/user}"> <i class="fa fa-fw fa-reply"></i> 返回
-									</a>
-									<button type="submit" class="btn btn-primary">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <div class="col-sm-offset-2 col-sm-8">
+                  <a class="btn btn-default " th:href="@{/system/user}"> <i class="fa fa-fw fa-reply"></i> 返回
+                  </a>
+                  <button type="submit" class="btn btn-primary">
 										<i class="fa fa-fw  fa-save"></i> 保存
 									</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</section>
-	</th:block>
-	<th:block layout:fragment="scripts">
-		<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js|}" 
-		  src="/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-		<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/jquery.validate.messages_zh.js|}" 
-		  src="/themes/lte/plugins/jquery-validation/dist/jquery.validate.messages_zh.js"></script>
-		<script type="text/javascript" th:inline="javascript">
-			$(document)
-				.ready(
-					function () {
-						/* form init  validation*/
-						$("#password").val("");
-						$("#newPassword").val("");
-						var form = $("#userForm");
-						var username = $("#oldUsername").val();
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </th:block>
+  <th:block layout:fragment="scripts">
+    <script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js|}" src="/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/jquery.validate.messages_zh.js|}"
+      src="/themes/lte/plugins/jquery-validation/dist/jquery.validate.messages_zh.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+      $(document)
+        .ready(
+          function () {
+            /* form init  validation*/
+            $("#password").val("");
+            $("#newPassword").val("");
+            var form = $("#userForm");
+            var username = $("#oldUsername").val();
 
-						// 提交当前活动的form，多个tab时候需要知道当前的tab
-						$(":submit", "#buttons").on("click",
-							function (e) {
-								form.submit();
-							});
+            // 提交当前活动的form，多个tab时候需要知道当前的tab
+            $(":submit", "#buttons").on("click",
+              function (e) {
+                form.submit();
+              });
 
-						// JQuery validate 插件看文档
-						// form validation
-						form
-							.validate({
-								rules: {
-									username: {
-										remote: "/exists?oldUsername=" +
-											encodeURIComponent(username)
-									},
-									email: {
-										emailCN: true
-									},
-									mobile: {
-										mobileCN: true
-									}
-								},
-								messages: {
-									username: {
-										remote: "该用户名已存在"
-									},
-									confirmNewPassword: {
-										equalTo: "输入与上面相同的密码"
-									},
-									mobile: {
-										remote: "只能输入纯数字的手机号"
-									}
-								}
-							});
-					});
-		</script>
-	</th:block>
+            // JQuery validate 插件看文档
+            // form validation
+            form
+              .validate({
+                rules: {
+                  username: {
+                    remote: "/exists?oldUsername=" +
+                      encodeURIComponent(username)
+                  },
+                  email: {
+                    emailCN: true
+                  },
+                  mobile: {
+                    mobileCN: true
+                  }
+                },
+                messages: {
+                  username: {
+                    remote: "该用户名已存在"
+                  },
+                  confirmNewPassword: {
+                    equalTo: "输入与上面相同的密码"
+                  },
+                  mobile: {
+                    remote: "只能输入纯数字的手机号"
+                  }
+                }
+              });
+          });
+    </script>
+  </th:block>
 </body>
 
 </html>

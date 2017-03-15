@@ -1,37 +1,56 @@
-## Welcome to GitHub Pages
+## Spring-boot+JPA+Thymeleaf Admin Console starter 
+Introduction
+============
 
-You can use the [editor on GitHub](https://github.com/DanneLeung/spring-boot-starter/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Framework
+---------
+- Spring Boot (v1.5.2)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+    >Takes an opinionated view of building production-ready Spring applications. Spring Boot favors convention over configuration and is designed to get you up and running as quickly as possible.
 
-### Markdown
+    [Spring Boot](http://projects.spring.io/spring-boot/)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Spring Data JPA
 
-```markdown
-Syntax highlighted code block
+    >Spring Data JPA, part of the larger Spring Data family, makes it easy to easily implement JPA based repositories. This module deals with enhanced support for JPA based data access layers. It makes it easier to build Spring-powered applications that use data access technologies. 
 
-# Header 1
-## Header 2
-### Header 3
+    [Spring Data JPA](http://projects.spring.io/spring-data-jpa/)
 
-- Bulleted
-- List
+- Spring Security
 
-1. Numbered
-2. List
+    >Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications.
 
-**Bold** and _Italic_ and `Code` text
+    [Spring Security](http://projects.spring.io/spring-security/)
 
-[Link](url) and ![Image](src)
-```
+- Thymeleaf
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+    >**Thymeleaf** is a modern server-side Java template engine for both web and standalone environments.
 
-### Jekyll Themes
+    [Thymeleaf](http://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/DanneLeung/spring-boot-starter/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    [Thymeleaf 3 docs](http://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
 
-### Support or Contact
+- AdminLTE (v2.3.11)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    >**AdminLTE** -- is a fully responsive admin template. Based on **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework. Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops. Check out the live preview now and see for yourself.
+    [AdminLTE GitHub](https://github.com/almasaeed2010/AdminLTE)
+
+Features
+--------
+
+- Spring boot with zero config
+- Integrate AdminLTE bootstrap 3 theme
+
+
+Run project
+-----------
+#### Requirements
+* Java 8
+* Maven 3
+
+#### Run
+- Use maven to run
+    ```
+    mvn spring-boot:run
+    ```
+- run with tomcat in IDE 
