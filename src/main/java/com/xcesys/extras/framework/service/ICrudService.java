@@ -29,7 +29,7 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 *            a collection of objects to be created.
 	 * @return a collection of objects just created.
 	 */
-	public Collection<T> create(Collection<T> o_list);
+	Collection<T> create(Collection<T> o_list);
 
 	/**
 	 * <p>
@@ -39,7 +39,7 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 * @param objects
 	 *            an collection of objects to be deleted.
 	 */
-	public void delete(Collection<T> o_list);
+	void delete(Collection<T> o_list);
 
 	/**
 	 * <p>
@@ -49,9 +49,9 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 * @param id
 	 *            id of object to be deleted.
 	 */
-	public void delete(ID id);
+	void delete(ID id);
 
-	public void delete(ID[] ids);
+	void delete(ID[] ids);
 
 	/**
 	 * <p>
@@ -61,7 +61,7 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 * @param object
 	 *            object to be deleted.
 	 */
-	public void delete(T o);
+	void delete(T o);
 
 	/**
 	 * 启用或禁用数据，对象中enabled属性将被更新。
@@ -71,7 +71,9 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 * @param enabled
 	 *            true为启用，false为禁用
 	 */
-	public int enabled(boolean enabled, Long... ids);
+	int enabled(boolean enabled, Long... ids);
+
+	boolean exists(ID id);
 
 	/**
 	 * <p>
@@ -79,9 +81,9 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 * 
 	 * @return all data objects.
 	 */
-	public Iterable<T> findAll();
+	Iterable<T> findAll();
 
-	public DataTablesOutput<T> findAll(DataTablesInput input);
+	DataTablesOutput<T> findAll(DataTablesInput input);
 
 	/**
 	 * <p>
@@ -93,7 +95,7 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 *            primary id of data object.
 	 * @return data object.
 	 */
-	public T findById(ID id);
+	T findById(ID id);
 
 	/**
 	 * <p>
@@ -104,7 +106,7 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 *            an array of primary ids of data object.
 	 * @return a list of data object, null if not found.
 	 */
-	public List<T> findByIds(Long[] ids);
+	List<T> findByIds(Long[] ids);
 
 	/**
 	 * <p>
@@ -114,14 +116,14 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 *            primary id of data object.
 	 * @return data object, null if not found.
 	 */
-	public T getById(ID id);
+	T getById(ID id);
 
 	/**
 	 * Return the Dao bean.
 	 * 
 	 * @return instance of {@link IDao}.
 	 */
-	public IBaseRepository<T, ID> getRepository();
+	IBaseRepository<T, ID> getRepository();
 
 	/**
 	 * <p>
@@ -131,7 +133,7 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 *            an object to be created.
 	 * @return an object just created.
 	 */
-	public T save(T o);
+	T save(T o);
 
 	/**
 	 * <p>
@@ -141,5 +143,5 @@ public interface ICrudService<T extends IdEntity, ID extends Serializable> {
 	 *            object to be updated.
 	 * @return T
 	 */
-	public T update(T o);
+	T update(T o);
 }

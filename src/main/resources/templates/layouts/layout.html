@@ -130,6 +130,10 @@ html, body, input, select, text-area, ul, ol, li, h1, h2, h3, h4, h5, h6,
 	<script
 		th:src="@{|/static/${applicationVersion}/themes/lte/plugins/toastr/toastr.min.js|}"
 		src="/themes/lte/plugins/toastr/toastr.min.js"></script>
+ <!-- iCheck -->
+  <script
+    th:src="@{|/static/${applicationVersion}/themes/lte/plugins/iCheck/icheck.min.js|}"
+    src="/themes/lte/plugins/iCheck/icheck.min.js"></script>
 	<!-- AdminLTE App -->
 	<script
 		th:src="@{|/static/${applicationVersion}/themes/lte/dist/js/app.min.js|}"
@@ -137,6 +141,11 @@ html, body, input, select, text-area, ul, ol, li, h1, h2, h3, h4, h5, h6,
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<!-- Page JavaScripts -->
 	<script type="text/javascript" th:inline="javascript">
+		$('input').iCheck({
+			checkboxClass : 'icheckbox_square-blue',
+			radioClass : 'iradio_square-blue',
+			increaseArea : '20%' // optional
+		});
 	  toastr.options = {
 			  "closeButton": true
 		}
