@@ -20,7 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.entity.IdEntity;
+import com.xcesys.extras.framework.entity.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class User extends IdEntity implements UserDetails, Serializable {
+public class User extends IdAuditableEntity implements UserDetails, Serializable {
 	private static final long serialVersionUID = -6943871074854331138L;
 	@JsonView(DataTablesOutput.View.class)
 	private boolean accountNonExpired = false;

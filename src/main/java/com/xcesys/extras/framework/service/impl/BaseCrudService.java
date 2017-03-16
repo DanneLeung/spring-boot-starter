@@ -7,11 +7,10 @@ import java.util.List;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-import com.xcesys.extras.framework.entity.IdEntity;
 import com.xcesys.extras.framework.repository.IBaseRepository;
 import com.xcesys.extras.framework.service.ICrudService;
 
-public abstract class BaseCrudService<T extends IdEntity, ID extends Serializable> implements ICrudService<T, ID> {
+public abstract class BaseCrudService<T, ID extends Serializable> implements ICrudService<T, ID> {
 
 	@Override
 	public Collection<T> create(Collection<T> o_list) {

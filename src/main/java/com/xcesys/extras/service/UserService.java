@@ -1,8 +1,6 @@
 package com.xcesys.extras.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
-import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,19 +37,16 @@ public class UserService extends BaseCrudService<User, Long> {
 	public User save(User user) {
 		log.info("Creating {} user", user.getUsername());
 
-		// if (user.isNew() && userRepository.findByUsername(user.getUsername())
-		// != null) {
-		// throw new RuntimeException("Cannot create user with username \"" +
-		// user.getUsername()
-		// + "\" , the username is already in use by another user.");
-		// }
+		if (user.isNew() && userRepository.countByUsername(user.getUsername()) > 0) {
+			throw new RuntimeException("Cannot create user with username \"" + user.getUsername()
+					+ "\" , the username is already in use by another user.");
+		}
 
 		// Encode password
 		user.setPassword(encryptPassword(user.getPassword()));
 		user.setAccountNonExpired(true);
 		user.setAccountNonLocked(true);
 		user.setCredentialsNonExpired(true);
-		user.setEnabled(true);
 
 		// create entity
 		return super.save(user);
@@ -65,5 +60,9 @@ public class UserService extends BaseCrudService<User, Long> {
 
 		// save entity
 		return userRepository.save(user);
+	}
+
+	public int countByUsername(String username) {
+		return userRepository.countByUsername(username);
 	}
 }

@@ -8,4 +8,6 @@ public interface UserRepository extends IBaseRepository<User, Long> {
 	User findByIdNotAndUsername(Long id, String username);
 
 	User findByUsername(String username);
+	
+	int countByUsername(String username);
 }

@@ -27,7 +27,7 @@ import com.xcesys.extras.framework.service.ICrudService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public abstract class BaseCrudController<T extends IdEntity, ID extends Serializable> extends BaseSearchController<T> {
+public abstract class BaseCrudController<T, ID extends Serializable> extends BaseSearchController<T> {
 	private static final String METHOD_ADD = "Adding";
 	private static final String METHOD_EDIT = "editing";
 	private static final String METHOD_VIEW = "Viewing";
@@ -157,6 +157,7 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 			return edit(m, model);
 		}
 		try {
+			preSave(m,request);
 			saveModel(m, request, redirectAttributes);
 		} catch (Exception e) {
 			log.error("Error while saving data.", e);
@@ -165,6 +166,10 @@ public abstract class BaseCrudController<T extends IdEntity, ID extends Serializ
 			return view(getPrefix() + "_form");
 		}
 		return "redirect:" + "/system/user";
+	}
+
+	protected void preSave(T m, HttpServletRequest request) {
+		
 	}
 
 	/**

@@ -1,0 +1,32 @@
+html,
+body,
+input,
+select,
+text-area,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: Microsoft YaHei;
+  font-size: 12px;
+}
+
+label.required:before {
+  color: red;
+  content: " * ";
+}
+
+form label.control-label:after {
+  content: " : ";
+}

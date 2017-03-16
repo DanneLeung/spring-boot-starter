@@ -17,7 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 public class RoleService extends BaseCrudService<Role, Long> {
 	@Autowired
 	private RoleRepository roleRepository;
-
+	public int countByname(String username) {
+		return roleRepository.countByName(username);
+	}
 	public Role findByName(String Rolename) {
 		return roleRepository.findByName(Rolename);
 	}

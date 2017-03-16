@@ -6,5 +6,5 @@ import com.xcesys.extras.framework.repository.IBaseRepository;
 public interface RoleRepository extends IBaseRepository<Role, Long> {
 
 	Role findByName(String name);
-
+	int countByName(String name);
 }

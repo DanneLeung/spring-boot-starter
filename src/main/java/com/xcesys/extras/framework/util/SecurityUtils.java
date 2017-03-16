@@ -2,6 +2,7 @@ package com.xcesys.extras.framework.util;
 
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
@@ -13,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.xcesys.extras.entity.User;
 
 public class SecurityUtils {
-
 	private static Set<String> getAuthorities() {
 		return AuthorityUtils
 				.authorityListToSet(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
@@ -40,6 +40,23 @@ public class SecurityUtils {
 			}
 		}
 		return null;
+	}
+
+	public static User getUser() {
+		// Check authentication exists
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null) {
+			return null;
+		}
+
+		// Get user
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof User) {
+			return (User) principal;
+		}
+
+		throw new RuntimeException("Unable to get user. Unknown user type found in SecurityContextHolder's principal = "
+				+ ReflectionToStringBuilder.toString(principal));
 	}
 
 	public static boolean hasAnyAuthority(String... authorities) {

@@ -3,7 +3,6 @@ package com.xcesys.extras.entity;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.PROTECTED;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -26,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Setter
 @Getter

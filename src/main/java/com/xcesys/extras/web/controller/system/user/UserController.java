@@ -1,12 +1,17 @@
 package com.xcesys.extras.web.controller.system.user;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xcesys.extras.entity.Role;
 import com.xcesys.extras.entity.User;
@@ -43,5 +48,18 @@ public class UserController extends BaseCrudController<User, Long> {
 	protected User newModel() {
 		User user = new User();
 		return user;
+	}
+
+	@GetMapping(value = "unique")
+	@ResponseBody
+	public boolean unique(String username, String oldUsername) {
+		if (!StringUtils.isBlank(oldUsername) && oldUsername.trim().equals(username))
+			return true;
+		return userService.countByUsername(username) <= 0;
+	}
+	
+	@Override
+	protected void preSave(User m, HttpServletRequest request) {
+		super.preSave(m, request);
 	}
 }

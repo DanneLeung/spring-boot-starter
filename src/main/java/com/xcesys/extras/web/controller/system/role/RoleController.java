@@ -6,30 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.entity.User;
-import com.xcesys.extras.service.UserService;
+import com.xcesys.extras.entity.Role;
+import com.xcesys.extras.framework.controller.BaseCrudController;
+import com.xcesys.extras.framework.service.ICrudService;
+import com.xcesys.extras.service.RoleService;
 
 @Controller
 @RequestMapping("/system/role")
-public class RoleController {
+public class RoleController extends BaseCrudController<Role, Long> {
 	@Autowired
-	private UserService userService;
+	private RoleService roleService;
 
 	@ResponseBody
 	@JsonView(DataTablesOutput.View.class)
 	@GetMapping(value = "/datatable")
-	public DataTablesOutput<User> datatable(@Valid DataTablesInput input) {
-		return userService.findAll(input);
+	public DataTablesOutput<Role> datatable(@Valid DataTablesInput input) {
+		return roleService.findAll(input);
 	}
 
-	@GetMapping(value = { "", "/" })
-	public String list(Model model) {
-		return "pages/system/user/list";
+	@Override
+	protected String getPrefix() {
+		return "user";
+	}
+
+	protected Role newModel() {
+		Role role = new Role();
+		return role;
+	}
+
+	@Override
+	protected ICrudService<Role, Long> getCrudService() {
+		return roleService;
 	}
 }
