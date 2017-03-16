@@ -9,12 +9,12 @@ import com.xcesys.extras.framework.util.ApplicationEnvironmentUtils;
 @ControllerAdvice
 public class ApplicationControllerAdvice {
 
-	@Value("${application.environment}")
+	@Value("${spring.application.environment}")
 	private String applicationEnvironment;
-	@Value("${application.name}")
+	@Value("${spring.application.name}")
 	private String applicationName;
-	@Value("${application.version}")
-	private String applicationVersion;
+
+	// @Value("${spring.application.version}")
 
 	@ModelAttribute("applicationEnvironment")
 	public String getApplicationEnvironment() {
@@ -24,11 +24,6 @@ public class ApplicationControllerAdvice {
 	@ModelAttribute("applicationName")
 	public String getApplicationName() {
 		return applicationName;
-	}
-
-	@ModelAttribute("applicationVersion")
-	public String getApplicationVersion() {
-		return applicationVersion;
 	}
 
 	@ModelAttribute("isDevelopmentEnvironment")
