@@ -6,7 +6,7 @@
     <head>
         <title>Java Melody</title>
         <!-- Page Stylesheet -->
-        <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/pages/system/javamelody.css|}" href="../../../../resources/stylesheets/pages/system/javamelody.css"/>
+        <link rel="stylesheet" th:href="@{|${theme}/stylesheets/pages/system/javamelody.css|}" href="../../../../resources/stylesheets/pages/system/javamelody.css"/>
     </head>
     <body>
 
@@ -16,7 +16,7 @@
 
         <th:block layout:fragment="javascripts">
             <!-- Page JavaScript -->
-            <script th:src="@{|/resources-${applicationVersion}/javascripts/pages/system/javamelody.js|}" src="../../../resources/javascripts/pages/system/javamelody.js"></script>
+            <script th:src="@{|${theme}/javascripts/pages/system/javamelody.js|}" src="../../../resources/javascripts/pages/system/javamelody.js"></script>
         </th:block>
     </body>
 </html>

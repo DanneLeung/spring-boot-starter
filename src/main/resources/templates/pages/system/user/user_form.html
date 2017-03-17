@@ -65,7 +65,7 @@
             <div class="form-group">
               <div class="col-sm-2" th:each="role : ${roles}">
                 <label> 
-                  <input name="roles" type="checkbox" th:value="${role.id}" /> 
+                  <input name="m.roles" type="checkbox" th:value="${role.id}" /> 
                   <span th:text="${role.name}"></span>
                 </label>
               </div>

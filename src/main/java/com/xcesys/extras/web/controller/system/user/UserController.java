@@ -1,5 +1,7 @@
 package com.xcesys.extras.web.controller.system.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +19,7 @@ import com.xcesys.extras.entity.Role;
 import com.xcesys.extras.entity.User;
 import com.xcesys.extras.framework.controller.BaseCrudController;
 import com.xcesys.extras.framework.service.ICrudService;
+import com.xcesys.extras.framework.util.ConvertUtils;
 import com.xcesys.extras.service.RoleService;
 import com.xcesys.extras.service.UserService;
 
@@ -57,9 +60,15 @@ public class UserController extends BaseCrudController<User, Long> {
 			return true;
 		return userService.countByUsername(username) <= 0;
 	}
-	
+
 	@Override
 	protected void preSave(User m, HttpServletRequest request) {
+		String[] ids = request.getParameterValues("m.roles");
+		if (ids != null && ids.length > 0) {
+			List<Role> roles = roleService.findByIds(ConvertUtils.convertStringArrayToLongArray(ids));
+			if (roles != null && !roles.isEmpty())
+				m.getRoles().addAll(roles);
+		}
 		super.preSave(m, request);
 	}
 }

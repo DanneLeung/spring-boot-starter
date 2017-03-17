@@ -142,7 +142,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 */
 	protected abstract T newModel();
 
-	@PostMapping(value = { "save"})
+	@PostMapping(value = { "save" })
 	public String save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		// 验证错误，则保持在编辑界面
@@ -156,7 +156,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 			return edit(m, model);
 		}
 		try {
-			preSave(m,request);
+			preSave(m, request);
 			saveModel(m, request, redirectAttributes);
 		} catch (Exception e) {
 			log.error("Error while saving data.", e);
@@ -168,7 +168,6 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	}
 
 	protected void preSave(T m, HttpServletRequest request) {
-		
 	}
 
 	/**
