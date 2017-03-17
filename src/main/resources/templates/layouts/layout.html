@@ -12,7 +12,7 @@
 	<!-- TODO: Add author -->
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" th:href="@{|/static/${applicationVersion}/themes/lte/favicon.ico|}" />
+	<link rel="shortcut icon" th:href="@{|${theme}/favicon.ico|}" />
 	<!-- TODO: Add favicon -->
 
 	<!-- Stylesheets -->
@@ -24,25 +24,25 @@
 		<th:block th:case="*">
 		</th:block>
 		<!-- Bootstrap 3.3.6 -->
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/bootstrap/css/bootstrap.min.css|}" href="bootstrap/css/bootstrap.min.css"
+		<link rel="stylesheet" th:href="@{|${theme}/bootstrap/css/bootstrap.min.css|}" href="bootstrap/css/bootstrap.min.css"
 		/>
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<!-- Theme style -->
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/dist/css/AdminLTE.min.css|}" href="/themes/lte/dist/css/AdminLTE.min.css"
+		<link rel="stylesheet" th:href="@{|${theme}/dist/css/AdminLTE.min.css|}" href="/themes/lte/dist/css/AdminLTE.min.css"
 		/>
 		<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/dist/css/skins/_all-skins.min.css|}" href="/themes/lte/dist/css/skins/_all-skins.min.css"
+		<link rel="stylesheet" th:href="@{|${theme}/dist/css/skins/_all-skins.min.css|}" href="/themes/lte/dist/css/skins/_all-skins.min.css"
 		/>
 		<!-- iCheck -->
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/plugins/iCheck/square/blue.css|}" href="/themes/lte/plugins/iCheck/square/blue.css"
+		<link rel="stylesheet" th:href="@{|${theme}/plugins/iCheck/square/blue.css|}" href="/themes/lte/plugins/iCheck/square/blue.css"
 		/>
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/plugins/toastr/toastr.min.css|}" href="/themes/lte/plugins/toastr/toastr.min.css"
+		<link rel="stylesheet" th:href="@{|${theme}/plugins/toastr/toastr.min.css|}" href="/themes/lte/plugins/toastr/toastr.min.css"
 		/>
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/plugins/datatables/dataTables.bootstrap.css|}"
+		<link rel="stylesheet" th:href="@{|${theme}/plugins/datatables/dataTables.bootstrap.css|}"
 		  href="//cdn.bootcss.com/datatables/1.10.11/css/dataTables.bootstrap.min.css" />
-		<link rel="stylesheet" th:href="@{|/static/${applicationVersion}/themes/lte/dist/css/app.css|}" href="/themes/lte/dist/css/app.css"
+		<link rel="stylesheet" th:href="@{|${theme}/dist/css/app.css|}" href="/themes/lte/dist/css/app.css"
 		/>
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -87,26 +87,26 @@
 	</th:block>
 
 	<!-- jQuery 2.2.3 -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jQuery/jquery-2.2.3.min.js|}" src="/themes/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script th:src="@{|${theme}/plugins/jQuery/jquery-2.2.3.min.js|}" src="/themes/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- jQuery UI 1.11.4 -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jQueryUI/jquery-ui.min.js|}" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script th:src="@{|${theme}/plugins/jQueryUI/jquery-ui.min.js|}" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<script>
 		$.widget.bridge('uibutton', $.ui.button);
 	</script>
 	<!-- Bootstrap 3.3.6 -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/bootstrap/js/bootstrap.min.js|}" src="bootstrap/js/bootstrap.min.js"></script>
+	<script th:src="@{|${theme}/bootstrap/js/bootstrap.min.js|}" src="bootstrap/js/bootstrap.min.js"></script>
 	<!-- Bootbox -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/bootbox/bootbox.min.js|}" src="/themes/lte/plugins/bootbox/bootbox.min.js"></script>
+	<script th:src="@{|${theme}/plugins/bootbox/bootbox.min.js|}" src="/themes/lte/plugins/bootbox/bootbox.min.js"></script>
 	<!-- Slimscroll -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/slimScroll/jquery.slimscroll.min.js|}" src="/themes/lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script th:src="@{|${theme}/plugins/slimScroll/jquery.slimscroll.min.js|}" src="/themes/lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/fastclick/fastclick.min.js|}" src="/themes/lte/plugins/fastclick/fastclick.min.js"></script>
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/toastr/toastr.min.js|}" src="/themes/lte/plugins/toastr/toastr.min.js"></script>
+	<script th:src="@{|${theme}/plugins/fastclick/fastclick.min.js|}" src="/themes/lte/plugins/fastclick/fastclick.min.js"></script>
+	<script th:src="@{|${theme}/plugins/toastr/toastr.min.js|}" src="/themes/lte/plugins/toastr/toastr.min.js"></script>
 	<!-- iCheck -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/iCheck/icheck.min.js|}" src="/themes/lte/plugins/iCheck/icheck.min.js"></script>
+	<script th:src="@{|${theme}/plugins/iCheck/icheck.min.js|}" src="/themes/lte/plugins/iCheck/icheck.min.js"></script>
 	<!-- AdminLTE App -->
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/dist/js/app.min.js|}" src="/themes/lte/dist/js/app.min.js"></script>
+	<script th:src="@{|${theme}/dist/js/app.min.js|}" src="/themes/lte/dist/js/app.min.js"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script type="text/javascript" th:inline="javascript">
 		$(document)

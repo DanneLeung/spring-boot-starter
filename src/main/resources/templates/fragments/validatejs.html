@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body th:fragment="validate">
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js|}" src="/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/additional-methods.min.js|}" src="/themes/lte/plugins/jquery-validation/dist/additional-methods.min.js"></script>
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/jquery-validation/dist/localization/messages_zh.min.js|}"
+	<script th:src="@{|${theme}/plugins/jquery-validation/dist/jquery.validate.min.js|}" src="/themes/lte/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script th:src="@{|${theme}/plugins/jquery-validation/dist/additional-methods.min.js|}" src="/themes/lte/plugins/jquery-validation/dist/additional-methods.min.js"></script>
+	<script th:src="@{|${theme}/plugins/jquery-validation/dist/localization/messages_zh.min.js|}"
 	  src="/themes/lte/plugins/jquery-validation/dist/localization/messages_zh.min.js"></script>
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/dist/js/setup_validation.js|}" src="/themes/lte/dist/js/setup_validation.js"></script>
+	<script th:src="@{|${theme}/dist/js/setup_validation.js|}" src="/themes/lte/dist/js/setup_validation.js"></script>
 </body>
 
 </html>

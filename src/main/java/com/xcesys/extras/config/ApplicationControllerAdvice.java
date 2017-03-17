@@ -16,6 +16,12 @@ public class ApplicationControllerAdvice {
 
 	// @Value("${spring.application.version}")
 
+	
+	
+	@ModelAttribute("theme")
+	public String getTheme() {
+		return "/static/themes/lte";
+	}
 	@ModelAttribute("applicationEnvironment")
 	public String getApplicationEnvironment() {
 		return applicationEnvironment;

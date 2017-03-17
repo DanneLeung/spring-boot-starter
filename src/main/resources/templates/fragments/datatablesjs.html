@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body th:fragment="datatables">
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/datatables/jquery.dataTables.min.js|}" src='//cdn.bootcss.com/datatables/1.10.13/js/jquery.dataTables.min.js'></script>
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/plugins/datatables/dataTables.bootstrap.min.js|}" src='//cdn.bootcss.com/datatables/1.10.13/js/dataTables.bootstrap.min.js'></script>
-	<script th:src="@{|/static/${applicationVersion}/themes/lte/dist/js/jquery.spring-friendly.js|}" src="/themes/lte/dist/js/jquery.spring-friendly.js"></script>
+	<script th:src="@{|${theme}/plugins/datatables/jquery.dataTables.min.js|}" src='//cdn.bootcss.com/datatables/1.10.13/js/jquery.dataTables.min.js'></script>
+	<script th:src="@{|${theme}/plugins/datatables/dataTables.bootstrap.min.js|}" src='//cdn.bootcss.com/datatables/1.10.13/js/dataTables.bootstrap.min.js'></script>
+	<script th:src="@{|${theme}/dist/js/jquery.spring-friendly.js|}" src="/themes/lte/dist/js/jquery.spring-friendly.js"></script>
 </body>
 
 </html>

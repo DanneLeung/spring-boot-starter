@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.entity.IdEntity;
 import com.xcesys.extras.framework.service.ICrudService;
 
 import lombok.extern.slf4j.Slf4j;
