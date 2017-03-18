@@ -27,12 +27,11 @@ import com.xcesys.extras.framework.entity.IdAuditableEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Getter
 @Setter
 public class User extends IdAuditableEntity implements UserDetails, Serializable {
