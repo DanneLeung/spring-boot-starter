@@ -83,7 +83,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * @return
 	 */
 	@GetMapping(value = { "edit/{id}" })
-	public String edit(@PathVariable("id") T m, Model model) {
+	public String edit(@ModelAttribute("m") T m, Model model) {
 		setMethod(model, METHOD_EDIT);
 		setEditing(model, true);
 		model.addAttribute("m", m);
@@ -95,7 +95,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * 
 	 * @return
 	 */
-	public int enableEntities(Long[] ids) {
+	public int enableEntities(ID[] ids) {
 		if (ids != null && ids.length == 0) {
 			int count = getCrudService().enabled(true, ids);
 			return count;
@@ -103,14 +103,13 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 		return 0;
 	}
 
-	// @ModelAttribute("m")
-	// public T get(Model model, @PathVariable(required = false) ID id) {
-	// if (id != null) {
-	// return getCrudService().getById(id);
-	// } else {
-	// return newModel();
-	// }
-	// }
+	@ModelAttribute("m")
+	public T get(Model model, @PathVariable(required = false) ID id) {
+		if (id != null) {
+			return getCrudService().findById(id);
+		}
+		return null;
+	}
 
 	protected abstract ICrudService<T, ID> getCrudService();
 
@@ -142,7 +141,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 */
 	protected abstract T newModel();
 
-	@PostMapping(value = { "save" })
+	@PostMapping(value = { "save", "save/{id}" })
 	public String save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		// 验证错误，则保持在编辑界面

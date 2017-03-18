@@ -1,8 +1,6 @@
 package com.xcesys.extras.framework.service;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
@@ -28,7 +26,7 @@ public interface ICrudService<T, ID extends Serializable> {
 	 *            a collection of objects to be created.
 	 * @return a collection of objects just created.
 	 */
-	Collection<T> create(Collection<T> o_list);
+	Iterable<T> create(Iterable<T> o_list);
 
 	/**
 	 * <p>
@@ -38,7 +36,7 @@ public interface ICrudService<T, ID extends Serializable> {
 	 * @param objects
 	 *            an collection of objects to be deleted.
 	 */
-	void delete(Collection<T> o_list);
+	void delete(Iterable<T> o_list);
 
 	/**
 	 * <p>
@@ -70,7 +68,7 @@ public interface ICrudService<T, ID extends Serializable> {
 	 * @param enabled
 	 *            true为启用，false为禁用
 	 */
-	int enabled(boolean enabled, Long... ids);
+	int enabled(boolean enabled, @SuppressWarnings("unchecked") ID... ids);
 
 	boolean exists(ID id);
 
@@ -105,7 +103,7 @@ public interface ICrudService<T, ID extends Serializable> {
 	 *            an array of primary ids of data object.
 	 * @return a list of data object, null if not found.
 	 */
-	List<T> findByIds(Long[] ids);
+	Iterable<T> findByIds(ID[] ids);
 
 	/**
 	 * <p>

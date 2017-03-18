@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -42,8 +43,6 @@ public class User extends IdAuditableEntity implements UserDetails, Serializable
 	@JsonView(DataTablesOutput.View.class)
 	private boolean credentialsNonExpired = false;
 	@JsonView(DataTablesOutput.View.class)
-	private String dateFormat = "yyyy/MM/dd";
-	@JsonView(DataTablesOutput.View.class)
 	private String email;
 	@JsonView(DataTablesOutput.View.class)
 	private boolean enabled = false;
@@ -60,8 +59,6 @@ public class User extends IdAuditableEntity implements UserDetails, Serializable
 	@JsonView(DataTablesOutput.View.class)
 	@ManyToMany(mappedBy = "users", fetch = EAGER)
 	private Set<Role> roles = new HashSet<Role>();
-	@JsonView(DataTablesOutput.View.class)
-	private String timeFormat = "HH.mm";
 	@Column(unique = true)
 	@NonNull
 	@JsonView(DataTablesOutput.View.class)

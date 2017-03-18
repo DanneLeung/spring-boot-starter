@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
               .useSecureCookie(true)
               .and()
           .exceptionHandling()
-              .accessDeniedPage("/error")
+//              .accessDeniedPage("/error")
               .and()
 //          .anonymous()
 //          .and()

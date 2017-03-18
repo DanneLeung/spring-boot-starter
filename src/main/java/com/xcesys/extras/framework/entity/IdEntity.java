@@ -7,11 +7,15 @@ import javax.persistence.MappedSuperclass;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+@DynamicInsert
+@DynamicUpdate
 @MappedSuperclass
 public class IdEntity extends AbstractPersistable<Long> {
 
@@ -22,7 +26,7 @@ public class IdEntity extends AbstractPersistable<Long> {
 	public Long getId() {
 		return super.getId();
 	}
-	
+
 	@Override
 	public void setId(Long id) {
 		super.setId(id);

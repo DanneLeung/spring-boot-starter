@@ -8,6 +8,8 @@ import javax.persistence.MappedSuperclass;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.data.jpa.domain.AbstractAuditable;
@@ -16,6 +18,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.entity.User;
 
+@DynamicInsert
+@DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class IdAuditableEntity extends AbstractAuditable<User, Long> {
@@ -29,7 +33,6 @@ public class IdAuditableEntity extends AbstractAuditable<User, Long> {
 	}
 
 	@Override
-	@JsonView(DataTablesOutput.View.class)
 	public User getCreatedBy() {
 		return super.getCreatedBy();
 	}
@@ -41,7 +44,6 @@ public class IdAuditableEntity extends AbstractAuditable<User, Long> {
 	}
 
 	@Override
-	@JsonView(DataTablesOutput.View.class)
 	public User getLastModifiedBy() {
 		return super.getLastModifiedBy();
 	}

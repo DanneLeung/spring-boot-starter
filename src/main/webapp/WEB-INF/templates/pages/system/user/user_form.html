@@ -18,7 +18,7 @@
           <div class="box-tools"></div>
         </div>
         <div class="box-body">
-          <form id="userForm" name="userForm" th:action="@{|/system/user/save|}" method="post" class="form-horizontal" novalidate="novalidate">
+          <form id="userForm" name="userForm" th:action="@{|/system/user/save${m.id==null?'':'/'+m.id}|}" method="post" class="form-horizontal" novalidate="novalidate">
             <input id="id" type="hidden" name="id" th:value="${m.id}" /> <input id="_csrf" type="hidden" name="_csrf" value=""
             />
             <div class="form-group">
@@ -39,7 +39,7 @@
                 <input id="fullname" name="fullname" th:value="${m.fullname}" class="form-control" />
               </div>
             </div>
-            <div th:hidden="${not m.new}">
+            <div th:if="${m.new}">
               <div class="form-group">
                 <label class="control-label col-sm-2">登录密码</label>
                 <div class="col-sm-8">

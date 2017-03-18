@@ -16,16 +16,6 @@ public class HomeController {
 
 	public static final int MINUTES = 60;
 
-	@GetMapping(value = "/accessdenied")
-	public String accessDenied() {
-		return "pages/accessdenied";
-	}
-
-	@GetMapping("/error")
-	public String error(Map<String, Object> model) {
-		return "pages/error";
-	}
-
 	@GetMapping("/login")
 	public String login() {
 		return "pages/login";
