@@ -38,15 +38,19 @@ import lombok.Setter;
 public class User extends IdAuditableEntity implements UserDetails, Serializable {
 	private static final long serialVersionUID = -6943871074854331138L;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean accountNonExpired = false;
+	private boolean accountNonExpired = true;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean accountNonLocked = false;
+	private boolean accountNonLocked = true;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean credentialsNonExpired = false;
+	private boolean admin = false;
+	@JsonView(DataTablesOutput.View.class)
+	private boolean credentialsNonExpired = true;
+	@JsonView(DataTablesOutput.View.class)
+	private boolean editable = false;
 	@JsonView(DataTablesOutput.View.class)
 	private String email;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean enabled = false;
+	private boolean enabled = true;
 	@JsonView(DataTablesOutput.View.class)
 	private String fullname;
 	@JsonView(DataTablesOutput.View.class)

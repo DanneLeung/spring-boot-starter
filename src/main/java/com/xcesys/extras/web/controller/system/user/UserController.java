@@ -31,11 +31,6 @@ public class UserController extends BaseCrudController<User, Long> {
 	@Autowired
 	RoleService roleService;
 
-	@ModelAttribute("roles")
-	public Iterable<Role> getRoles(@PathVariable(name = "id", required = false) Long id) {
-		return roleService.findAll();
-	}
-
 	@Override
 	protected ICrudService<User, Long> getCrudService() {
 		return userService;
@@ -46,17 +41,14 @@ public class UserController extends BaseCrudController<User, Long> {
 		return "user";
 	}
 
+	@ModelAttribute("roles")
+	public Iterable<Role> getRoles(@PathVariable(name = "id", required = false) Long id) {
+		return roleService.findAll();
+	}
+
 	protected User newModel() {
 		User user = new User();
 		return user;
-	}
-
-	@GetMapping(value = "unique")
-	@ResponseBody
-	public boolean unique(String username, String oldUsername) {
-		if (!StringUtils.isBlank(oldUsername) && oldUsername.trim().equals(username))
-			return true;
-		return userService.countByUsername(username) <= 0;
 	}
 
 	@Override
@@ -70,5 +62,22 @@ public class UserController extends BaseCrudController<User, Long> {
 			roles.forEach(m.getRoles()::add);
 		}
 		super.preSave(m, request);
+	}
+
+	@ResponseBody
+	@GetMapping(value = "resetpwd")
+	public int resetpwd(Long[] ids) {
+		if (ids != null && ids.length > 0) {
+			return userService.resetpwd(ids);
+		}
+		return -1;
+	}
+
+	@GetMapping(value = "unique")
+	@ResponseBody
+	public boolean unique(String username, String oldUsername) {
+		if (!StringUtils.isBlank(oldUsername) && oldUsername.trim().equals(username))
+			return true;
+		return userService.countByUsername(username) <= 0;
 	}
 }

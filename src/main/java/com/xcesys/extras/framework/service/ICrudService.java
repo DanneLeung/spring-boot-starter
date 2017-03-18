@@ -68,7 +68,7 @@ public interface ICrudService<T, ID extends Serializable> {
 	 * @param enabled
 	 *            true为启用，false为禁用
 	 */
-	int enabled(boolean enabled, @SuppressWarnings("unchecked") ID... ids);
+	int enable(boolean enabled, ID[] ids);
 
 	boolean exists(ID id);
 

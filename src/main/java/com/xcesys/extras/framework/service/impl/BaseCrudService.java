@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xcesys.extras.framework.repository.IBaseRepository;
 import com.xcesys.extras.framework.service.ICrudService;
@@ -38,9 +39,9 @@ public abstract class BaseCrudService<T, ID extends Serializable> implements ICr
 	}
 
 	@Override
-	public int enabled(boolean enabled, ID... ids) {
-
-		return 0;
+	@Transactional
+	public int enable(boolean enabled, ID[] ids) {
+		return getRepository().enable(enabled, ids);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
@@ -82,12 +83,13 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * 
 	 * @return
 	 */
-	public int enableEntities(ID[] ids) {
-		if (ids != null && ids.length == 0) {
-			int count = getCrudService().enabled(true, ids);
-			return count;
+	@ResponseBody
+	@GetMapping(value = "enable")
+	public int enable(boolean enabled, ID[] ids) {
+		if (ids != null && ids.length > 0) {
+			return getCrudService().enable(enabled, ids);
 		}
-		return 0;
+		return -1;
 	}
 
 	@ModelAttribute("m")
