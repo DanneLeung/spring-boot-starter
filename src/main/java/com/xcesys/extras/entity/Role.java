@@ -1,6 +1,5 @@
 package com.xcesys.extras.entity;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
@@ -10,6 +9,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -39,6 +40,9 @@ public class Role extends IdEntity implements Serializable {
 	private String name;
 	@OneToMany(fetch = EAGER)
 	private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();
-	@ManyToMany(cascade = ALL, fetch = LAZY)
+	@ManyToMany(fetch = LAZY)
+	@JoinTable(name = "user_roles", joinColumns = {
+			@JoinColumn(name = "roles_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "users_id", nullable = false, updatable = false) })
 	private Set<User> users = new HashSet<User>();
 }

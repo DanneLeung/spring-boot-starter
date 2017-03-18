@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 import com.xcesys.extras.framework.core.ValueLabelItem;
@@ -146,7 +147,8 @@ public final class ConvertUtils {
 				Boolean b = Boolean.FALSE;
 				if (v != null) {
 					String vs = v.toString();
-					if ("true".equalsIgnoreCase(vs) || "1".equalsIgnoreCase(vs) || "yes".equalsIgnoreCase(vs)) {
+					if ("true".equalsIgnoreCase(vs) || "1".equalsIgnoreCase(vs) || "yes".equalsIgnoreCase(vs)
+							|| "on".equalsIgnoreCase(vs)) {
 						b = Boolean.TRUE;
 					}
 				}
@@ -156,7 +158,7 @@ public final class ConvertUtils {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return Boolean.FALSE;
 	}
 
 	/**

@@ -9,9 +9,10 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -56,8 +57,12 @@ public class User extends IdAuditableEntity implements UserDetails, Serializable
 	@JsonView(DataTablesOutput.View.class)
 	@OneToMany(fetch = EAGER)
 	private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();
+
 	@JsonView(DataTablesOutput.View.class)
-	@ManyToMany(mappedBy = "users", fetch = EAGER)
+	@ManyToMany(fetch = EAGER)
+	@JoinTable(name = "user_roles", joinColumns = {
+			@JoinColumn(name = "users_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "roles_id", nullable = false, updatable = false) })
 	private Set<Role> roles = new HashSet<Role>();
 	@Column(unique = true)
 	@NonNull

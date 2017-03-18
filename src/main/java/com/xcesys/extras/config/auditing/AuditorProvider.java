@@ -1,14 +1,13 @@
 package com.xcesys.extras.config.auditing;
 
+import static com.xcesys.extras.framework.util.SecurityUtils.getLoginUsername;
+
 import org.springframework.data.domain.AuditorAware;
-import static com.xcesys.extras.framework.util.SecurityUtils.*;
 
-import com.xcesys.extras.entity.User;
-
-public class AuditorProvider implements AuditorAware<User> {
+public class AuditorProvider implements AuditorAware<String> {
 
 	@Override
-	public User getCurrentAuditor() {
-		return getUser();
+	public String getCurrentAuditor() {
+		return getLoginUsername();
 	}
 }

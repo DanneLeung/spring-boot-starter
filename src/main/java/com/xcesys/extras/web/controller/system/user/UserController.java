@@ -61,7 +61,10 @@ public class UserController extends BaseCrudController<User, Long> {
 
 	@Override
 	protected void preSave(User m, HttpServletRequest request) {
-		String[] ids = request.getParameterValues("m.roles");
+		// 解决checkbox没有勾选时传值问题
+		m.setEnabled(ConvertUtils.convertObjectToBoolean(request.getParameter("enabled")));
+		m.getRoles().clear();
+		String[] ids = request.getParameterValues("roles");
 		if (ids != null && ids.length > 0) {
 			Iterable<Role> roles = roleService.findByIds(ConvertUtils.convertStringArrayToLongArray(ids));
 			roles.forEach(m.getRoles()::add);

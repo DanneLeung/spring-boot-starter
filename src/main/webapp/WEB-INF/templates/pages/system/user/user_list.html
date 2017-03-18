@@ -19,11 +19,13 @@
 					<div class="box-tools">
 						<a class="btn btn-sm btn-default" th:href="@{/system/user/add}" th:title="创建新用户"><i
 							class="fa fa-fw fa-plus"></i> </a>
+						<a class="btn btn-sm btn-danger delAll" href="javascript:;" th:title="删除用户"><i
+							class="fa fa-fw fa-trash"></i> </a>
 					</div>
 				</div>
 				<div class="box-body">
 					<div id="tableWrapper" style="display: none;">
-						<table id="users" class="table table-striped table-bordered table-hover">
+						<table id="table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th style="width:40px;"><a href="javascript:;" class="selectAll" title="全选">全选</a></th>
@@ -65,7 +67,7 @@
 							serverSide: true,
 							stateSave: true
 						};
-						var table = $('table#users').DataTable(
+						var table = $('table#table').DataTable(
 							$.extend(opts, {
 								ajax: '/system/user/datatable',
 								order: [
@@ -149,6 +151,23 @@
 								});
 							}
 						});
+						
+						$(".btn.delAll").on("click", function(e) {
+	            var ids = [];
+	            $('#table>tbody input:checked').each(function(i, item) {
+                 ids.push($(item).val());
+               });
+	            $("#delForm #ids").val(ids.join(","));
+	            if (ids.length > 0) {
+	              bootbox.confirm("确定要删除选中的数据吗?", function(result) {
+	                if (result) {
+	                  $("#delForm").submit();
+	                }
+	              });
+	            } else {
+	              bootbox.alert("请选择要删除的数据.");
+	            }
+	          });
 					});
 		</script>
 	</th:block>

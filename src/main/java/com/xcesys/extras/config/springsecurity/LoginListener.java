@@ -3,7 +3,6 @@ package com.xcesys.extras.config.springsecurity;
 import static com.xcesys.extras.framework.util.ApplicationUtils.getSession;
 import static com.xcesys.extras.framework.util.ApplicationUtils.getUser;
 import static com.xcesys.extras.framework.util.ApplicationUtils.getUsername;
-import static com.xcesys.extras.framework.util.StringUtils.quote;
 
 import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class LoginListener {
 		@Override
 		public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
 			getSession().setAttribute("username", getUsername());
-			log.info("Logged in as {}", quote(getUsername()));
+			log.info("Logged in as {}", getUsername());
 			listener.onLogin(getUser());
 		}
 	}
@@ -46,9 +45,9 @@ public class LoginListener {
 			User fromUser = (User) event.getAuthentication().getPrincipal();
 			User toUser = (User) event.getTargetUser();
 
-			log.info("Logged out as {} (switching to {})", quote(fromUser.getUsername()), quote(toUser.getUsername()));
+			log.info("Logged out as {} (switching to {})", fromUser.getUsername(), toUser.getUsername());
 			getSession().setAttribute("username", toUser.getUsername());
-			log.info("Logged in as {} (switched from {})", quote(toUser.getUsername()), quote(fromUser.getUsername()));
+			log.info("Logged in as {} (switched from {})", toUser.getUsername(), fromUser.getUsername());
 			listener.onLogin(toUser);
 		}
 	}

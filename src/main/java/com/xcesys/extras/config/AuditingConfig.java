@@ -13,7 +13,7 @@ import com.xcesys.extras.entity.User;
 public class AuditingConfig {
 
     @Bean
-    public AuditorAware<User> auditorProvider() {
+    public AuditorAware<String> auditorProvider() {
         return new AuditorProvider();
     }
 }

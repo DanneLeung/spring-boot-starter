@@ -7,8 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
-import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -17,16 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.service.ICrudService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public abstract class BaseCrudController<T, ID extends Serializable> extends BaseSearchController<T> {
+public abstract class BaseCrudController<T, ID extends Serializable> extends BaseSearchController<T, ID> {
 	private static final String METHOD_ADD = "Adding";
 	private static final String METHOD_EDIT = "editing";
 	private static final String METHOD_VIEW = "Viewing";
@@ -37,13 +31,6 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 		setAdding(model, true);
 		model.addAttribute("m", newModel());
 		return view(getPrefix() + "_form");
-	}
-
-	@ResponseBody
-	@JsonView(DataTablesOutput.View.class)
-	@GetMapping(value = "datatable")
-	public DataTablesOutput<T> datatable(@Valid DataTablesInput input) {
-		return getCrudService().findAll(input);
 	}
 
 	@PostMapping(value = "del")
@@ -104,14 +91,9 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	}
 
 	@ModelAttribute("m")
-	public T get(Model model, @PathVariable(required = false) ID id) {
-		if (id != null) {
-			return getCrudService().findById(id);
-		}
-		return null;
+	public T get(Model model, @PathVariable(name = "id", required = false) T m) {
+		return m == null ? newModel() : m;
 	}
-
-	protected abstract ICrudService<T, ID> getCrudService();
 
 	protected String getPrefix() {
 		return "";

@@ -1,7 +1,5 @@
 package com.xcesys.extras.config.springsecurity;
 
-import static com.xcesys.extras.framework.util.StringUtils.quote;
-
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.session.SessionDestroyedEvent;
 import org.springframework.security.web.session.HttpSessionDestroyedEvent;
@@ -17,6 +15,6 @@ public class LogoutListener implements ApplicationListener<SessionDestroyedEvent
 	public void onApplicationEvent(SessionDestroyedEvent event) {
 		String sessionId = (String) ((HttpSessionDestroyedEvent) event).getSession().getId();
 		String username = (String) ((HttpSessionDestroyedEvent) event).getSession().getAttribute("username");
-		log.info("Logged out as {}", quote(username));
+		log.info("Logged out as {}", username);
 	}
 }
