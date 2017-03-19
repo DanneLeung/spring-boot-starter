@@ -11,7 +11,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.xcesys.extras.entity.User;
+import com.xcesys.extras.framework.entity.User;
 
 public class ApplicationUtils {
 

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-import com.xcesys.extras.framework.repository.IBaseRepository;
+import com.xcesys.extras.framework.dao.repository.IBaseRepository;
 
 /**
  * <p>

@@ -31,7 +31,16 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 		setMethod(model, METHOD_ADD);
 		setAdding(model, true);
 		model.addAttribute("m", newModel());
-		return view(getPrefix() + "_form");
+		return view(getSuffix() + "_form");
+	}
+
+	@GetMapping(value = "del/{id}")
+	public String del(ID id, RedirectAttributes redirectAttributes) {
+		if (id != null) {
+			getCrudService().delete(id);
+			addSuccessMessage(redirectAttributes, "删除数据成功");
+		}
+		return "redirect:" + getRequestMapping() + "/";
 	}
 
 	@PostMapping(value = "del")
@@ -41,16 +50,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 				getCrudService().delete(id);
 			addSuccessMessage(redirectAttributes, "删除数据成功");
 		}
-		return "redirect:" + "/system/user";
-	}
-
-	@GetMapping(value = "del/{id}")
-	public String del(ID id, RedirectAttributes redirectAttributes) {
-		if (id != null) {
-			getCrudService().delete(id);
-			addSuccessMessage(redirectAttributes, "删除数据成功");
-		}
-		return "redirect:" + "/system/user";
+		return "redirect:" + getRequestMapping() + "/";
 	}
 
 	// @GetMapping(value = "del/{id}")
@@ -60,7 +60,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	// getCrudService().delete(m);
 	// addSuccessMessage(redirectAttributes, "删除数据成功");
 	// }
-	// return "redirect:" + "/system/user";
+	// return "redirect:" + getViewPrefix() + "/";
 	// }
 
 	/**
@@ -75,7 +75,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 		setMethod(model, METHOD_EDIT);
 		setEditing(model, true);
 		model.addAttribute("m", m);
-		return view(getPrefix() + "_form");
+		return view(getSuffix() + "_form");
 	}
 
 	/**
@@ -94,10 +94,15 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 
 	@ModelAttribute("m")
 	public T get(Model model, @PathVariable(name = "id", required = false) T m) {
+		modelAttribute(model,m);
 		return m == null ? newModel() : m;
 	}
 
-	protected String getPrefix() {
+	/**
+	 * 返回功能后缀字符串
+	 * @return
+	 */
+	protected String getSuffix() {
 		return "";
 	}
 
@@ -109,13 +114,17 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * @return
 	 */
 	protected boolean hasError(T m, BindingResult result) {
-		Assert.notNull(m);
+		Assert.notNull(m, "Model attribute cannot be null!");
 		return result.hasErrors();
 	}
 
 	@GetMapping(value = { "", "/" })
 	public String list(Model model) {
-		return view(getPrefix() + "_list");
+		return view(getSuffix() + "_list");
+	}
+
+	protected void modelAttribute(Model model, T m) {
+		
 	}
 
 	/**
@@ -124,6 +133,9 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * @return model实例
 	 */
 	protected abstract T newModel();
+
+	protected void preSave(T m, HttpServletRequest request) {
+	}
 
 	@PostMapping(value = { "save", "save/{id}" })
 	public String save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request,
@@ -145,12 +157,9 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 			log.error("Error while saving data.", e);
 			addErrorMessage(model, e.getLocalizedMessage());
 			// TODO: Fixed page change logic
-			return view(getPrefix() + "_form");
+			return view(getSuffix() + "_form");
 		}
-		return "redirect:" + "/system/user";
-	}
-
-	protected void preSave(T m, HttpServletRequest request) {
+		return "redirect:" + getRequestMapping() + "/";
 	}
 
 	/**
@@ -206,7 +215,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	public String view(Model model) {
 		setMethod(model, METHOD_VIEW);
 		setViewing(model, true);
-		return view(getPrefix() + "_form");
+		return view(getSuffix() + "_form");
 	}
 
 }

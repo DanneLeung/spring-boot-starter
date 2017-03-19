@@ -7,7 +7,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xcesys.extras.framework.repository.IBaseRepository;
+import com.xcesys.extras.framework.dao.repository.IBaseRepository;
 import com.xcesys.extras.framework.service.ICrudService;
 
 public abstract class BaseCrudService<T, ID extends Serializable> implements ICrudService<T, ID> {

@@ -10,8 +10,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.xcesys.extras.entity.User;
+import com.xcesys.extras.framework.entity.User;
 
 public class SecurityUtils {
 	private static Set<String> getAuthorities() {
@@ -116,6 +117,15 @@ public class SecurityUtils {
 
 	public static boolean isSwitchedUser() {
 		return hasRole("ROLE_PREVIOUS_ADMINISTRATOR");
+	}
+
+	public static String encodePassword(String p) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder.encode(p);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(SecurityUtils.encodePassword("123456"));
 	}
 
 }

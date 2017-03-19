@@ -6,7 +6,6 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import com.xcesys.extras.config.auditing.AuditorProvider;
-import com.xcesys.extras.entity.User;
 
 @Configuration
 @EnableJpaAuditing

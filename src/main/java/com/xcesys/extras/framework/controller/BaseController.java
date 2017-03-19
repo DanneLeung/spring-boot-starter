@@ -11,10 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xcesys.extras.entity.User;
+import com.xcesys.extras.framework.entity.User;
 import com.xcesys.extras.framework.exception.SystemException;
+import com.xcesys.extras.framework.service.UserService;
 import com.xcesys.extras.framework.util.SecurityUtils;
-import com.xcesys.extras.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,10 +36,10 @@ public abstract class BaseController {
 	/**
 	 * 视图前缀
 	 */
-	private String viewPrefix;
+	private String requestMapping;
 
 	protected BaseController() {
-		viewPrefix = defaultViewPrefix();
+		requestMapping = fromAnnotation();
 	}
 
 	/**
@@ -125,8 +125,8 @@ public abstract class BaseController {
 	 * 
 	 * @return
 	 */
-	protected String defaultViewPrefix() {
-		String prefix = "pages";
+	protected String fromAnnotation() {
+		String prefix = "";
 		RequestMapping requestMapping = AnnotationUtils.findAnnotation(getClass(), RequestMapping.class);
 		if (requestMapping != null && requestMapping.value().length > 0) {
 			prefix += requestMapping.value()[0];
@@ -171,8 +171,8 @@ public abstract class BaseController {
 	 * @return
 	 * @see #view(String)
 	 */
-	public String getViewPrefix() {
-		return viewPrefix;
+	public String getRequestMapping() {
+		return requestMapping;
 	}
 
 	public void setMethod(Model model, String method) {
@@ -188,9 +188,10 @@ public abstract class BaseController {
 	 * @return
 	 */
 	public String view(String suffixName) {
+		String viewRoot = "pages";
 		if (!suffixName.startsWith("/")) {
 			suffixName = "/" + suffixName;
 		}
-		return getViewPrefix() + suffixName;
+		return viewRoot + getRequestMapping() + suffixName;
 	}
 }
