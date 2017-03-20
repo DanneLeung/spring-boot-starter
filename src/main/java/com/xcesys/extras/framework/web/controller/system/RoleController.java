@@ -9,13 +9,12 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.controller.BaseCrudController;
+import com.xcesys.extras.framework.core.controller.BaseCrudController;
+import com.xcesys.extras.framework.core.service.ICrudService;
 import com.xcesys.extras.framework.entity.Role;
-import com.xcesys.extras.framework.service.ICrudService;
 import com.xcesys.extras.framework.service.RoleService;
 
 @Controller
@@ -52,11 +51,5 @@ public class RoleController extends BaseCrudController<Role, Long> {
 		if (!StringUtils.isBlank(oldName) && oldName.trim().equals(name))
 			return true;
 		return roleService.countByName(name) <= 0;
-	}
-
-	@GetMapping(value = "usersInRole/{id}")
-	@ResponseBody
-	public Role usersInRole(@RequestParam("id") Long id) {
-		return roleService.usersInRole(id);
 	}
 }

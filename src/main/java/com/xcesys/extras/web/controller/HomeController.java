@@ -1,6 +1,6 @@
 package com.xcesys.extras.web.controller;
 
-import static com.xcesys.extras.framework.util.SecurityUtils.isSwitchedUser;
+import static com.xcesys.extras.framework.core.util.SecurityUtils.isSwitchedUser;
 
 import java.util.Map;
 

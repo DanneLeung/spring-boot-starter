@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.xcesys.extras.framework.springsecurity.SpringDataTokenRepositoryImpl;
+import com.xcesys.extras.framework.core.springsecurity.SpringDataTokenRepositoryImpl;
 
 @Configuration
 // @EnableWebSecurity

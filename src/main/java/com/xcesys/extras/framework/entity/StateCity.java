@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.xcesys.extras.framework.dao.model.IdTreeEntity;
+import com.xcesys.extras.framework.core.model.IdTreeEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

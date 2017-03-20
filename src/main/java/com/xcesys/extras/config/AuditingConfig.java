@@ -11,8 +11,8 @@ import com.xcesys.extras.config.auditing.AuditorProvider;
 @EnableJpaAuditing
 public class AuditingConfig {
 
-    @Bean
-    public AuditorAware<String> auditorProvider() {
-        return new AuditorProvider();
-    }
+	@Bean
+	public AuditorAware<String> auditorProvider() {
+		return new AuditorProvider();
+	}
 }

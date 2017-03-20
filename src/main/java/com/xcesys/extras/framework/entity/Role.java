@@ -18,7 +18,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.dao.model.IdAuditableEntity;
+import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

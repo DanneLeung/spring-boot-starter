@@ -314,7 +314,7 @@ a:focus {
 }
 .content-header > h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
 }
 .content-header > h1 > small {
   font-size: 15px;
@@ -1756,7 +1756,7 @@ a:focus {
 .box-header > .ion,
 .box-header .box-title {
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
   margin: 0;
   line-height: 1;
 }

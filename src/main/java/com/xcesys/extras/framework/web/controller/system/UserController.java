@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xcesys.extras.framework.controller.BaseCrudController;
+import com.xcesys.extras.framework.core.controller.BaseCrudController;
+import com.xcesys.extras.framework.core.service.ICrudService;
+import com.xcesys.extras.framework.core.util.ConvertUtils;
 import com.xcesys.extras.framework.entity.Role;
 import com.xcesys.extras.framework.entity.User;
-import com.xcesys.extras.framework.service.ICrudService;
 import com.xcesys.extras.framework.service.RoleService;
 import com.xcesys.extras.framework.service.UserService;
-import com.xcesys.extras.framework.util.ConvertUtils;
 
 @Controller
 @RequestMapping("/system/user")

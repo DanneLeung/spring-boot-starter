@@ -24,8 +24,9 @@
 					<form id="userForm" name="userForm"
 						th:action="@{|/system/user/save${m.id==null?'':'/' + m.id}|}"
 						method="post" class="form-horizontal" novalidate="novalidate">
-						<input id="id" type="hidden" name="id" th:value="${m.id}" /> <input
-							id="_csrf" type="hidden" name="_csrf" value="" />
+						<input id="id" type="hidden" name="id" th:value="${m.id}" /> 
+						<input id="oldUsername" type="hidden" th:value="${m.username}"/>
+						<input id="_csrf" type="hidden" name="_csrf" value="" />
 						<div class="form-group">
 							<label class="control-label col-sm-2 required">用户名</label>
 							<div class="col-sm-8">
@@ -103,49 +104,8 @@
 	</th:block>
 	<th:block layout:fragment="scripts">
 		<script th:replace="fragments/validatejs :: validate" />
-		<script type="text/javascript" th:inline="javascript">
-			$(document).ready(
-					function() {
-						/* form init  validation*/
-						$("#password").val("");
-						$("#newPassword").val("");
-						var oldUsername = /*[[${m.username}]]*/'';
-						var form = $("#userForm");
-
-						// 提交当前活动的form，多个tab时候需要知道当前的tab
-						$(":submit", "#buttons").on("click", function(e) {
-							form.submit();
-						});
-
-						// JQuery validate 插件看文档
-						// form validation
-						form.validate({
-							rules : {
-								username : {
-									remote : "/system/user/unique?oldUsername="
-											+ oldUsername
-								},
-								mobile : {
-									mobileCN : true
-								},
-								confirmPassword : {
-									equalTo : "#password"
-								}
-							},
-							messages : {
-								username : {
-									remote : "该用户名已存在!"
-								},
-								confirmPassword : {
-									equalTo : "输入与上面相同的密码"
-								},
-								mobile : {
-									remote : "只能输入纯数字的手机号"
-								}
-							}
-						});
-					});
-		</script>
+		<script th:src="@{|/static/js/app/system/user_form.js|}"
+			th:inline="javascript"></script>
 	</th:block>
 </body>
 

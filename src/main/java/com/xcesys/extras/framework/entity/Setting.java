@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-import com.xcesys.extras.framework.dao.model.IdAuditableEntity;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,16 +25,19 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Setting extends IdAuditableEntity implements java.io.Serializable {
-
-	private static final long serialVersionUID = 4695202659405293403L;
-//	@ManyToOne
-//	private Module module;
+	private static final long serialVersionUID = 1914923621183428105L;
+	@JsonView(DataTablesOutput.View.class)
+	private String type;
+	// @ManyToOne
+	// private Module module;
+	@JsonView(DataTablesOutput.View.class)
 	@Column(unique = true)
 	@NonNull
 	private String name;
-	private String description;
-	private String type;
+	@JsonView(DataTablesOutput.View.class)
 	private String value;
+	@JsonView(DataTablesOutput.View.class)
+	private String description;
 	private String credentials;
 
 }

@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.xcesys.extras.framework.dao.model.IdAuditableEntity;
+import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

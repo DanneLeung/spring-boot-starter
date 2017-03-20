@@ -1,6 +1,6 @@
 package com.xcesys.extras.config.auditing;
 
-import static com.xcesys.extras.framework.util.SecurityUtils.getLoginUsername;
+import static com.xcesys.extras.framework.core.util.SecurityUtils.getLoginUsername;
 
 import org.springframework.data.domain.AuditorAware;
 

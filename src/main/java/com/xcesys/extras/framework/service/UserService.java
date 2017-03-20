@@ -5,10 +5,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xcesys.extras.framework.dao.repository.IBaseRepository;
-import com.xcesys.extras.framework.dao.repository.UserRepository;
+import com.xcesys.extras.framework.core.repository.IBaseRepository;
+import com.xcesys.extras.framework.core.service.impl.BaseCrudService;
 import com.xcesys.extras.framework.entity.User;
-import com.xcesys.extras.framework.service.impl.BaseCrudService;
+import com.xcesys.extras.framework.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

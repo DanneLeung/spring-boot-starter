@@ -17,7 +17,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.xcesys.extras.framework.dao.model.IdAuditableEntity;
+import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

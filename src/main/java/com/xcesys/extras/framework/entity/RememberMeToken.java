@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.xcesys.extras.framework.dao.model.IdEntity;
+import com.xcesys.extras.framework.core.model.IdEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

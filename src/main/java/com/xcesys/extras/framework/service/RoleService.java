@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xcesys.extras.framework.dao.repository.IBaseRepository;
-import com.xcesys.extras.framework.dao.repository.RoleRepository;
+import com.xcesys.extras.framework.core.repository.IBaseRepository;
+import com.xcesys.extras.framework.core.service.impl.BaseCrudService;
 import com.xcesys.extras.framework.entity.Role;
-import com.xcesys.extras.framework.service.impl.BaseCrudService;
+import com.xcesys.extras.framework.repository.RoleRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

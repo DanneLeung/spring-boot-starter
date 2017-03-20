@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.xcesys.extras.framework.util.ApplicationEnvironmentUtils;
+import com.xcesys.extras.framework.core.util.ApplicationEnvironmentUtils;
 
 @ControllerAdvice
 public class ApplicationControllerAdvice {
@@ -16,12 +16,11 @@ public class ApplicationControllerAdvice {
 
 	// @Value("${spring.application.version}")
 
-	
-	
 	@ModelAttribute("theme")
 	public String getTheme() {
 		return "/static/themes/lte";
 	}
+
 	@ModelAttribute("applicationEnvironment")
 	public String getApplicationEnvironment() {
 		return applicationEnvironment;
