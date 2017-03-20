@@ -1,8 +1,5 @@
 package com.xcesys.extras.framework.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -35,6 +32,7 @@ public class Region extends IdAuditableEntity implements java.io.Serializable {
 	/***/
 	private String description;
 	/***/
-	private Set<StateCity> stateCities = new HashSet<StateCity>(0);
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
+	// private Set<StateCity> stateCities = new HashSet<StateCity>(0);
 
 }

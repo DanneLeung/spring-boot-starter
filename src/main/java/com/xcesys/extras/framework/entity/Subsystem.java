@@ -7,11 +7,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.fasterxml.jackson.databind.Module;
 import com.xcesys.extras.framework.dao.model.IdAuditableEntity;
 
 import lombok.Getter;
@@ -35,6 +35,7 @@ public class Subsystem extends IdAuditableEntity {
 	private String name;
 	private String description;
 	private Boolean enabled;
-	private Set<Module> modules = new HashSet<Module>(0);
+	// private Set<Module> modules = new HashSet<Module>(0);
+	@OneToMany(mappedBy = "subsystem")
 	private Set<Permission> permissions = new HashSet<Permission>(0);
 }

@@ -1,6 +1,9 @@
 package com.xcesys.extras.framework.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,8 +30,9 @@ public class Dict extends IdAuditableEntity implements java.io.Serializable {
 	private Long id;
 	private String name;
 	private Integer seq;
-	private DictType dictType;
-	private Long dictTypeId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private DictType type;
 	private String value;
 
 }

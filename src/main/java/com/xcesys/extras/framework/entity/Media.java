@@ -1,7 +1,5 @@
 package com.xcesys.extras.framework.entity;
 
-import javax.persistence.Entity;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

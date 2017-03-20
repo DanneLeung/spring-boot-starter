@@ -3,7 +3,6 @@ package com.xcesys.extras.framework.entity;
 // Generated 2010-11-24 16:30:46 by Hibernate Tools 3.2.4.GA
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

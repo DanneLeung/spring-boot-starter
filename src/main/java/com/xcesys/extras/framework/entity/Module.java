@@ -5,8 +5,6 @@ package com.xcesys.extras.framework.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

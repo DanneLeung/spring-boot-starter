@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -28,6 +31,8 @@ public class DictType extends IdAuditableEntity {
 	private static final long serialVersionUID = -4470144171936304544L;
 	private String description;
 	private Integer length;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Set<Dict> dicts = new HashSet<Dict>(0);
 	private Boolean editable;
 

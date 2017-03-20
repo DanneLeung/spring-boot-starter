@@ -30,15 +30,15 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Setter
 @Getter
-public class Group extends IdAuditableEntity implements Serializable {
+public class UserGroup extends IdAuditableEntity implements Serializable {
 
 	private static final long serialVersionUID = -2969876357784297539L;
 	@Column(unique = true)
 	@NonNull
-	private String groupname;
+	private String name;
 	@ElementCollection(targetClass = Role.class, fetch = EAGER)
 	@Enumerated(STRING)
-	private Set<Role> groupRoles = new HashSet<Role>();
+	private Set<Role> roles = new HashSet<Role>();
 	@ManyToMany(cascade = ALL, fetch = LAZY)
 	private Set<User> users = new HashSet<User>();
 	@OneToMany(fetch = EAGER)

@@ -6,9 +6,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -35,28 +38,32 @@ public class Permission extends IdAuditableEntity implements java.io.Serializabl
 	// private Set<Permission> dependsPermissions = new HashSet<Permission>(0);
 	private String description;
 	private String name;
-	private Long requireId;
 	// private Permission requirePermission;
 	// private Set<Menu> tsMenus = new HashSet<Menu>(0);
-	private Module module;
-	private Long moduleId;
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn
+	// private Module module;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "role_permissions", joinColumns = {
+			@JoinColumn(name = "permissions_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "roles_id", nullable = false, updatable = false) })
 	private Set<Role> roles = new HashSet<Role>(0);
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Subsystem subsystem;
-	private Long subsystemId;
-	private Set<User> users = new HashSet<User>(0);
 	protected String displayName;
 
-	@Transient
-	public String getDisplayName() {
-		if (!StringUtils.isBlank(this.displayName)) {
-			return this.displayName;
-		}
-		if (this.module != null) {
-			this.displayName = this.module.getTreeName() + ">" + this.name;
-		} else {
-			this.displayName = this.name;
-		}
-		return displayName;
-	}
+	// @Transient
+	// public String getDisplayName() {
+	// if (!StringUtils.isBlank(this.displayName)) {
+	// return this.displayName;
+	// }
+	// if (this.module != null) {
+	// this.displayName = this.module.getTreeName() + ">" + this.name;
+	// } else {
+	// this.displayName = this.name;
+	// }
+	// return displayName;
+	// }
 
 }

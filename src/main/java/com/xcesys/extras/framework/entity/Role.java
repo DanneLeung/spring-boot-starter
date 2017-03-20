@@ -50,4 +50,11 @@ public class Role extends IdAuditableEntity {
 			@JoinColumn(name = "roles_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "users_id", nullable = false, updatable = false) })
 	private Set<User> users = new HashSet<User>();
+
+	@ManyToMany(fetch = LAZY)
+	@JoinTable(name = "role_permissions", joinColumns = {
+			@JoinColumn(name = "roles_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "permissions_id", nullable = false, updatable = false) })
+	private Set<Permission> permissions = new HashSet<Permission>(0);
+
 }
