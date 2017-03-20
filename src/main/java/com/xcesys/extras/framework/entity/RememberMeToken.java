@@ -24,6 +24,7 @@ import lombok.Setter;
 @Getter
 public class RememberMeToken extends IdEntity {
 
+	private static final long serialVersionUID = 2909574708567201161L;
 	@NonNull
 	@Column(length = 64)
 	private String username;

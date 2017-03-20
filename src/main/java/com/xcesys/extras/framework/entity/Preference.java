@@ -21,7 +21,8 @@ import lombok.Setter;
 @Getter
 public class Preference extends IdEntity implements Serializable {
 
-    private Boolean isGroupPreference;
+	private static final long serialVersionUID = -2282056424549221493L;
+	private Boolean isGroupPreference;
     private Boolean isUserPreference;
     @NonNull
     private String name;

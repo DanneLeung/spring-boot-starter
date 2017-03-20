@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -25,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Setter

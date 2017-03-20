@@ -17,7 +17,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class PreferenceValue extends IdEntity implements Serializable {
-    @ManyToOne
+	private static final long serialVersionUID = -3952389941716183924L;
+	@ManyToOne
     private Preference preference;
     private String value;
 }
