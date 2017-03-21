@@ -36,6 +36,7 @@
 									<th class="text=center">更新时间</th>
 									<th style="width:40px;">激活</th>
 									<th style="width:120px;">操作</th>
+									<th>可编辑</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,7 +53,7 @@
 	</th:block>
 	<th:block layout:fragment="scripts">
 		<script th:replace="fragments/datatablesjs :: datatables" />
-		<script th:src="@{|/static/js/app/system/user_list.js|}"  th:inline="javascript" ></script>
+		<script th:src="@{|/static/js/app/system/user_list.js|}" th:inline="javascript"></script>
 	</th:block>
 </body>
 

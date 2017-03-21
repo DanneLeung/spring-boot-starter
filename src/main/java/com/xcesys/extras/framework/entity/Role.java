@@ -18,6 +18,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.model.IEditable;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
@@ -33,7 +34,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Setter
 @Getter
-public class Role extends IdAuditableEntity {
+public class Role extends IdAuditableEntity implements IEditable {
 	private static final long serialVersionUID = 4371762231795963170L;
 	@JsonView(DataTablesOutput.View.class)
 	private String description;

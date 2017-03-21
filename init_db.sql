@@ -1,0 +1,3 @@
+insert into `user` (`id`,`fullname`,`mobile`,`password`,`username`,`account_non_expired`,`account_non_locked`,`credentials_non_expired`,`email`,`enabled`,`admin`,`editable`) values (1,'administrator','17700119900','$2a$10$MVjUTVebBFDYdoX24dJTd.tlCBA0ibn/ySDEr0MliavvgWID9gPlC','admin',1,1,1,'admin@example.com',1, 1,0); 
+insert into `role` (`id`,`name`, `description`, `editable` ) values (1,'admin','administrators',1); 
+insert into `user_roles` (`users_id`, `roles_id`) values (1, 1); 

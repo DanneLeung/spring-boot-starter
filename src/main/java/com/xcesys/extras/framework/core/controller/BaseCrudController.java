@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.xcesys.extras.framework.core.model.IEditable;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -35,19 +37,26 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	}
 
 	@GetMapping(value = "del/{id}")
-	public String del(ID id, RedirectAttributes redirectAttributes) {
+	public String del(ID id, Model model, RedirectAttributes redirectAttributes) {
 		if (id != null) {
-			getCrudService().delete(id);
+			T m = getCrudService().findById(id);
+			if (m != null && m instanceof IEditable && !((IEditable) m).isEditable()) {
+				addWarnMessage(model, "该数据为系统固定不可编辑，请选择其他操作!");
+				return "redirect:" + getRequestMapping() + "/";
+			}
+
+			getCrudService().delete(m);
 			addSuccessMessage(redirectAttributes, "删除数据成功");
 		}
 		return "redirect:" + getRequestMapping() + "/";
 	}
 
 	@PostMapping(value = "del")
-	public String del(ID[] ids, RedirectAttributes redirectAttributes) {
+	public String del(ID[] ids, Model model, RedirectAttributes redirectAttributes) {
 		if (ids != null && ids.length > 0) {
-			for (ID id : ids)
+			for (ID id : ids) {
 				getCrudService().delete(id);
+			}
 			addSuccessMessage(redirectAttributes, "删除数据成功");
 		}
 		return "redirect:" + getRequestMapping() + "/";
@@ -72,6 +81,10 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 */
 	@GetMapping(value = { "edit/{id}" })
 	public String edit(@ModelAttribute("m") T m, Model model) {
+		if (m instanceof IEditable && !((IEditable) m).isEditable()) {
+			addWarnMessage(model, "该数据为系统固定不可编辑，请选择其他操作!");
+			return "redirect:" + getRequestMapping() + "/";
+		}
 		setMethod(model, METHOD_EDIT);
 		setEditing(model, true);
 		model.addAttribute("m", m);

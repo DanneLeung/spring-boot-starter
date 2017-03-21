@@ -23,6 +23,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.model.IEditable;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
@@ -38,7 +39,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class User extends IdAuditableEntity implements UserDetails {
+public class User extends IdAuditableEntity implements UserDetails, IEditable {
 	private static final long serialVersionUID = -6943871074854331138L;
 	@JsonView(DataTablesOutput.View.class)
 	private boolean accountNonExpired = true;
@@ -49,7 +50,7 @@ public class User extends IdAuditableEntity implements UserDetails {
 	@JsonView(DataTablesOutput.View.class)
 	private boolean credentialsNonExpired = true;
 	@JsonView(DataTablesOutput.View.class)
-	private boolean editable = false;
+	private boolean editable = true;
 	@JsonView(DataTablesOutput.View.class)
 	private String email;
 	@JsonView(DataTablesOutput.View.class)
@@ -57,7 +58,7 @@ public class User extends IdAuditableEntity implements UserDetails {
 	@JsonView(DataTablesOutput.View.class)
 	private String fullname;
 	@JsonView(DataTablesOutput.View.class)
-	private Locale locale;
+	private String mobile;
 	@NonNull
 	@JsonView(DataTablesOutput.View.class)
 	private String password;

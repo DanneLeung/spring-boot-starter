@@ -163,13 +163,9 @@ public abstract class BaseController {
 	}
 
 	/**
-	 * 返回视图文件的前缀。
-	 * <p>
-	 * 例如：前缀返回为user,则user list的视图可通过view("List")返回为userList.jsp
-	 * </p>
+	 * return request mapping this class annotated with @RequestMapping
 	 * 
 	 * @return
-	 * @see #view(String)
 	 */
 	public String getRequestMapping() {
 		return requestMapping;
