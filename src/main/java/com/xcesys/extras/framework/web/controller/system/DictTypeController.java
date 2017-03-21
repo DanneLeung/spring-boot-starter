@@ -14,35 +14,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.controller.BaseCrudController;
 import com.xcesys.extras.framework.core.service.ICrudService;
-import com.xcesys.extras.framework.entity.Setting;
-import com.xcesys.extras.framework.service.SettingService;
+import com.xcesys.extras.framework.entity.DictType;
+import com.xcesys.extras.framework.service.DictTypeService;
 
 @Controller
-@RequestMapping("/system/setting")
-public class SettingController extends BaseCrudController<Setting, Long> {
+@RequestMapping("/system/dicttype")
+public class DictTypeController extends BaseCrudController<DictType, Long> {
 	@Autowired
-	private SettingService service;
+	private DictTypeService service;
 
 	@ResponseBody
 	@JsonView(DataTablesOutput.View.class)
 	@GetMapping(value = "/datatable")
-	public DataTablesOutput<Setting> datatable(@Valid DataTablesInput input) {
+	public DataTablesOutput<DictType> datatable(@Valid DataTablesInput input) {
 		return service.findAll(input);
 	}
 
 	@Override
-	protected ICrudService<Setting, Long> getCrudService() {
+	protected ICrudService<DictType, Long> getCrudService() {
 		return service;
 	}
 
 	@Override
 	protected String getSuffix() {
-		return "setting";
+		return "dicttype";
 	}
 
-	protected Setting newModel() {
-		Setting setting = new Setting();
-		return setting;
+	protected DictType newModel() {
+		DictType dicttype = new DictType();
+		return dicttype;
 	}
 
 	@GetMapping(value = "unique")

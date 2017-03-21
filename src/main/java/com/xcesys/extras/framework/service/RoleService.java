@@ -9,33 +9,26 @@ import com.xcesys.extras.framework.core.service.impl.BaseCrudService;
 import com.xcesys.extras.framework.entity.Role;
 import com.xcesys.extras.framework.repository.RoleRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 @Transactional
-@Slf4j
 public class RoleService extends BaseCrudService<Role, Long> {
 	@Autowired
-	private RoleRepository roleRepository;
-
-	public int countByname(String username) {
-		return roleRepository.countByName(username);
-	}
+	private RoleRepository repository;
 
 	public Role findByName(String Rolename) {
-		return roleRepository.findByName(Rolename);
+		return repository.findByName(Rolename);
 	}
 
 	@Override
 	public IBaseRepository<Role, Long> getRepository() {
-		return roleRepository;
+		return repository;
 	}
 
 	public int countByName(String name) {
-		return roleRepository.countByName(name);
+		return repository.countByName(name);
 	}
 
 	public Role usersInRole(Long id) {
-		return roleRepository.findUsersById(id);
+		return repository.findUsersById(id);
 	}
 }

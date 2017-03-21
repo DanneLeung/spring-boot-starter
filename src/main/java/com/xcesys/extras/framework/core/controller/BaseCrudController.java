@@ -24,9 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class BaseCrudController<T, ID extends Serializable> extends BaseSearchController<T, ID> {
-	private static final String METHOD_ADD = "Adding";
-	private static final String METHOD_EDIT = "editing";
-	private static final String METHOD_VIEW = "Viewing";
+	protected static final String METHOD_ADD = "Adding";
+	protected static final String METHOD_EDIT = "editing";
+	protected static final String METHOD_VIEW = "Viewing";
 
 	@GetMapping(value = { "add" })
 	public String add(Model model) {
@@ -44,7 +44,6 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 				addWarnMessage(model, "该数据为系统固定不可编辑，请选择其他操作!");
 				return "redirect:" + getRequestMapping() + "/";
 			}
-
 			getCrudService().delete(m);
 			addSuccessMessage(redirectAttributes, "删除数据成功");
 		}
@@ -52,7 +51,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	}
 
 	@PostMapping(value = "del")
-	public String del(ID[] ids, Model model, RedirectAttributes redirectAttributes) {
+	public String del(ID[] ids, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		if (ids != null && ids.length > 0) {
 			for (ID id : ids) {
 				getCrudService().delete(id);
@@ -80,9 +79,9 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * @return
 	 */
 	@GetMapping(value = { "edit/{id}" })
-	public String edit(@ModelAttribute("m") T m, Model model) {
+	public String edit(@ModelAttribute("m") T m, Model model, RedirectAttributes redirectAttributes) {
 		if (m instanceof IEditable && !((IEditable) m).isEditable()) {
-			addWarnMessage(model, "该数据为系统固定不可编辑，请选择其他操作!");
+			addWarnMessage(redirectAttributes, "该数据为系统固定不可编辑，请选择其他操作!");
 			return "redirect:" + getRequestMapping() + "/";
 		}
 		setMethod(model, METHOD_EDIT);
@@ -162,7 +161,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 				msgs.add(err.getDefaultMessage());
 			}
 			super.addErrorMessage(model, msgs.toArray(new String[] {}));
-			return edit(m, model);
+			return edit(m, model, redirectAttributes);
 		}
 		try {
 			preSave(m, request);
@@ -184,7 +183,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	 * @param redirectAttributes
 	 */
 	protected void saveModel(T m, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		getCrudService().save(m);
+		m = getCrudService().save(m);
 		addSuccessMessage(redirectAttributes, "数据保存成功!");
 	}
 

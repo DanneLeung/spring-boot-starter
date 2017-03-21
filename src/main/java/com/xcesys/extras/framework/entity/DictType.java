@@ -12,7 +12,10 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.model.IEditable;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
@@ -26,14 +29,19 @@ import lombok.Setter;
 @DynamicUpdate
 @Getter
 @Setter
-public class DictType extends IdAuditableEntity {
-
-	private static final long serialVersionUID = -4470144171936304544L;
+public class DictType extends IdAuditableEntity implements IEditable{
+	private static final long serialVersionUID = -2334286394502372010L;
+	@JsonView(DataTablesOutput.View.class)
+	private String name;
+	@JsonView(DataTablesOutput.View.class)
 	private String description;
-	private Integer length;
+	@JsonView(DataTablesOutput.View.class)
+	private int length = 1;
+	@JsonView(DataTablesOutput.View.class)
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Set<Dict> dicts = new HashSet<Dict>(0);
-	private Boolean editable;
+	@JsonView(DataTablesOutput.View.class)
+	private boolean editable = true;
 
 }

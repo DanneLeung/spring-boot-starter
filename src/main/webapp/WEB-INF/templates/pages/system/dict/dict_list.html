@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/layout">
+
+<head>
+<title>字典值</title>
+</head>
+<th:block layout:fragment="styles">
+
+</th:block>
+
+<body>
+	<th:block layout:fragment="content">
+		<th:block th:include="fragments/pageheader :: pageheader"
+			th:with="header='字典值', subtext='管理字典值数据'" />
+		<section class="content">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">字典值列表</h3>
+					<div class="box-tools">
+						<a class="btn btn-sm btn-default" href="/system/dicttype/"
+							th:title="返回字典类型列表"><i class="fa fa-fw fa-reply"></i> </a> <a
+							class="btn btn-sm btn-default"
+							th:href="@{|/system/dict/add/${typeId}|}" th:title="创建字典值"><i
+							class="fa fa-fw fa-plus"></i> </a>
+					</div>
+				</div>
+				<div class="box-body">
+					<div id="tableWrapper">
+						<table id="table"
+							class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>名称</th>
+									<th>值</th>
+									<th class="text-right">排序</th>
+									<th>描述</th>
+									<th class="text-center">更新时间</th>
+									<th style="width: 120px;" class="text-center">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="d : ${list}">
+									<td th:text="${d.name}"></td>
+									<td th:text="${d.value}"></td>
+									<td th:text="${d.sort}"></td>
+									<td th:text="${d.description}"></td>
+									<td class="text-center"
+										th:text="${#dates.format(d.lastModifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td class="text-center">
+										<div class="btn-group">
+											<a class="btn btn-default btn-sm" title="修改"
+												th:href="@{|/system/dict/edit/${d.id}|}"><i class="fa fa-edit"></i></a> 
+											<a class="btn btn-default btn-sm del"  title="删除" href="javascript:;" th:id="${d.id}"><i
+												class="fa fa-trash-o"></i></a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+		<form id="delForm" method="post" style="display: none"
+			th:action="@{/system/dict/del}">
+			<input id="ids" type="hidden" name="ids" /> 
+			<input id="typeId" type="hidden" name="typeId" th:value="${typeId}" />
+			<input id="_csrf"
+				type="hidden" name="_csrf" />
+		</form>
+	</th:block>
+	<th:block layout:fragment="scripts">
+		<script th:replace="fragments/datatablesjs :: datatables" />
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(function() {
+				var table = $("#table");
+				table.on('click', '.del', function() {
+					var id = $(this).attr("id");
+					$("#delForm #ids").val(id);
+					if (id) {
+						bootbox.confirm("确定要删除数据吗?", function(result) {
+							if (result) {
+								$("#delForm").submit();
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</th:block>
+</body>
+
+</html>

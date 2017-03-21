@@ -27,13 +27,13 @@ public class UserController extends BaseCrudController<User, Long> {
 	@Autowired(required = false)
 	PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
 	@Autowired
-	UserService userService;
+	UserService service;
 	@Autowired
 	RoleService roleService;
 
 	@Override
 	protected ICrudService<User, Long> getCrudService() {
-		return userService;
+		return service;
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class UserController extends BaseCrudController<User, Long> {
 	@GetMapping(value = "resetpwd")
 	public int resetpwd(Long[] ids) {
 		if (ids != null && ids.length > 0) {
-			return userService.resetpwd(ids);
+			return service.resetpwd(ids);
 		}
 		return -1;
 	}
@@ -78,6 +78,6 @@ public class UserController extends BaseCrudController<User, Long> {
 	public boolean unique(String username, String oldUsername) {
 		if (!StringUtils.isBlank(oldUsername) && oldUsername.trim().equals(username))
 			return true;
-		return userService.countByUsername(username) <= 0;
+		return service.countByUsername(username) <= 0;
 	}
 }

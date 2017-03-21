@@ -5,7 +5,6 @@ import static javax.persistence.FetchType.EAGER;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.Column;

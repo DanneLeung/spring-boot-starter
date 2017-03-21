@@ -7,7 +7,9 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
@@ -23,16 +25,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Dict extends IdAuditableEntity implements java.io.Serializable {
+public class Dict extends IdAuditableEntity {
 
 	private static final long serialVersionUID = -8572522105499245114L;
-	private String description;
-	private Long id;
-	private String name;
-	private Integer seq;
+	@JsonView(DataTablesOutput.View.class)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private DictType type;
+	@JsonView(DataTablesOutput.View.class)
+	private String name;
+	@JsonView(DataTablesOutput.View.class)
 	private String value;
+	@JsonView(DataTablesOutput.View.class)
+	private Integer sort;
+	@JsonView(DataTablesOutput.View.class)
+	private String description;
 
 }

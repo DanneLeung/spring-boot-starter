@@ -10,11 +10,8 @@ import com.xcesys.extras.framework.core.service.impl.BaseCrudService;
 import com.xcesys.extras.framework.entity.User;
 import com.xcesys.extras.framework.repository.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 @Transactional
-@Slf4j
 public class UserService extends BaseCrudService<User, Long> {
 	@Autowired(required = false)
 	private PasswordEncoder passwordEncoder;

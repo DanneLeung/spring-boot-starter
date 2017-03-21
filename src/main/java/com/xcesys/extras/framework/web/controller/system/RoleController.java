@@ -21,18 +21,18 @@ import com.xcesys.extras.framework.service.RoleService;
 @RequestMapping("/system/role")
 public class RoleController extends BaseCrudController<Role, Long> {
 	@Autowired
-	private RoleService roleService;
+	private RoleService service;
 
 	@ResponseBody
 	@JsonView(DataTablesOutput.View.class)
 	@GetMapping(value = "/datatable")
 	public DataTablesOutput<Role> datatable(@Valid DataTablesInput input) {
-		return roleService.findAll(input);
+		return service.findAll(input);
 	}
 
 	@Override
 	protected ICrudService<Role, Long> getCrudService() {
-		return roleService;
+		return service;
 	}
 
 	@Override
@@ -50,6 +50,6 @@ public class RoleController extends BaseCrudController<Role, Long> {
 	public boolean unique(String name, String oldName) {
 		if (!StringUtils.isBlank(oldName) && oldName.trim().equals(name))
 			return true;
-		return roleService.countByName(name) <= 0;
+		return service.countByName(name) <= 0;
 	}
 }
