@@ -35,7 +35,7 @@ public class UserService extends BaseCrudService<User, Long> {
 		return userRepository.resetpwd(ids, encryptPassword("123456"));
 	}
 
-	public int countByUsername(String username) {
+	public long countByUsername(String username) {
 		return userRepository.countByUsername(username);
 	}
 }

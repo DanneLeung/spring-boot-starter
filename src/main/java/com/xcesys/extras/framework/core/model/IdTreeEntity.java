@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * This class defines some properties representing tree data structure.
@@ -22,52 +28,70 @@ import org.apache.commons.lang3.StringUtils;
  */
 @SuppressWarnings("rawtypes")
 @MappedSuperclass
+@NoArgsConstructor
+@Getter
+@Setter
 public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEntity implements Comparable<T> {
 	private static final long serialVersionUID = 9122288078023262971L;
 	/**
 	 * A list of children nodes.
 	 */
+	@JsonView(DataTablesOutput.View.class)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parent", orphanRemoval = true)
 	protected Set<T> children = new HashSet<T>();
 
 	/**
 	 * Depth value in tree.
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	protected Integer depth;
 	/**
 	 * String value with tree depth indent.
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	protected String displayName;
 	/**
 	 * Flag indicates leaf node.
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	private Boolean leaf;
 	/**
 	 * Lineage representing tree path to this node.
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	protected String lineage;
 	/**
 	 * Node type string value.
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	protected String type;
 
 	/**
 	 * String value representing unique tree node name.
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	protected String name;
 
 	/**
 	 * Parent node object.
 	 */
+
+	@JsonView(DataTablesOutput.View.class)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	protected T parent;
 
 	/**
 	 * Parent node id.
 	 */
-	protected Long parentId;
+	// @JsonView(DataTablesOutput.View.class)
+	// @Column(name = "parent_id")
+	// protected Long parentId;
 	/**
 	 * Sortable sequence in tree node, if subclass should let it be set to max
 	 * value automatically, so should set it to zero value before persisting it
 	 */
+	@JsonView(DataTablesOutput.View.class)
 	protected Integer seq = Integer.valueOf(0);
 
 	@Override
@@ -79,12 +103,6 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 		return (this.seq == null ? Integer.valueOf(0) : this.seq).compareTo(seq2);
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parent", orphanRemoval = true)
-	public Set<T> getChildren() {
-		return this.children;
-	}
-
-	@Column(name = "depth", precision = 5, scale = 0)
 	public Integer getDepth() {
 		int newDepth = this.parent == null ? 1 : ((this.parent.getDepth() == null ? 1 : this.parent.getDepth()) + 1);
 		if (this.depth == null || !this.depth.equals(newDepth)) {
@@ -108,7 +126,6 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 		return leaf;
 	}
 
-	@Column(name = "lineage", length = 300)
 	public String getLineage() {
 		if (this.getId() == null) {
 			this.lineage = null;
@@ -121,27 +138,22 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 		return this.lineage;
 	}
 
-	@Column(name = "name", unique = true, nullable = false, length = 200)
 	public String getName() {
 		return this.name;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_id")
 	public T getParent() {
 		return parent;
 	}
 
-	@Column(name = "parent_id", precision = 20, scale = 0, insertable = false, updatable = false)
-	public Long getParentId() {
-		if (this.parentId == null) {
-			this.parentId = this.parent != null ? this.parent.getId() : null;
-		}
-		return parentId;
-	}
+	// public Long getParentId() {
+	// if (this.parentId == null) {
+	// this.parentId = this.parent != null ? this.parent.getId() : null;
+	// }
+	// return parentId;
+	// }
 
 	@SuppressWarnings("unchecked")
-	@Column(name = "seq", precision = 5, scale = 0)
 	public Integer getSeq() {
 		if (this.seq == null) {
 			this.seq = 1;
@@ -175,45 +187,8 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 		return treeName;
 	}
 
-	@Column(name = "type", length = 4)
 	public String getType() {
 		return type;
-	}
-
-	public void setChildren(Set<T> children) {
-		this.children = children;
-	}
-
-	public void setDepth(Integer depth) {
-		this.depth = depth;
-	}
-
-	public void setLeaf(Boolean leaf) {
-		this.leaf = leaf;
-	}
-
-	public void setLineage(String lineage) {
-		this.lineage = lineage;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setParent(T parent) {
-		this.parent = parent;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public void setSeq(Integer seq) {
-		this.seq = seq;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	@Override

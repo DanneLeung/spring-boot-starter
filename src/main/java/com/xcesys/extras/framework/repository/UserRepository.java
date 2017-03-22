@@ -13,7 +13,7 @@ public interface UserRepository extends IBaseRepository<User, Long> {
 
 	User findByUsername(String username);
 
-	int countByUsername(String username);
+	long countByUsername(String username);
 
 	@Modifying
 	@Query("update #{#entityName} set password = :password where id in :ids")

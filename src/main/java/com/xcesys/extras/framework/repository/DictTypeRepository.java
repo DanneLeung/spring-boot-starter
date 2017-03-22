@@ -7,5 +7,5 @@ public interface DictTypeRepository extends IBaseRepository<DictType, Long> {
 
 	DictType findByName(String name);
 
-	int countByName(String name);
+	long countByName(String name);
 }

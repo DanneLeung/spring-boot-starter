@@ -7,7 +7,7 @@ public interface DictRepository extends IBaseRepository<Dict, Long> {
 
 	Dict findByName(String name);
 
-	int countByTypeIdAndName(Long typeId, String name);
+	long countByTypeIdAndName(Long typeId, String name);
 
 	Iterable<Dict> findByTypeId(Long id);
 }

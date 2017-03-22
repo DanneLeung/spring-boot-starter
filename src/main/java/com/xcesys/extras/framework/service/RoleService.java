@@ -24,7 +24,7 @@ public class RoleService extends BaseCrudService<Role, Long> {
 		return repository;
 	}
 
-	public int countByName(String name) {
+	public long countByName(String name) {
 		return repository.countByName(name);
 	}
 

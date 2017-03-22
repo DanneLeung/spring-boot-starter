@@ -25,7 +25,7 @@ public class DictService extends BaseCrudService<Dict, Long> {
 		return reposity;
 	}
 
-	public int countByTypeIdAndName(Long typeId, String name) {
+	public long countByTypeIdAndName(Long typeId, String name) {
 		return reposity.countByTypeIdAndName(typeId, name);
 	}
 

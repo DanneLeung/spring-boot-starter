@@ -7,7 +7,7 @@ public interface RoleRepository extends IBaseRepository<Role, Long> {
 
 	Role findByName(String name);
 
-	int countByName(String name);
+	long countByName(String name);
 
 	Role findUsersById(Long id);
 }

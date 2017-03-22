@@ -7,7 +7,7 @@ public interface SettingRepository extends IBaseRepository<Setting, Long> {
 
 	Setting findByName(String name);
 
-	int countByName(String name);
+	long countByName(String name);
 
 	Setting findUsersById(Long id);
 }

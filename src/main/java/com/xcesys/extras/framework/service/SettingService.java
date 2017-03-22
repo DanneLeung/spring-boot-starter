@@ -24,7 +24,7 @@ public class SettingService extends BaseCrudService<Setting, Long> {
 		return repository;
 	}
 
-	public int countByName(String name) {
+	public long countByName(String name) {
 		return repository.countByName(name);
 	}
 
