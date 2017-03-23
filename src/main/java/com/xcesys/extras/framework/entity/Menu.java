@@ -49,6 +49,8 @@ public class Menu extends IdTreeEntity<Menu> implements java.io.Serializable {
 	private Permission permission;
 	@JsonView(DataTablesOutput.View.class)
 	private String url;
+	@JsonView(DataTablesOutput.View.class)
+	int sort;
 
 	@Override
 	@Transient
