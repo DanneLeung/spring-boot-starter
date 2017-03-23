@@ -49,8 +49,6 @@ public class Menu extends IdTreeEntity<Menu> implements java.io.Serializable {
 	private Permission permission;
 	@JsonView(DataTablesOutput.View.class)
 	private String url;
-	@JsonView(DataTablesOutput.View.class)
-	int sort;
 
 	@Override
 	@Transient
@@ -67,7 +65,7 @@ public class Menu extends IdTreeEntity<Menu> implements java.io.Serializable {
 	@Transient
 	public String getLineage() {
 		this.lineage = (this.parent == null ? "0" : this.parent.getLineage())
-				+ (this.seq == null ? "" : ("_" + StringUtils.leftPad("0", 3) + "" + this.seq)) + "." + this.getId();
+				+ (this.sort == 0 ? "" : ("_" + StringUtils.leftPad("0", 3) + "" + this.sort)) + "." + this.getId();
 		return this.lineage;
 	}
 

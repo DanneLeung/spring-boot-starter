@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.controller.BaseCrudController;
@@ -32,9 +33,16 @@ public class MenuController extends BaseCrudController<Menu, Long> {
 		return service.findAll(input);
 	}
 
-	@GetMapping(value = { "/", "/{parentId}" })
-	public String list(@PathVariable(name = "parentId", required = false) Long parentId, Model model) {
+	@Override
+	public String list(Model model, RedirectAttributes redirectAttributes) {
+		// return super.list(model, redirectAttributes);
+		return "redirect: " + getRequestMapping() + "/children";
+	}
+
+	@GetMapping(value = { "/children", "/children/{parentId}" })
+	public String children(@PathVariable(name = "parentId", required = false) Long parentId, Model model) {
 		model.addAttribute("menus", service.findByParentId(parentId));
+		model.addAttribute("parentId", parentId);
 		return view(getSuffix() + "_list");
 	}
 

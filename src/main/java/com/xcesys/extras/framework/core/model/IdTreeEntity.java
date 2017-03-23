@@ -44,7 +44,7 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	 * Depth value in tree.
 	 */
 	@JsonView(DataTablesOutput.View.class)
-	protected Integer depth;
+	protected int depth = 1;
 	/**
 	 * String value with tree depth indent.
 	 */
@@ -54,7 +54,7 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	 * Flag indicates leaf node.
 	 */
 	@JsonView(DataTablesOutput.View.class)
-	private Boolean leaf;
+	private boolean leaf;
 	/**
 	 * Lineage representing tree path to this node.
 	 */
@@ -92,20 +92,16 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	 * value automatically, so should set it to zero value before persisting it
 	 */
 	@JsonView(DataTablesOutput.View.class)
-	protected Integer seq = Integer.valueOf(0);
+	protected int sort = 0;
 
 	@Override
 	public int compareTo(T o) {
-		Integer seq2 = o.getSeq();
-		if (seq2 == null) {
-			seq2 = Integer.valueOf(0);
-		}
-		return (this.seq == null ? Integer.valueOf(0) : this.seq).compareTo(seq2);
+		return this.sort - o.getSort();
 	}
 
-	public Integer getDepth() {
-		int newDepth = this.parent == null ? 1 : ((this.parent.getDepth() == null ? 1 : this.parent.getDepth()) + 1);
-		if (this.depth == null || !this.depth.equals(newDepth)) {
+	public int getDepth() {
+		int newDepth = this.parent == null ? 1 : ((this.parent.getDepth() == 0 ? 1 : this.parent.getDepth()) + 1);
+		if (this.depth == newDepth) {
 			this.depth = newDepth;
 		}
 		return this.depth;
@@ -122,7 +118,7 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	}
 
 	@Transient
-	public Boolean getLeaf() {
+	public boolean getLeaf() {
 		return leaf;
 	}
 
@@ -154,28 +150,24 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	// }
 
 	@SuppressWarnings("unchecked")
-	public Integer getSeq() {
-		if (this.seq == null) {
-			this.seq = 1;
-			return this.seq;
-		}
+	public int getSort() {
 		// if this.seq has default zero value
-		if (this.parent != null && this.seq != null && this.seq.intValue() == 0) {
-			this.seq = 1;
+		if (this.parent != null && this.sort == 0) {
+			this.sort = 1;
 			Set<T> chld = this.parent.getChildren();
 			if (chld != null) {
 				for (T t : chld) {
-					if (t != this && t.getSeq() != null) {
-						this.seq = Math.max(this.seq, t.getSeq());
+					if (t != this && t.getSort() > 0) {
+						this.sort = Math.max(this.sort, t.getSort());
 					}
 				}
-				this.seq++;
+				this.sort++;
 			} else {
 				// its parent has no children, then set seq to one.
-				this.seq = Integer.valueOf(1);
+				this.sort = 1;
 			}
 		}
-		return this.seq;
+		return this.sort;
 	}
 
 	@Transient

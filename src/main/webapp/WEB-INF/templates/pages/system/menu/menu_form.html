@@ -3,55 +3,93 @@
   layout:decorator="layouts/layout">
 
 <head>
-	<title>编辑系统字典</title>
+	<title>编辑系统菜单项</title>
 </head>
 <th:block layout:fragment="styles">
 </th:block>
 
 <body>
 	<th:block layout:fragment="content">
-		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='编辑系统字典', subtext='编辑指定字典数据'" />
+		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='编辑系统菜单项', subtext='编辑指定菜单项数据'" />
 		<section class="content">
 			<div class="box box-primary">
-				<div class="box-header">	
-					<h3 class="box-title">编辑系统字典</h3>
+				<div class="box-header">
+					<h3 class="box-title">编辑系统菜单项</h3>
 					<div class="box-tools"></div>
 				</div>
 				<div class="box-body">
-					<form id="dictForm" name="dictForm" th:action="@{|/system/dict/save${m.id==null?'':'/' + m.id}|}" method="post"
-					  class="form-horizontal" novalidate="novalidate">
+					<form id="menuForm" name="menuForm" th:action="@{|/system/menu/save${m.id==null?'':'/' + m.id}|}" method="post" class="form-horizontal"
+					  novalidate="novalidate">
 						<input id="id" type="hidden" name="id" th:value="${m.id}" />
-						<input id="typeId" type="hidden" name="typeId" th:value="${typeId}" />
-						<input id="_csrf" type="hidden" name="_csrf" value=""
-						/>
+						<input id="_csrf" type="hidden" name="_csrf" />
 						<div class="form-group">
-							<label class="control-label col-sm-2 required">名称</label>
-							<div class="col-sm-8">
-								<input id="name" name="name" th:value="${m.name}" class="form-control required" />
+							<label class="control-label col-sm-2">上级菜单:</label>
+							<div class="col-sm-9">
+								<select id="parentId" name="parentId" class="form-control">
+									<option >--请选择--</option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 required">值</label>
-							<div class="col-sm-8">
-								<input id="value" name="value" min="1" type="text" th:value="${m.value}" class="form-control required" />
+							<label class="control-label col-sm-2">模块:</label>
+							<div class="col-sm-9">
+								<select id="module" name="module" class="form-control">
+									<option >--请选择--</option>
+									</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 required">排序</label>
-							<div class="col-sm-8">
-								<input id="sort" name="sort" min="1" type="number" th:value="${m.sort}" class="form-control required" />
+							<label class="control-label col-sm-2 required">标识:</label>
+							<div class="col-sm-9">
+								<input id="name" type="text" name="name" placeholder="标识" th:value="${m.name}" class="form-control required" />
+								<p class="help-block">唯一标识，不可与其它菜单重复，不可为空，创建后不可修改</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2">描述</label>
-							<div class="col-sm-8">
-								<input id="description" name="description" th:value="${m.description}" class="form-control" />
+							<label class="control-label col-sm-2 required">标题:</label>
+							<div class="col-sm-9">
+								<input id="title" type="text" name="title" placeholder="标题" th:value="${m.title}" class="form-control required" /></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">链接:</label>
+							<div class="col-sm-9">
+								<input id="url" type="text" name="url" placeholder="菜单链接Url" th:value="${m.url}" class="form-control" /></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">图标Class:</label>
+							<div class="col-sm-9">
+								<input id="iconClass" type="text" name="iconClass" placeholder="菜单的图标CSS Class" th:value="${m.iconClass}" class="form-control"
+								/>
+								<p class="help-block">图标的css class名称，如fa fa-user</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">排序:</label>
+							<div class="col-sm-9">
+								<input id="sort" type="number" name="sort" placeholder="菜单排序" th:value="1" class="form-control" />
+								<p class="help-block">同级菜单中排序序号，越小排序越靠前</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">顶置菜单:</label>
+							<div class="col-sm-9">
+								<label class="checkbox">
+									<input type="checkbox" name="top" th:checked="${m.top}"/>
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">激活:</label>
+							<div class="col-sm-9">
+								<label class="checkbox">
+									<input type="checkbox" name="enabled" th:checked="${m.enabled}"/>
+								</label>
 							</div>
 						</div>
 						<hr />
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-8">
-								<a class="btn btn-default" th:href="@{|/system/dict/${typeId}|}"> <i class="fa fa-fw fa-reply"></i> 返回
+								<a class="btn btn-default" th:href="@{|/system/menu/${typeId}|}"> <i class="fa fa-fw fa-reply"></i> 返回
 								</a>
 								<button type="submit" class="btn btn-primary">
 									<i class="fa fa-fw  fa-save"></i> 保存
@@ -70,7 +108,7 @@
 				function () {
 					/* form init  validation*/
 					var oldName = /*[[${m.name}]]*/ '';
-					var form = $("#dictForm");
+					var form = $("#menuForm");
 
 					// 提交当前活动的form，多个tab时候需要知道当前的tab
 					$(":submit", "#buttons").on("click", function (e) {
@@ -82,12 +120,12 @@
 					form.validate({
 						rules: {
 							name: {
-								remote: "/system/dict/unique/"+ /*[[${typeId}]]*/"" + "?oldName=" +	oldName
+								remote: "/system/menu/unique/" + "?oldName=" + oldName
 							}
 						},
 						messages: {
 							name: {
-								remote: "该名称的字典已存在!"
+								remote: "该名称的菜单项已存在!"
 							}
 						}
 					});

@@ -132,7 +132,7 @@ public abstract class BaseCrudController<T, ID extends Serializable> extends Bas
 	}
 
 	@GetMapping(value = { "", "/" })
-	public String list(Model model) {
+	public String list(Model model, RedirectAttributes redirectAttributes) {
 		return view(getSuffix() + "_list");
 	}
 

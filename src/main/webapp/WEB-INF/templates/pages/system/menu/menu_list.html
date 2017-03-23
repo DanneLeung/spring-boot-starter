@@ -44,19 +44,19 @@
 									<td>
 										<i th:class="${menu.iconClass}"></i> &nbsp; <span th:text="${menu.title}"></span>
 									</td>
-									<td th:text="${menu.module}"></td>
+									<td></td>
 									<td th:text="${menu.lineage}"></td>
 									<td th:text="${menu.url}"></td>
 									<td th:text="${menu.sort}"></td>
-									<td th:text="${menu.top}"></td>
-									<td th:text="${menu.enabled}"></td>
-									<td>
+									<td class="text-center"><i class="fa fa-check-square" th:if="${menu.top}"></i></td>
+									<td class="text-center"><i class="fa fa-check-square" th:if="${menu.enabled}"></i></td>
+									<td class="text-center">
 										<a href="@{|/system/menu/${menu.id}|}" title="子菜单" class="btn btn-default btn-sm add"><i class="fa fa-fw fa-list"></i></a>
 									</td>
 									<td class="text-center">
 										<div class="btn-group">
 											<a id="edit" th:href="@{|/system/menu/add/${menu.id}|}" title="添加子菜单" class="btn btn-default btn-sm add"><i class="fa fa-fw fa-plus"></i></a>
-											<a id="edit" th:href="@{|/system/menu/edit/${menu.id|}" title="编辑菜单" class="btn btn-default btn-sm edit"><i class="fa fa-fw fa-edit"></i></a>
+											<a id="edit" th:href="@{|/system/menu/edit/${menu.id}|}" title="编辑菜单" class="btn btn-default btn-sm edit"><i class="fa fa-fw fa-edit"></i></a>
 											<a id="del" onclick="del('${menu.id}')" title="删除菜单" class="btn btn-default btn-sm del"><i class="fa fa-fw fa-trash-o"></i></a>
 										</div>&nbsp;&nbsp;
 										<div class="btn-group">
