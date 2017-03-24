@@ -85,9 +85,7 @@
 											'</div>';
 									}
 								}]
-							})).on('draw.dt', function () {
-							$("#tableWrapper").fadeIn();
-						});
+							}));
 						table.on('click', '.del', function () {
 							var id = table.row($(this).parents('tr')).data().id;
 							$("#delForm #ids").val(id);

@@ -51,7 +51,7 @@
 									<td class="text-center"><i class="fa fa-check-square" th:if="${menu.top}"></i></td>
 									<td class="text-center"><i class="fa fa-check-square" th:if="${menu.enabled}"></i></td>
 									<td class="text-center">
-										<a href="@{|/system/menu/${menu.id}|}" title="子菜单" class="btn btn-default btn-sm add"><i class="fa fa-fw fa-list"></i></a>
+										<a th:href="@{|/system/menu/children/${menu.id}|}" title="子菜单" class="btn btn-default btn-sm add"><i class="fa fa-fw fa-list"></i></a>
 									</td>
 									<td class="text-center">
 										<div class="btn-group">

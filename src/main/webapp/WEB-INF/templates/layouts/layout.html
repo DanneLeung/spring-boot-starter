@@ -134,10 +134,21 @@
 					toastr.success(success);
 				if (warning)
 					toastr.warning(warning);
+
+				// icheck
 				$('input').iCheck({
 					checkboxClass: 'icheckbox_square-blue',
 					radioClass: 'iradio_square-blue',
 					increaseArea: '20%' // optional
+				});
+				//datatable 
+				$('body').on('draw.dt', 'table', function () {
+					$(this).parents('div:hidden').fadeIn();
+					$(this).find('input:checkbox').iCheck({
+						checkboxClass: 'icheckbox_square-blue',
+						radioClass: 'iradio_square-blue',
+						increaseArea: '20%' // optional
+					});
 				});
 
 				$('body').on(

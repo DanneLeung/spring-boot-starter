@@ -68,14 +68,7 @@ $(document).ready(function () {
 			data: 'editable',
 			visible: false
 		}]
-	})).on('draw.dt', function () {
-		$("#tableWrapper").fadeIn();
-		$('#tableWrapper input:checkbox').iCheck({
-			checkboxClass: 'icheckbox_square-blue',
-			radioClass: 'iradio_square-blue',
-			increaseArea: '20%'
-		});
-	});
+	}));
 	table.on('click', '.del', function () {
 		var id = table.row($(this).parents('tr')).data().id;
 		$("#delForm #ids").val(id);

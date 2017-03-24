@@ -36,7 +36,7 @@ public class MenuController extends BaseCrudController<Menu, Long> {
 	@Override
 	public String list(Model model, RedirectAttributes redirectAttributes) {
 		// return super.list(model, redirectAttributes);
-		return "redirect: " + getRequestMapping() + "/children";
+		return "redirect:" + getRequestMapping() + "/children";
 	}
 
 	@GetMapping(value = { "/children", "/children/{parentId}" })
