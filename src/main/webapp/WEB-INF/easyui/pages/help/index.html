@@ -1,0 +1,121 @@
+<div>
+    <h1>帮助</h1>
+
+    <p>基于 EasyUI 前端开发脚手架( <a href="https://github.com/waylau/easyui-scaffold" target="_blank"> easyui-scaffold </a>)。快速建立企业应用模型。
+    </p>
+
+    <h2>版本说明</h2>
+
+    <div>
+
+        <h4>基于 Git 版本的 EasyUI 1.4.4 下载地址：</h4>
+
+        <p><a target="_blank"
+              href="https://github.com/waylau/jquery-easyui">https://github.com/waylau/jquery-easyui</a></p>
+        <h4>
+
+            <h4>easyui-scaffold 项目源码 下载地址：</h4>
+
+            <p><a target="_blank"
+                  href="https://github.com/waylau/easyui-scaffold">https://github.com/waylau/easyui-scaffold</a></p>
+            <h4>
+                v1.4.4 ChangeLog</h4>
+		<p>
+	Bug（错误）</p><ul class=" list-paddingleft-2"><li><p>
+		filebox: The 'clear' and 'reset' methods do not work properly in IE9. fixed.（filebox：“clear”和“reset”方法在IE9下不正常，已修复。）	</p></li><li><p>
+		messager: After calling $.messager.progress() with no arguments, the $.messager.progress('close') does not work properly. fixed.（messager：不带参数调用“$.messager.progress()”后“$.messager.progress('close')”不正常，已修复。）	</p></li><li><p>
+		timespinner: The value does not display properly in IE8 while clicking the spin buttons. fixed.（timespinner：在IE8下单击微调按钮时显示不正常，已修复。）	</p></li><li><p>
+		window: The window does not display when calling 'options' method in 'onMove' event. fixed.（window：在“onMove”事件中调用“options”方法时窗口不显示，已修复。）	</p></li><li><p>
+		treegrid: The 'getLevel' method does not accept the parameter value of 0. fixed.（treegrid：“getLevel”方法不接受0参数，已修改。）	</p></li></ul><p>
+	Improvement（改进）</p><ul class=" list-paddingleft-2"><li><p>
+		layout: The 'collapsedContent','expandMode' and 'hideExpandTool' properties are supported in region panel.（layout：“collapsedContent”、“expandMode”和“hideExpandTool”属性支持局部面板。）	</p></li><li><p>
+		layout: The 'hideCollapsedContent' property can be set to display the vertical title bar on collapsed panel.（layout：在展开的面板中“hideCollapsedContent”属性可以设置以显示垂直标题栏。）	</p></li><li><p>
+		layout: Add 'onCollapse','onExpand','onAdd','onRemove' events.（layout：加入“onCollapse”、“onExpand”、“onAdd”、“onRemove”事件。）	</p></li><li><p>
+		datagrid: Display the 'up-down' icon on the sortable columns.（datagrid：在排序列显示“up-down”图标。）	</p></li><li><p>
+		datagrid: Add 'gotoPage' method.（加入“gotoPage”方法。）	</p></li><li><p>
+		propertygrid: Add 'groups' method that allows to get all the data groups.（propertygrid：加入“groups”方法允许获取全部数据分组。）	</p></li><li><p>
+		messager: Auto scroll feature is supported when displaying long messages.（messager：显示长消息时支持自动滚动特性。）	</p></li><li><p>
+		tabs: The 'disabled' property is supported when defining a disabled tab panel.（tabs：支持使用“disabled”属性定义禁用的标签面板。）	</p></li><li><p>
+		tabs: The percentange size is supported now.（tabs：现在支持百分比大小。）	</p></li></ul>
+
+            <h4>
+                v1.4.2 ChangeLog</h4>
+            <div>Bug</div>
+            <ul class=" list-paddingleft-2"><li><p>
+                treegrid: The column will restore its size to original size after recreating the treegrid. fixed.
+                （TreeGrid：重新创建TreeGrid后列宽将恢复到原始大小，已修复。）	</p></li></ul>
+            <div>Improvement</div>
+            <ul class=" list-paddingleft-2"><li><p>
+                draggable: Add 'delay' property that allows the user to delay the drag operation.（Draggable：加入“delay”属性允许用户延迟拖动。）	</p></li><li><p>
+                tree: Add 'filter' property and 'doFilter' method.（Tree：加入“filter”属性和“doFilter”方法。）	</p></li><li><p>
+                tabs: The 'add' method allows the user to insert a tab panel at a specified index.（Tabs：加入“add”方法允许用户在指定索引前插入Tab面板。）	</p></li><li><p>
+                tabs: The user can determine what tab panel can be selected.（Tabs：用户能限定那些Tab面板可以被选中。）	</p></li><li><p>
+                tabs: Add 'justified' and 'narrow' properties.（Tabs：加入“justified”和“narrow”属性。）	</p></li><li><p>
+                layout: Add 'unsplit' and 'split' methods.（Layout：加入“unsplit”和“split”方法。）	</p></li><li><p>
+                messager: Keyboard navigation features are supported now.（Messager：现在支持键盘导航了。）	</p></li><li><p>
+                form: Add 'onChange' event.（Form：加入“onChange”事件。）	</p></li><li><p>
+                combobox: Add 'queryParams' property.（ComboBox：加入“queryParams”属性。）	</p></li><li><p>
+                slider: Add 'range' property.（Slider：加入“range”属性。）	</p></li><li><p>
+                menu: Add 'itemHeight','inline','noline' properties.（Menu：加入“itemHeight”、“inline”、“noline”属性。）	</p></li><li><p>
+                panel: The 'header' property allows the user to customize the panel header.（Panel：“header”属性允许用户定制面板头部。）	</p></li><li><p>
+                menubutton: Add 'hasDownArrow' property.（MenuButton：加入“hasDownArrow”属性。）	</p></li></ul>
+            <div>New Plugins</div>
+            <ul class=" list-paddingleft-2"><li><p>
+                datalist: The plugin to render items in a list.（DataList：这个插件可以在列表中渲染列表项。）	</p></li><li><p>
+                navpanel: The root component for the mobile page.（NavPanel：移动页面的根组件。）	</p></li><li><p>
+                mobile: The plugin to provide the mobile page stack management and navigation.（Moblie：这个插件提供移动页面堆栈管理和导航。）&nbsp;	</p></li></ul>
+
+            <h4>
+
+            v1.4.1 ChangeLog（更新日志）</h4>
+
+            <p>
+                Bug（错误）</p>
+            <ul class=" list-paddingleft-2">
+                <li><p>
+                    The combogrid has different height than other combo components.
+                    fixed.（Combogrid组件与其他Combo组件高度不一致，已修复。） </p></li>
+                <li><p>
+                    datagrid: The row element loses some class style value after calling 'updateRow' method.
+                    fixed.（Datagrid：行元素调用“updateRow”方法后丢失部分样式，已修复。） </p></li>
+                <li><p>
+                    menubutton: Calling 'enable' method on a disabled button can not work well.
+                    fixed.（Menubutton：在被禁用按钮上调用“enable”方法不能很好的工作，已修复。） </p></li>
+                <li><p>
+                    form: The filebox components in the form do not work correctly after calling 'clear' method.
+                    fixed.（Form：调用“clear”方法后Filebox组件不能正常工作，已修复。） </p></li>
+            </ul>
+            <p>
+                Improvement（改进）</p>
+            <ul class=" list-paddingleft-2">
+                <li><p>
+                    tabs: The 'update' method accepts 'type' option that allows the user to update the header,body,or
+                    both.（Tabs：“update”方法可以接受“type”选项，允许用户更新头部、主体或全部内容） </p></li>
+                <li><p>
+                    panel: Add 'openAnimation','openDuration','closeAnimation' and 'closeDuration' properties to set the
+                    animation for opening or closing a
+                    panel.（Panel：加入“openAnimation”、“openDuration”、“closeAnimation”和“closeDuration”属性来设置面板打开关闭时的动画效果。） </p>
+                </li>
+                <li><p>
+                    panel: Add 'footer' property that allows the user to add a footer bar to the bottom of
+                    panel.（Panel：加入“footer”属性，允许用户在面板底部加入底脚条。） </p></li>
+                <li><p>
+                    datagrid: Calling 'endEdit' method will accept the editing value
+                    correctly.（Datagrid：调用“endEdit”方法可以正确接受编辑值。） </p></li>
+                <li><p>
+                    datagrid: Add 'onBeforeSelect','onBeforeCheck','onBeforeUnselect','onBeforeUncheck'
+                    events.（Datagrid：加入“onBeforeSelect”、“onBeforeCheck”、“onBeforeUnselect”、“onBeforeUncheck”事件。） </p>
+                </li>
+                <li><p>
+                    propertygrid: The user can edit a row by calling 'beginEdit'
+                    method.（Propertygrid：用户可以调用“beginEdit”方法编辑行值。） </p></li>
+                <li><p>
+                    datebox: Add 'cloneFrom' method to create the datebox component
+                    quickly.（Datebox：加入“cloneFrom”方法来快速创建日期组件。） </p></li>
+                <li><p>
+                    datetimebox: Add 'cloneFrom' method to create the datetimebox component
+                    quickly.（Datetimebox：加入“cloneFrom”方法来快速创建日期时间组件。） </p></li>
+            </ul>
+        </h4>
+    </div>
+</div>
