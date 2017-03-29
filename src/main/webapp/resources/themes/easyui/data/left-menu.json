@@ -1,0 +1,67 @@
+[{
+		"group": "基础数据",
+		"icon": "",
+		"data": [{
+				"title": "区域数据条标签",
+				"icon": "",
+				"url": "/master/databar",
+				"type": 1
+			},
+			{
+				"title": "工艺参数",
+				"icon": "",
+				"url": "/master/process",
+				"type": 1
+			}
+
+		]
+	},
+	{
+		"group": "任务管理",
+		"icon": "",
+		"data": [{
+				"title": "任务分派",
+				"icon": "",
+				"url": "/master/databar",
+				"type": 1
+			}
+
+		]
+	},
+	{
+		"group": "报表",
+		"icon": "",
+		"data": [{
+				"title": "任务分派",
+				"icon": "",
+				"url": "/master/databar",
+				"type": 1
+			}
+
+		]
+	},
+	{
+		"group": "系统管理",
+		"icon": "",
+		"data": [{
+				"title": "用户",
+				"icon": "",
+				"url": "/system/user",
+				"type": 1
+			},
+			{
+				"title": "角色",
+				"icon": "",
+				"url": "/system/role",
+				"type": 1
+			},
+			{
+				"title": "参数",
+				"icon": "",
+				"url": "/system/setting",
+				"type": 1
+			}
+
+		]
+	}
+]

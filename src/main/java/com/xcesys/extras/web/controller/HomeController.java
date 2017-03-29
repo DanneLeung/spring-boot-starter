@@ -2,8 +2,6 @@ package com.xcesys.extras.web.controller;
 
 import static com.xcesys.extras.framework.core.util.SecurityUtils.isSwitchedUser;
 
-import java.util.Map;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -59,7 +57,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/")
-	public String welcome(Map<String, Object> model) {
+	public String index(Model model) {
 		return "pages/index";
 	}
 
