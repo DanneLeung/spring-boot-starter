@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.controller.BaseCrudController;
 import com.xcesys.extras.framework.core.service.ICrudService;
 import com.xcesys.extras.framework.entity.Role;
@@ -23,8 +24,9 @@ public class RoleController extends BaseCrudController<Role, Long> {
 	@Autowired
 	private RoleService service;
 
+	@Override
 	@ResponseBody
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@GetMapping(value = "/datatable")
 	public DataTablesOutput<Role> datatable(@Valid DataTablesInput input) {
 		return service.findAll(input);
@@ -40,6 +42,7 @@ public class RoleController extends BaseCrudController<Role, Long> {
 		return "role";
 	}
 
+	@Override
 	protected Role newModel() {
 		Role role = new Role();
 		return role;

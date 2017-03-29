@@ -77,19 +77,16 @@ a {
 .easyui-accordion ul {
     list-style-type: none;
     margin: 0px;
-    padding: 10px;
 }
 
 .easyui-accordion ul li {
     padding: 0px;
 }
 
-.easyui-accordion ul li div {
-    margin: 2px 0px;
-    padding-left: 10px;
-    padding-top: 2px;
+.easyui-accordion ul li a {
     text-align: left;
     border: 0;
+    display:block;
 }
 
 .easyui-accordion ul li div img {

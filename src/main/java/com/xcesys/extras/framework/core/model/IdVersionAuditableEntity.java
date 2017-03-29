@@ -6,7 +6,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
 import org.springframework.data.jpa.domain.AbstractAuditable;
@@ -31,7 +30,7 @@ public class IdVersionAuditableEntity extends AbstractAuditable<User, Long> {
 	@Override
 	public String toString() {
 		try {
-			return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+			return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
 		} catch (LazyInitializationException e) {
 			return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append("id", getId()).append("version", getVersion())
 					.toString();

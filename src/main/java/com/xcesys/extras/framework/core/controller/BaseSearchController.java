@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.service.ICrudService;
 
 /**
@@ -19,7 +20,7 @@ import com.xcesys.extras.framework.core.service.ICrudService;
  */
 public abstract class BaseSearchController<T, ID extends Serializable> extends BaseController {
 	@ResponseBody
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@GetMapping(value = "datatable")
 	public DataTablesOutput<T> datatable(@Valid DataTablesInput input) {
 		return getCrudService().findAll(input);

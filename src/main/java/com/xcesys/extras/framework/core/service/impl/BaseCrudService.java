@@ -3,6 +3,8 @@ package com.xcesys.extras.framework.core.service.impl;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,7 @@ public abstract class BaseCrudService<T, ID extends Serializable> implements ICr
 
 	}
 
+	@Override
 	public void delete(ID id) {
 		getRepository().delete(id);
 	}
@@ -74,6 +77,7 @@ public abstract class BaseCrudService<T, ID extends Serializable> implements ICr
 		return getRepository().getOne(id);
 	}
 
+	@Override
 	public abstract IBaseRepository<T, ID> getRepository();
 
 	@Override
@@ -84,6 +88,11 @@ public abstract class BaseCrudService<T, ID extends Serializable> implements ICr
 	@Override
 	public T update(T o) {
 		return getRepository().save(o);
+	}
+
+	@Override
+	public Page<T> findAll(Pageable pageable) {
+		return getRepository().findAll(pageable);
 	}
 
 }

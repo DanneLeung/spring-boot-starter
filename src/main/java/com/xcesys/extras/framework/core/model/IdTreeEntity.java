@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.bean.PageResult;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,47 +37,47 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	/**
 	 * A list of children nodes.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parent", orphanRemoval = true)
 	protected Set<T> children = new HashSet<T>();
 
 	/**
 	 * Depth value in tree.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	protected int depth = 1;
 	/**
 	 * String value with tree depth indent.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	protected String displayName;
 	/**
 	 * Flag indicates leaf node.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private boolean leaf;
 	/**
 	 * Lineage representing tree path to this node.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	protected String lineage;
 	/**
 	 * Node type string value.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	protected String type;
 
 	/**
 	 * String value representing unique tree node name.
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	protected String name;
 
 	/**
 	 * Parent node object.
 	 */
 
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	protected T parent;
@@ -84,14 +85,14 @@ public abstract class IdTreeEntity<T extends IdTreeEntity> extends IdAuditableEn
 	/**
 	 * Parent node id.
 	 */
-	// @JsonView(DataTablesOutput.View.class)
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	// @Column(name = "parent_id")
 	// protected Long parentId;
 	/**
 	 * Sortable sequence in tree node, if subclass should let it be set to max
 	 * value automatically, so should set it to zero value before persisting it
 	 */
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	protected int sort = 0;
 
 	@Override

@@ -18,6 +18,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IEditable;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
@@ -36,13 +37,13 @@ import lombok.Setter;
 @Getter
 public class Role extends IdAuditableEntity implements IEditable {
 	private static final long serialVersionUID = 4371762231795963170L;
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String description;
 	@Column(unique = true)
 	@NonNull
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private boolean editable = true;
 	@OneToMany(fetch = EAGER)
 	private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();

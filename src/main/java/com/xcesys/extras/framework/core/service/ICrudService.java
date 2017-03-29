@@ -2,6 +2,8 @@ package com.xcesys.extras.framework.core.service;
 
 import java.io.Serializable;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
@@ -141,4 +143,6 @@ public interface ICrudService<T, ID extends Serializable> {
 	 * @return T
 	 */
 	T update(T o);
+	
+	Page<T> findAll(Pageable pageable);
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.controller.BaseCrudController;
 import com.xcesys.extras.framework.core.service.ICrudService;
 import com.xcesys.extras.framework.core.util.ConvertUtils;
@@ -45,8 +46,9 @@ public class DictController extends BaseCrudController<Dict, Long> {
 		return view(getSuffix() + "_form");
 	}
 
+	@Override
 	@ResponseBody
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@GetMapping(value = "/datatable")
 	public DataTablesOutput<Dict> datatable(@Valid DataTablesInput input) {
 		return service.findAll(input);
@@ -84,6 +86,7 @@ public class DictController extends BaseCrudController<Dict, Long> {
 		return view(getSuffix() + "_list");
 	}
 
+	@Override
 	protected Dict newModel() {
 		Dict dict = new Dict();
 		return dict;

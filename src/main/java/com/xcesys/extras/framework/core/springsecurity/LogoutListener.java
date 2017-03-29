@@ -13,7 +13,7 @@ public class LogoutListener implements ApplicationListener<SessionDestroyedEvent
 
 	@Override
 	public void onApplicationEvent(SessionDestroyedEvent event) {
-		String sessionId = (String) ((HttpSessionDestroyedEvent) event).getSession().getId();
+		String sessionId = ((HttpSessionDestroyedEvent) event).getSession().getId();
 		String username = (String) ((HttpSessionDestroyedEvent) event).getSession().getAttribute("username");
 		log.info("Logged out as {}", username);
 	}

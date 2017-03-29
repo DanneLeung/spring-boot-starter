@@ -9,7 +9,7 @@
 	<!-- Favicon -->
 	<link rel="shortcut icon" th:href="@{|${theme}/favicon.ico|}" />
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link id="easyui_theme_id" rel="stylesheet" type="text/css" th:href="@{|${theme}/themes/bootstrap/easyui.css|}" />
+	<link id="easyui_theme_id" rel="stylesheet" type="text/css" th:href="@{|${theme}/themes/metro/easyui.css|}" />
 	<link rel="stylesheet" type="text/css" th:href="@{|${theme}/themes/icon.css|}" />
 	<link rel="stylesheet" th:href="@{|${theme}/css/reset.css|}" href="css/reset.css" />
 	<link rel="stylesheet" th:href="@{|${theme}/css/main.css|}" href="css/main.css" />
@@ -20,7 +20,7 @@
 
 <body class="easyui-layout">
 	<!--顶部区域-->
-	<div class="top-layout" data-options="region:'north',border:false">
+	<div class="top-layout " data-options="region:'north',border:false">
 		<div class="top-left">
 			<a href="/"> <img class="logo" th:src="@{|${theme}/images/logo.png|}" src="images/logo.png" alt="logo" />
 			</a>
@@ -31,18 +31,19 @@
 
 		<div class="top-right">
 			<div class="top-menu">
-				<a id="person_detail_id" class="easyui-menubutton" plain="true" menu="#person_menu_id"> waylau</a> <a id="msg_id" href="javascript:void(0);"
-				  class="easyui-linkbutton" plain="true" onclick="javascript:addTabContent('消息','app/msg/index.html' );return false;">
-					消息</a> <a id="theme_id" href="javascript:void(0);" class="easyui-linkbutton" plain="true"> 换肤</a> <a href="javascript:void(0);"
-				  class="easyui-linkbutton" target="_blank" plain="true" onclick="javascript:addTabHref('帮助', 'app/help/index.html');return false;">帮助</a>
+				<a id="person_detail_id" class="easyui-menubutton" plain="true" menu="#person_menu_id"> <span sec:authentication="name"></span></a>
+				<!--<a id="msg_id" href="javascript:void(0);" class="easyui-linkbutton" plain="true" onclick="javascript:addTabContent('消息','/msg/index.html' );return false;">-->
+					<!--消息</a>-->
+<!-- 				<a id="theme_id" href="javascript:void(0);" class="easyui-linkbutton" plain="true"> 换肤</a> -->
+				<a href="javascript:void(0);" class="easyui-linkbutton" target="_blank" plain="true" onclick="javascript:addTabHref('帮助', '/help/index.html');return false;">帮助</a>
 			</div>
 		</div>
 
 
 		<div id="person_menu_id" style="width: 90px;">
-			<div onclick="javascript:addTabHref('个人设置','app/personal/index.html' );return false;">
+			<div onclick="javascript:addTabHref('个人设置','/user/profile' );return false;">
 				个人设置</div>
-			<div onclick="javascript:logout();return false;">退出</div>
+			<div  ><a href="/logout">退出</a></div>
 		</div>
 
 	</div>
@@ -89,6 +90,7 @@
 	<!-- bower:js -->
 	<script th:src="@{|${theme}/js/jquery.min.js|}" src="bower_components/jquery/dist/jquery.js"></script>
 	<script th:src="@{|${theme}/js/jquery.easyui.min.js|}"></script>
+	<script th:src="@{|${theme}/locale/easyui-lang-zh_CN.js|}"></script>
 	<script th:src="@{|${theme}/js/jquery.cookie.min.js|}" src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->

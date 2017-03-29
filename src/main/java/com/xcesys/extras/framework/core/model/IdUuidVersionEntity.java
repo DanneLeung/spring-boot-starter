@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -34,7 +33,7 @@ public class IdUuidVersionEntity extends AbstractPersistable<Long> {
 	@Override
 	public String toString() {
 		try {
-			return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+			return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
 		} catch (LazyInitializationException e) {
 			return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append("id", getId()).append("uuid", getUuid())
 					.append("version", getVersion()).toString();

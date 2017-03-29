@@ -46,19 +46,19 @@
 		"data": [{
 				"title": "用户",
 				"icon": "",
-				"url": "/system/user",
+				"url": "/epa/system/user",
 				"type": 1
 			},
 			{
 				"title": "角色",
 				"icon": "",
-				"url": "/system/role",
+				"url": "/epa/system/role",
 				"type": 1
 			},
 			{
 				"title": "参数",
 				"icon": "",
-				"url": "/system/setting",
+				"url": "/epa/system/setting",
 				"type": 1
 			}
 

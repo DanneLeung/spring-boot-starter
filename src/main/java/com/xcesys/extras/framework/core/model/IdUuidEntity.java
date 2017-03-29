@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -30,7 +29,7 @@ public class IdUuidEntity extends AbstractPersistable<Long> {
 	@Override
 	public String toString() {
 		try {
-			return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+			return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
 		} catch (LazyInitializationException e) {
 			return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append("id", getId()).append("uuid", getUuid())
 					.toString();

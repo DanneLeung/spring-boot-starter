@@ -46,6 +46,7 @@ public class UserController extends BaseCrudController<User, Long> {
 		return roleService.findAll();
 	}
 
+	@Override
 	protected User newModel() {
 		User user = new User();
 		return user;

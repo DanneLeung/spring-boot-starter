@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -31,19 +30,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
-		http
-				// .headers()
-				// TODO: (REWRITE) This enables opening javamelody in an iframe,
-				// see https://jira.spring.io/browse/SEC-2501 and
-				// https://jira.spring.io/browse/SPR-11496
-				// .addHeaderWriter(new
-				// XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
-				// .and()
-				// .requiresChannel()
-				// .anyRequest()
-				// .requiresInsecure()
-				// .and()
-				.authorizeRequests()
+		http.headers()
+				// TODO: (REWRITE) This enables opening javamelody in an
+				// iframe, see https://jira.spring.io/browse/SEC-2501
+				// and https://jira.spring.io/browse/SPR-11496
+				.frameOptions().sameOrigin()
+				.and().authorizeRequests()
 				// .expressionHandler(webSecurityExpressionHandler())
 				.antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/database/**")
 				.access("hasRole('DEVELOPER') and !isProductionEnvironment()").antMatchers("/javamelody/**")
@@ -97,10 +89,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return springDataTokenRepository;
 	}
 
-//	@Bean
-//	public RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
-//		RememberMeAuthenticationProvider rememberMeAuthenticationProvider = new RememberMeAuthenticationProvider(
-//				REMEMBER_ME_KEY);
-//		return rememberMeAuthenticationProvider;
-//	}
+	// @Bean
+	// public RememberMeAuthenticationProvider
+	// rememberMeAuthenticationProvider() {
+	// RememberMeAuthenticationProvider rememberMeAuthenticationProvider = new
+	// RememberMeAuthenticationProvider(
+	// REMEMBER_ME_KEY);
+	// return rememberMeAuthenticationProvider;
+	// }
 }

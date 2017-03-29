@@ -9,7 +9,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
 import org.hibernate.annotations.DynamicInsert;
@@ -23,6 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.framework.core.bean.PageResult;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +42,7 @@ public abstract class IdAuditableEntity extends IdEntity {
 
 	@CreatedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
 
@@ -51,7 +51,7 @@ public abstract class IdAuditableEntity extends IdEntity {
 
 	@LastModifiedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonView(DataTablesOutput.View.class)
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastModifiedDate;
 	//
@@ -123,7 +123,7 @@ public abstract class IdAuditableEntity extends IdEntity {
 	@Override
 	public String toString() {
 		try {
-			return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+			return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
 		} catch (LazyInitializationException e) {
 			return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append("id", getId()).toString();
 		}
