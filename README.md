@@ -47,6 +47,8 @@ Run project
 #### Requirements
 * Java 8
 * Maven 3
+* MySQL >= 5.6
+* 
 
 #### Run
 - Use maven to run

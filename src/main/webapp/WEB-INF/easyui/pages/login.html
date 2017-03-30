@@ -7,47 +7,56 @@
 	<title th:text="${applicationName}">Spring Boot Start | Log in</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+	<!-- Favicon -->
+	<link rel="shortcut icon" th:href="@{|${theme}/favicon.ico|}" />
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link id="easyui_theme_id" rel="stylesheet" type="text/css" th:href="@{|${theme}/themes/metro/easyui.css|}" />
+	<link rel="stylesheet" type="text/css" th:href="@{|${theme}/themes/icon.css|}" />
+	<link rel="stylesheet" th:href="@{|${theme}/css/reset.css|}" href="css/reset.css" />
+	<link rel="stylesheet" th:href="@{|${theme}/css/main.css|}" href="css/main.css" />
+	<link rel="stylesheet" th:href="@{|${theme}/css/login.css|}" href="css/login.css" />
 </head>
 
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="/"><b th:text="${applicationName}">Admin</b></a>
+			<a href="/">
+				<h1 th:text="${applicationName}">Spring boot starter</h1>
+			</a>
 		</div>
 		<!-- /.login-logo -->
-		<div class="login-box-body">
-			<p class="login-box-msg">使用用户密码登录系统!</p>
+		<div class="easyui-panel" title="登录系统" style="width:100%;max-width:400px;padding:20px;">
+			<!--<h1 class="login-box-msg">使用用户密码登录系统!</h1>-->
 
 			<form th:action="@{/login}" action="/login" method="post">
-				<div th:text="${message}" id="message" th:if="${message}"></div>
-				<div class="form-group has-feedback">
-					<input type="text" name="username" class="form-control" placeholder="用户名或电子邮件" /> <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+				<h4 style="color: red" th:text="${message}" id="message" th:if="${message}"></h4>
+				<div class="" style="margin-bottom: 15px">
+					<input type="text" name="username" class="easyui-textbox" prompt="用户名或电子邮件" data-options="label:'用户名:',required:true, iconCls:'icon-man'" style="width:100%;height: 30px;"
+					  placeholder="用户名或电子邮件" />
 				</div>
-				<div class="form-group has-feedback">
-					<input type="password" name="password" class="form-control" placeholder="登录密码" /> <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				<div class="" style="margin-bottom: 15px">
+					<input type="password" name="password" class="easyui-passwordbox" prompt="登录密码" data-options="label:'登录密码:',required:true, iconCls:'icon-lock'"
+					  style="width:100%;height: 30px;" placeholder="登录密码" />
 				</div>
-				<div class="row">
-					<div class="col-xs-8">
-						<div class="checkbox icheck">
-							<label> <input name="remember-me" type="checkbox" />
-								Remember Me
-							</label>
-						</div>
-					</div>
-					<!-- /.col -->
-					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">
-							<i class="fa fa-fw fa-arrow-right"></i> 登录
+				<div class="" style="margin-bottom: 15px">
+					<label class="textbox-label"></label>
+					<input name="remember-me" type="checkbox" class="easyui-switchbutton" data-options="label:'下次自动登录:'"/> 
+				</div>
+				<div class="" style="margin-bottom: 15px">
+					<label class="textbox-label"></label>
+					<button type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px; height: 30px;">
+							 登录
 						</button>
-					</div>
-					<!-- /.col -->
 				</div>
 			</form>
-			<a href="#">I forgot my password</a><br /> <a href="register.html" class="text-center">Register a new membership</a>
 		</div>
 		<!-- /.login-box-body -->
 	</div>
 	<!-- /.login-box -->
+	<script th:src="@{|${theme}/js/jquery.min.js|}" src="bower_components/jquery/dist/jquery.js"></script>
+	<script th:src="@{|${theme}/js/jquery.easyui.min.js|}"></script>
+	<script th:src="@{|${theme}/locale/easyui-lang-zh_CN.js|}"></script>
+	<script th:src="@{|${theme}/js/jquery.cookie.min.js|}" src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 </body>
 

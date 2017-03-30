@@ -1,24 +1,32 @@
-html,
-body,
-input,
-select,
-text-area,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
+* {
     font-family: Microsoft YaHei;
+}
+
+h1,
+.h1 {
+    padding: 15px 0;
+    font-size: 20px
+}
+
+h2,
+.h2 {
+    padding: 15px 0;
+    font-size: 18px
+}
+
+h3,
+.h3 {
+    padding: 10px 0;
+    font-size: 16px
+}
+
+h4,
+.h4 {
+    padding: 10px 0;
+    font-size: 14px
+}
+
+body {
     font-size: 12px;
 }
 
@@ -30,38 +38,41 @@ a {
 /*顶部区域样式*/
 
 .top-layout {
-    height: 60px;
+    height: 40px;
+    overflow: hidden;
 }
 
 .logo-text {
     font-size: 24px;
-    font-family: 'SimHei';
+    height: 40px;
+    padding: 5px;
+    font-weight: 700;
 }
 
 .top-left {
-    float: left;
-    height: 60px;
-    text-align: center;
-    position: relative;
+    height: 40px;
+    margin: 0;
 }
 
 .top-left img {
-    width: 50px;
-    height: 50px;
+    margin: 0;
+    width: 100px;
+    height: 40px;
     vertical-align: middle;
     border: 0
 }
 
 .top-right {
-    height: 60px;
-    float: right;
-    vertical-align: bottom;
+    height: 40px;
 }
 
 .top-right .top-menu {
-    height: 22px;
-    margin-top: 34px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 10px;
     margin-bottom: 0px;
+    vertical-align: bottom;
 }
 
 
@@ -86,7 +97,7 @@ a {
 .easyui-accordion ul li a {
     text-align: left;
     border: 0;
-    display:block;
+    display: block;
 }
 
 .easyui-accordion ul li div img {

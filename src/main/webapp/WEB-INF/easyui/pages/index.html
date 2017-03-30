@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{|${theme}/themes/icon.css|}" />
 	<link rel="stylesheet" th:href="@{|${theme}/css/reset.css|}" href="css/reset.css" />
 	<link rel="stylesheet" th:href="@{|${theme}/css/main.css|}" href="css/main.css" />
+
 	<script th:inline="javascript">
 		var theme = /*[[${theme}]]*/ '';
 	</script>
@@ -23,9 +24,7 @@
 	<div class="top-layout " data-options="region:'north',border:false">
 		<div class="top-left">
 			<a href="/"> <img class="logo" th:src="@{|${theme}/images/logo.png|}" src="images/logo.png" alt="logo" />
-			</a>
-			<a href="/" class="easyui-linkbutton" data-options="plain:true">
-				<h1 class="logo-text" th:text="${applicationName}">Spring boot starter</h1>
+				<span class="logo-text" th:text="${applicationName}">Spring spanoot starter</span>
 			</a>
 		</div>
 
@@ -33,8 +32,8 @@
 			<div class="top-menu">
 				<a id="person_detail_id" class="easyui-menubutton" plain="true" menu="#person_menu_id"> <span sec:authentication="name"></span></a>
 				<!--<a id="msg_id" href="javascript:void(0);" class="easyui-linkbutton" plain="true" onclick="javascript:addTabContent('消息','/msg/index.html' );return false;">-->
-					<!--消息</a>-->
-<!-- 				<a id="theme_id" href="javascript:void(0);" class="easyui-linkbutton" plain="true"> 换肤</a> -->
+				<!--消息</a>-->
+				<!-- 				<a id="theme_id" href="javascript:void(0);" class="easyui-linkbutton" plain="true"> 换肤</a> -->
 				<a href="javascript:void(0);" class="easyui-linkbutton" target="_blank" plain="true" onclick="javascript:addTabHref('帮助', '/help/index.html');return false;">帮助</a>
 			</div>
 		</div>
@@ -43,7 +42,7 @@
 		<div id="person_menu_id" style="width: 90px;">
 			<div onclick="javascript:addTabHref('个人设置','/user/profile' );return false;">
 				个人设置</div>
-			<div  ><a href="/logout">退出</a></div>
+			<div><a href="/logout">退出</a></div>
 		</div>
 
 	</div>
@@ -86,22 +85,16 @@
 		<div id="mm-tabcloseleft">关闭左侧窗口</div>
 		<div id="mm-tabcloseright">关闭右侧窗口</div>
 	</div>
-	<!-- build:js(.) scripts/vendor.js -->
-	<!-- bower:js -->
 	<script th:src="@{|${theme}/js/jquery.min.js|}" src="bower_components/jquery/dist/jquery.js"></script>
 	<script th:src="@{|${theme}/js/jquery.easyui.min.js|}"></script>
 	<script th:src="@{|${theme}/locale/easyui-lang-zh_CN.js|}"></script>
 	<script th:src="@{|${theme}/js/jquery.cookie.min.js|}" src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-	<!-- endbower -->
-	<!-- endbuild -->
 
-	<!-- build:js({app,.tmp}) scripts/main.js -->
 	<script th:src="@{|${theme}/js/date-util.js|}"></script>
 	<script th:src="@{|${theme}/js/easyui-theme-change.js|}"></script>
 	<script th:src="@{|${theme}/js/jquery-loading.js|}"></script>
 	<script th:src="@{|${theme}/js/msg.js|}"></script>
 	<script th:src="@{|${theme}/js/main.js|}"></script>
-	<!-- endbuild -->
 </body>
 
 </html>
