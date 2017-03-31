@@ -11,7 +11,7 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='系统菜单', subtext='管理系统菜单数据'" />
+		<th:block th:include="layouts/fragments/pageheader :: pageheader" th:with="header='系统菜单', subtext='管理系统菜单数据'" />
 		<section class="content">
 
 			<div class="box">
@@ -77,7 +77,7 @@
 		</form>
 	</th:block>
 	<th:block layout:fragment="scripts">
-		<script th:replace="fragments/datatablesjs :: datatables" />
+		<script th:replace="layouts/fragments/datatablesjs :: datatables" />
 		<script type="text/javascript" th:inline="javascript">
 			$(document).ready(function () {
 				var table = $("#table");

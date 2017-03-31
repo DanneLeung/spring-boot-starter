@@ -37,24 +37,24 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 		super();
 	}
 
-	private void addErrorMessage(String... array) {
+	protected void addErrorMessage(String... array) {
 
 	}
-	
+
 	@ResponseBody
 	@GetMapping(value = "del/{id}")
-	public Result del(@PathVariable("id")ID id ) {
+	public Result del(@PathVariable("id") ID id) {
 		if (id != null) {
 			T m = getCrudService().findById(id);
 			if (m != null && m instanceof IEditable && !((IEditable) m).isEditable()) {
 				return result(1, "该数据为系统固定不可编辑，请选择其他操作!");
 			}
 			getCrudService().delete(m);
-			return result(0,  "删除数据成功");
+			return result(0, "删除数据成功");
 		}
-		return result(1,  "ID为空，没有要删除的数据!");
+		return result(1, "ID为空，没有要删除的数据!");
 	}
-	
+
 	@ModelAttribute("m")
 	public T get(Model model, @PathVariable(name = "id", required = false) T m) {
 		modelAttribute(model, m);
@@ -84,9 +84,9 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 		return result.hasErrors();
 	}
 
-	@GetMapping("")
-	public String Index(Model model) {
-		return "pages/system/users";
+	@GetMapping({ "/", "" })
+	public String index(Model model) {
+		return view("");
 	}
 
 	@JsonView(PageResult.View.class)
@@ -116,7 +116,7 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 	protected void preSave(T m, HttpServletRequest request) {
 	}
 
-	private Result result(Integer error,String... msg) {
+	private Result result(Integer error, String... msg) {
 		return new Result(error, StringUtils.join(msg, ", "));
 	}
 
@@ -129,7 +129,7 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 			for (ObjectError err : errors) {
 				addErrorMessage(err.getDefaultMessage());
 			}
-			return result(1,"保存数据发生错误!");
+			return result(1, "保存数据发生错误!");
 		}
 		try {
 			preSave(m, request);
@@ -137,9 +137,9 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 		} catch (Exception e) {
 			log.error("Error while saving data.", e);
 			addErrorMessage(e.getLocalizedMessage());
-			return result(1,e.getLocalizedMessage());
+			return result(1, e.getLocalizedMessage());
 		}
-		return result(0,"保持数据成功!");
+		return result(0, "保持数据成功!");
 	}
 
 	/**

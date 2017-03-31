@@ -10,7 +10,7 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='编辑系统角色', subtext='编辑指定角色数据，并且可以对角色进行角色授权'" />
+		<th:block th:include="layouts/fragments/pageheader :: pageheader" th:with="header='编辑系统角色', subtext='编辑指定角色数据，并且可以对角色进行角色授权'" />
 		<section class="content">
 			<div class="box box-primary">
 				<div class="box-header">
@@ -71,7 +71,7 @@
 		</section>
 	</th:block>
 	<th:block layout:fragment="scripts">
-		<script th:replace="fragments/validatejs :: validate" />
+		<script th:replace="layouts/fragments/validatejs :: validate" />
 		<script type="text/javascript" th:inline="javascript">
 			$(document).ready(
 				function () {

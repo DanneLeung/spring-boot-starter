@@ -70,19 +70,19 @@
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<!-- Navbar -->
-		<th:block th:include="fragments/navbar :: navbar" />
+		<th:block th:include="layouts/fragments/navbar :: navbar" />
 
-		<th:block th:include="fragments/sidebar :: sidebar" />
+		<th:block th:include="layouts/fragments/sidebar :: sidebar" />
 		<div class="content-wrapper">
 			<!-- Content -->
 			<th:block layout:fragment="content" />
 		</div>
 
 		<!-- Footer -->
-		<th:block th:include="fragments/footer :: footer" />
+		<th:block th:include="layouts/fragments/footer :: footer" />
 
 		<!-- 	<div class="bottom-right-container"> -->
-		<!-- 		<th:block th:include="fragments/debuginfo :: debuginfo" /> -->
+		<!-- 		<th:block th:include="layouts/fragments/debuginfo :: debuginfo" /> -->
 		<!-- 	</div> -->
 	</div>
 	<!-- JavaScripts -->

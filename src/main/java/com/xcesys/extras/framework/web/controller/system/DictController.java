@@ -1,12 +1,9 @@
 package com.xcesys.extras.framework.web.controller.system;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
-import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.controller.BaseCrudController;
 import com.xcesys.extras.framework.core.service.ICrudService;
 import com.xcesys.extras.framework.core.util.ConvertUtils;
@@ -45,14 +40,7 @@ public class DictController extends BaseCrudController<Dict, Long> {
 		model.addAttribute("m", dict);
 		return view(getSuffix() + "_form");
 	}
-
-	@Override
-	@ResponseBody
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@GetMapping(value = "/datatable")
-	public DataTablesOutput<Dict> datatable(@Valid DataTablesInput input) {
-		return service.findAll(input);
-	}
+ 
 
 	@Override
 	@PostMapping(value = "del")

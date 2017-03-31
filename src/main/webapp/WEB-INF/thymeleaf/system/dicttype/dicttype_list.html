@@ -11,7 +11,7 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='字典类型', subtext='管理系字典类型数据'" />
+		<th:block th:include="layouts/fragments/pageheader :: pageheader" th:with="header='字典类型', subtext='管理系字典类型数据'" />
 		<section class="content">
 			<div class="box">
 				<div class="box-header">
@@ -51,7 +51,7 @@
 		</form>
 	</th:block>
 	<th:block layout:fragment="scripts">
-		<script th:replace="fragments/datatablesjs :: datatables" />
+		<script th:replace="layouts/fragments/datatablesjs :: datatables" />
 		<script type="text/javascript" th:inline="javascript">
 			$(document)
 				.ready(

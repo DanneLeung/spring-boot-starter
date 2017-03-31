@@ -9,21 +9,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.xcesys.extras.framework.core.controller.BaseController;
+
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 
 	public static final int MINUTES = 60;
 
 	@GetMapping("/login")
 	public String login() {
-		return "pages/login";
+		return "login";
 	}
 
 	@GetMapping(value = "/login/fail")
 	public String loginFailure(Model model) {
 		String message = "Wrong password or username provided! Please try again.";
 		model.addAttribute("message", message);
-		return "pages/login";
+		return "login";
 	}
 
 	@GetMapping(value = "/login/success")
@@ -48,7 +50,7 @@ public class HomeController {
 
 	@GetMapping("/switchuser")
 	public String switchUser() {
-		return "pages/switchuser";
+		return "switchuser";
 	}
 
 	@GetMapping("/switchuserto{username}")
@@ -58,7 +60,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		return "pages/index";
+		return "index";
 	}
 
 }

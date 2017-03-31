@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.xcesys.extras.framework.core.bean.Result;
 import com.xcesys.extras.framework.core.exception.ApplicationException;
 
-public abstract class BaseRestController {
+public abstract class BaseRestController extends BaseController {
 
 	@ExceptionHandler
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

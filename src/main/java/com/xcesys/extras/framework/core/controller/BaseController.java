@@ -5,6 +5,7 @@
  */
 package com.xcesys.extras.framework.core.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.Model;
@@ -184,10 +185,11 @@ public abstract class BaseController {
 	 * @return
 	 */
 	public String view(String suffixName) {
-		String viewRoot = "pages";
-		if (!suffixName.startsWith("/")) {
+		if (!StringUtils.isBlank(suffixName) && !suffixName.startsWith("/")) {
 			suffixName = "/" + suffixName;
 		}
-		return viewRoot + getRequestMapping() + suffixName;
+		String view = getRequestMapping() + suffixName;
+		log.debug(" ****** view is :" + view);
+		return view;
 	}
 }
