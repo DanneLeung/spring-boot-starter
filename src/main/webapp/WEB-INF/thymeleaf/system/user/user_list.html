@@ -53,7 +53,7 @@
 	</th:block>
 	<th:block layout:fragment="scripts">
 		<script th:replace="layouts/fragments/datatablesjs :: datatables" />
-		<script th:src="@{|/static/js/app/system/user_list.js|}" th:inline="javascript"></script>
+		<script th:src="@{|${theme}/dist/js/app/system/user_list.js|}" src="/themes/lte/dist/js/app/system/user_list.js" th:inline="javascript"></script>
 	</th:block>
 </body>
 

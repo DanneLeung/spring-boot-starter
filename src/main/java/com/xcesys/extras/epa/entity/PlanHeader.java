@@ -1,4 +1,6 @@
-package com.xcesys.extras.framework.entity;
+package com.xcesys.extras.epa.entity;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,26 +19,59 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * 任务规则
+ * @author danne
+ *
+ */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-public class Dict extends IdAuditableEntity {
+public class PlanHeader extends IdAuditableEntity {
 
-	private static final long serialVersionUID = -8572522105499245114L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3893664023484789028L;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
-	private DictType type;
+	private DataBar databar;
+	/**
+	 * 名称
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
+	/**
+	 * 周期
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String value;
+	private String cycle;
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Integer sort;
+	private String work;
+	/**
+	 * 领取开始时间
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String description;
+	private Date receiveStartTime;
+	/**
+	 * 领取截止时间
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Date receiveEndTime;
+	/**
+	 * 上传截止时间
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Date uploadEndTime;
+	/**
+	 * 负责人
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Date worker;
 
 }

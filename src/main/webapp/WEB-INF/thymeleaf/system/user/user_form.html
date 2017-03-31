@@ -104,8 +104,7 @@
 	</th:block>
 	<th:block layout:fragment="scripts">
 		<script th:replace="layouts/fragments/validatejs :: validate" />
-		<script th:src="@{|/static/js/app/system/user_form.js|}"
-			th:inline="javascript"></script>
+		<script th:src="@{|/static/js/app/system/user_form.js|}" src="/themes/lte/dist/js/app/system/user_form.js" th:inline="javascript"></script>
 	</th:block>
 </body>
 

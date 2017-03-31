@@ -1,6 +1,7 @@
-package com.xcesys.extras.framework.entity;
+package com.xcesys.extras.epa.entity;
 
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -13,29 +14,29 @@ import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
+/**
+ * 工作日例外
+ * @author danne
+ *
+ */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-public class Setting extends IdAuditableEntity implements java.io.Serializable {
-	private static final long serialVersionUID = 1914923621183428105L;
+public class WorkDate extends IdAuditableEntity {
+	private static final long serialVersionUID = -805246265360988602L;
+	/**
+	 * 类型
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String type;
-	// @ManyToOne
-	// private Module module;
+	/**
+	 * 工作日
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(unique = true)
-	@NonNull
-	private String name;
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String value;
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String description;
-	private String credentials;
-
+	private Date workDate;
 }
