@@ -1,13 +1,9 @@
-package com.xcesys.extras.epa.entity;
-
-import java.util.HashSet;
-import java.util.Set;
+package com.saic.epa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,7 +18,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 工艺过程数据
+ * 质量过程数据
+ * 
  * @author danne
  *
  */
@@ -32,13 +29,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DataProcess extends IdAuditableEntity {
+public class QualityDataProcess extends IdAuditableEntity {
 
-	private static final long serialVersionUID = -5012274748925500133L;
+	private static final long serialVersionUID = 8319422858003215190L;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private DataBar databar;
+	
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn

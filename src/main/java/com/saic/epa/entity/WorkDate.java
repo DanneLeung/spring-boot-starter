@@ -1,12 +1,8 @@
-package com.xcesys.extras.epa.entity;
+package com.saic.epa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,26 +16,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * 工作日例外
+ * @author danne
+ *
+ */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-public class Area extends IdAuditableEntity {
-	private static final long serialVersionUID = -3356325683038483403L;
+public class WorkDate extends IdAuditableEntity {
+	private static final long serialVersionUID = -805246265360988602L;
 	/**
-	 * 名称
+	 * 类型
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
+	private String type;
 	/**
-	 * 说明
+	 * 工作日
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String description;
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-	@JoinColumn
-	private Set<DataBar> databars = new HashSet<DataBar>(0);
+	private Date workDate;
 }

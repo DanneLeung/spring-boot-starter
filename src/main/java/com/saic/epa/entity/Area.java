@@ -1,9 +1,11 @@
-package com.xcesys.extras.epa.entity;
+package com.saic.epa.entity;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -23,29 +25,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DataBar extends IdAuditableEntity {
-
-	private static final long serialVersionUID = -5012274748925500133L;
+public class Area extends IdAuditableEntity {
+	private static final long serialVersionUID = -3356325683038483403L;
 	/**
-	 * 区域
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Area area;
-	/**
-	 * 功能分类
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String type;
-	/**
-	 * 描述
+	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
 	/**
-	 * 图片路径
+	 * 说明
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String picture;
+	private String description;
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
+	private Set<DataBar> databars = new HashSet<DataBar>(0);
 }

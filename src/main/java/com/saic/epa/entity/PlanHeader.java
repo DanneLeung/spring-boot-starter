@@ -1,12 +1,11 @@
-package com.xcesys.extras.epa.entity;
+package com.saic.epa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -21,7 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 标签
+ * 任务规则
  * @author danne
  *
  */
@@ -31,54 +30,48 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Tag extends IdAuditableEntity {
-	private static final long serialVersionUID = 9067340437829608488L;
+public class PlanHeader extends IdAuditableEntity {
+
 	/**
-	 * 数据类型
+	 * 
 	 */
+	private static final long serialVersionUID = 3893664023484789028L;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String type;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private DataBar databar;
 	/**
 	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
 	/**
-	 * 默认值
+	 * 周期
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String defaultValue;
-	
+	private String cycle;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String work;
 	/**
-	 * 单位
+	 * 领取开始时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String unit;
-	
+	private Date receiveStartTime;
 	/**
-	 * 枚举值
+	 * 领取截止时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String valueCode;
+	private Date receiveEndTime;
 	/**
-	 * 检验算式
+	 * 上传截止时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String calculate;
+	private Date uploadEndTime;
 	/**
-	 * 检验标准值
+	 * 负责人
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String standard;
-	/**
-	 * 允许空值
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String isnull;
-	
-	
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-	@JoinColumn
-	private Set<DataBar> databars = new HashSet<DataBar>(0);
+	private Date worker;
+
 }

@@ -1,6 +1,4 @@
-package com.xcesys.extras.epa.entity;
-
-import java.util.Date;
+package com.saic.epa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +18,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 任务规则
+ * 报表数据
+ * 
  * @author danne
  *
  */
@@ -30,48 +29,27 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PlanHeader extends IdAuditableEntity {
+public class DataBarTagData extends IdAuditableEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3893664023484789028L;
+	private static final long serialVersionUID = 8319422858003215190L;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private DataBar databar;
+	
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private Tag tag;
+	
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private Task task;
 	/**
-	 * 名称
+	 * 值
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
-	/**
-	 * 周期
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String cycle;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String work;
-	/**
-	 * 领取开始时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveStartTime;
-	/**
-	 * 领取截止时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveEndTime;
-	/**
-	 * 上传截止时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date uploadEndTime;
-	/**
-	 * 负责人
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date worker;
+	private String dataValue;
 
 }
