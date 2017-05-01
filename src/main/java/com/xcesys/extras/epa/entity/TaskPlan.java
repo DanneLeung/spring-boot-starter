@@ -13,6 +13,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -37,17 +38,25 @@ import lombok.Setter;
 public class TaskPlan extends IdAuditableEntity {
 	private static final long serialVersionUID = 3893664023484789028L;
 
+	@Id
+	@GeneratedValue
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TM_PLAN_HEADER_ID")
+	private Long id;
+
 	/**
 	 * 区域
 	 */
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TM_AREA_ID")
+	@JoinColumn(name = "TM_AREA_ID")
 	private Area area;
 
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TM_DATA_BAR_ID")
+	@JoinColumn(name = "TM_DATA_BAR_ID")
 	private DataBar databar;
 
 	/**
@@ -60,6 +69,7 @@ public class TaskPlan extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String cycle;
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String work;
 
@@ -83,11 +93,5 @@ public class TaskPlan extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long worker;
-
-	@Id
-	@GeneratedValue
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TM_PLAN_HEADER_ID")
-	private Long id;
 
 }

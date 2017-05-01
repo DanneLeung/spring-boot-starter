@@ -13,6 +13,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -37,12 +38,14 @@ import lombok.Setter;
 public class QualityData extends IdAuditableEntity {
 
 	private static final long serialVersionUID = 8319422858003215190L;
-
+	
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_DATA_BAR_ID")
 	private DataBar databar;
 
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_TAG_ID")

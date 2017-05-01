@@ -13,6 +13,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -42,6 +43,7 @@ public class PartPic extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_BAS_VHC_ID")
@@ -49,6 +51,7 @@ public class PartPic extends IdAuditableEntity {
 	/**
 	 * 
 	 */
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne
 	private PartPic parent;

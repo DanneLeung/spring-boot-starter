@@ -15,6 +15,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -38,6 +39,7 @@ import lombok.Setter;
 @Table(name = "TT_TASK")
 public class Task extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;
+	
 	@Id
 	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
@@ -46,11 +48,13 @@ public class Task extends IdAuditableEntity {
 	/**
 	 * 区域
 	 */
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_AREA_ID")
 	private Area area;
 
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_DATA_BAR_ID")

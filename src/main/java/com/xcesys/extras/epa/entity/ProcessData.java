@@ -13,6 +13,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -38,6 +39,13 @@ public class ProcessData extends IdAuditableEntity {
 
 	private static final long serialVersionUID = -5012274748925500133L;
 
+	@Id
+	@GeneratedValue
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TT_DATA_PROCESS_ID")
+	private Long id;
+
+	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_DATA_BAR_ID")
@@ -65,10 +73,4 @@ public class ProcessData extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "ISWARN")
 	private boolean iswarn;
-
-	@Id
-	@GeneratedValue
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TT_DATA_PROCESS_ID")
-	private Long id;
 }

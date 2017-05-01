@@ -9,6 +9,8 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.util.ClassUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @MappedSuperclass
 public abstract class AbstractEntity<PK extends Serializable> implements Persistable<PK> {
 
@@ -31,6 +33,7 @@ public abstract class AbstractEntity<PK extends Serializable> implements Persist
 	 * @see org.springframework.data.domain.Persistable#isNew()
 	 */
 	@Override
+	@JsonIgnore
 	@Transient // DATAJPA-622
 	public boolean isNew() {
 		return null == getId();
