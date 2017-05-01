@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.saic.epa.entity.User;
+import com.saic.epa.service.UserService;
 import com.xcesys.extras.framework.core.exception.SystemException;
 import com.xcesys.extras.framework.core.util.SecurityUtils;
-import com.xcesys.extras.framework.entity.User;
-import com.xcesys.extras.framework.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -146,7 +146,7 @@ public abstract class BaseController {
 			return userId;
 		} else {
 			String username = getLoggedInUsername();
-			User user = userService.findByUsername(username);
+			User user = null;// userService.findByUsername(username);
 			if (user != null) {
 				return user.getId();
 			}

@@ -1,5 +1,6 @@
 package com.saic.epa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -21,21 +22,22 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="TS_USER")
+@Table(name = "TS_USER")
 public class User extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
- 
+
 	/**
 	 * 登录帐号
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "ACCOUNT")
 	private String account;
 	/**
 	 * 用户名
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
- 
+
 	/**
 	 * 用户密码
 	 */

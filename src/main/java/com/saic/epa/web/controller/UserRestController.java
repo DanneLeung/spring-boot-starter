@@ -4,28 +4,28 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.saic.epa.entity.User;
+import com.saic.epa.service.UserService;
 import com.xcesys.extras.framework.core.controller.BaseCrudRestController;
 import com.xcesys.extras.framework.core.service.ICrudService;
-import com.xcesys.extras.framework.entity.User;
-import com.xcesys.extras.framework.service.RoleService;
-import com.xcesys.extras.framework.service.UserService;
 
-@Controller
-@RequestMapping("/epa/system/user")
+@RestController
+@RequestMapping("/api/user")
 public class UserRestController extends BaseCrudRestController<User, Long> {
 	@Autowired(required = false)
 	PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
 	@Autowired
 	UserService service;
-	@Autowired
-	RoleService roleService;
 
-	@ResponseBody
+	@GetMapping("/list")
+	public Iterable<User> List() {
+		return service.findAll();
+	}
+
 	@GetMapping(value = "resetpwd")
 	public int resetpwd(Long[] ids) {
 		if (ids != null && ids.length > 0) {
@@ -35,7 +35,6 @@ public class UserRestController extends BaseCrudRestController<User, Long> {
 	}
 
 	@GetMapping(value = "unique")
-	@ResponseBody
 	public boolean unique(String username, String oldUsername) {
 		if (!StringUtils.isBlank(oldUsername) && oldUsername.trim().equals(username))
 			return true;

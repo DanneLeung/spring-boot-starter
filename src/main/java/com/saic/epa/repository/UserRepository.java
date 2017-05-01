@@ -1,11 +1,11 @@
-package com.xcesys.extras.framework.repository;
+package com.saic.epa.repository;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.saic.epa.entity.User;
 import com.xcesys.extras.framework.core.repository.IBaseRepository;
-import com.xcesys.extras.framework.entity.User;
 
 public interface UserRepository extends IBaseRepository<User, Long> {
 
