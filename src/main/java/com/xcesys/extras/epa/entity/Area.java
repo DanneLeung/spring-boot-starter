@@ -1,7 +1,18 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
+
+import static javax.persistence.FetchType.LAZY;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -22,40 +33,35 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TS_USER")
-public class User extends IdAuditableEntity {
+@Table(name = "TM_AREA")
+public class Area extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
 
 	/**
-	 * 登录帐号
+	 * 功能分类 1点检 2工艺 3质量
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "ACCOUNT")
-	private String account;
+	private int type;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String picture;
+
 	/**
-	 * 用户名
+	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
 
-	/**
-	 * 用户密码
-	 */
+	@ManyToMany(fetch = LAZY)
+	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
+			@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) })
+	@OrderBy("ORDERS")
+	private Set<DataBar> databars = new LinkedHashSet<DataBar>(0);
+
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String password;
-	/**
-	 * 是否域用户(1:是)
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String ldapUser;
-	/**
-	 * 邮箱
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String email;
-	/**
-	 * 删除标识
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String deleted;
+	@Column(name = "TM_AREA_ID")
+	private Long id;
 }

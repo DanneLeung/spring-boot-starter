@@ -1,16 +1,13 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
-import static javax.persistence.FetchType.LAZY;
-
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -24,41 +21,51 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * 任务过程数据
+ * 
+ * @author danne
+ *
+ */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-public class DataBar extends IdAuditableEntity {
+@Table(name = "TT_TASK_DATA_PROCESS")
+public class TaskDataProcess extends IdAuditableEntity {
+	@Id
+	@GeneratedValue
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name="TT_TASK_DATA_PROCESS_ID")
+	private Long id;
 
-	private static final long serialVersionUID = -5012274748925500133L;
-	/**
-	 * 区域
-	 */
+	private static final long serialVersionUID = 8319422858003215190L;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_AREA_ID")
-	private Area area;
-	/**
-	 * 功能分类
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String type;
-	/**
-	 * 描述
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
-	/**
-	 * 图片路径
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String picture;
+	@JoinColumn(name = "TT_TASK_ID")
+	private Task task;
 
-	@ManyToMany(fetch = LAZY)
-	@JoinTable(name = "databar_tags", joinColumns = {
-			@JoinColumn(name = "databar_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "tag_id", nullable = false, updatable = false) })
-	private Set<Tag> tags = new HashSet<Tag>();
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TM_DATA_BAR_ID")
+	private DataBar databar;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TM_TAG_ID")
+	private Tag tag;
+
+	/**
+	 * 值
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String dataValue;
+
+	/**
+	 * 是否报警
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private boolean iswarn;
 }

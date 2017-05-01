@@ -1,10 +1,10 @@
-package com.saic.epa.entity;
-
-import java.util.Date;
+package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 任务矩阵
+ * 任务规则
  * 
  * @author danne
  *
@@ -33,84 +33,61 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TT_TASK")
-public class Task extends IdAuditableEntity {
-	private static final long serialVersionUID = 9067340437829608488L;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TT_TASK_ID")
-	public Long getId() {
-		return super.getId();
-	}
+@Table(name = "TM_PLAN_HEADER")
+public class PlanHeader extends IdAuditableEntity {
+	private static final long serialVersionUID = 3893664023484789028L;
 
 	/**
 	 * 区域
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_AREA_ID")
+	@JoinColumn(name="TM_AREA_ID")
 	private Area area;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
+	@JoinColumn(name="TM_DATA_BAR_ID")
 	private DataBar databar;
+
 	/**
-	 * 任务状态
+	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TASK_STATUS")
-	private String status;
+	private String name;
 	/**
-	 * 工作日
+	 * 周期
 	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String cycle;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String work;
+
 	/**
 	 * 领取开始时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveStartTime;
+	private String receiveStartTime;
 	/**
 	 * 领取截止时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveEndTime;
+	private String receiveEndTime;
 	/**
 	 * 上传截止时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date uploadEndTime;
-
+	private String uploadEndTime;
 	/**
 	 * 负责人
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long worker;
-	/**
-	 * 任务分派时间
-	 */
+
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date allocateTime;
-	/**
-	 * 任务提取时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveTime;
-	/**
-	 * 任务操作时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date workTime;
-	/**
-	 * 任务提交时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date commitTime;
-	/**
-	 * 设备
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String device;
+	@Column(name = "TM_PLAN_HEADER_ID")
+	private Long id;
+
 }

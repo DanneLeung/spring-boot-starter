@@ -1,10 +1,10 @@
-package com.saic.epa.entity;
-
-import java.util.Date;
+package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 任务规则
+ * 质量过程数据
  * 
  * @author danne
  *
@@ -33,61 +33,42 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TM_PLAN_HEADER")
-public class PlanHeader extends IdAuditableEntity {
-	private static final long serialVersionUID = 3893664023484789028L;
+@Table(name = "TT_QUALITY_DATA_PROCESS")
+public class QualityDataProcess extends IdAuditableEntity {
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TM_PLAN_HEADER_ID")
-	public Long getId() {
-		return super.getId();
-	}
-
-	/**
-	 * 区域
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Area area;
+	private static final long serialVersionUID = 8319422858003215190L;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "TM_DATA_BAR_ID")
 	private DataBar databar;
-	/**
-	 * 名称
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
-	/**
-	 * 周期
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String cycle;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String work;
-	/**
-	 * 领取开始时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveStartTime;
-	/**
-	 * 领取截止时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveEndTime;
-	/**
-	 * 上传截止时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date uploadEndTime;
-	/**
-	 * 负责人
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Long worker;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TM_TAG_ID")
+	private Tag tag;
 
+	/**
+	 * 批次ID
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TT_BATCH_ID")
+	private String batchId;
+	/**
+	 * 值
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String dataValue;
+	/**
+	 * 是否报警
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "ISWARN")
+	private boolean iswarn;
+
+	@Id
+	@GeneratedValue
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TT_QUALITY_DATA_PROCESS_ID")
+	private Long id;
 }

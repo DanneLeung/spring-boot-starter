@@ -1,10 +1,18 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
+
+import static javax.persistence.FetchType.LAZY;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -19,54 +27,43 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * 工艺过程数据
- * 
- * @author danne
- *
- */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TT_DATA_PROCESS")
-public class DataProcess extends IdAuditableEntity {
+@Table(name = "TM_DATA_BAR")
+public class DataBar extends IdAuditableEntity {
 
 	private static final long serialVersionUID = -5012274748925500133L;
 
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TT_DATA_PROCESS_ID")
-	public Long getId() {
-		return super.getId();
-	}
+	@Column(name = "TM_DATA_BAR_ID")
+	private Long id;
 
+	/**
+	 * 功能分类
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
-	private DataBar databar;
+	private String type;
+	/**
+	 * 描述
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String name;
+	/**
+	 * 图片路径
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String picture;
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_TAG_ID")
-	private Tag tag;
-	/**
-	 * 批次ID
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TT_BATCH_ID")
-	private String batchId;
-	/**
-	 * 值
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String dataValue;
-	/**
-	 * 是否报警
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "ISWARN")
-	private boolean iswarn;
+	@ManyToMany(fetch = LAZY)
+	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
+			@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
+	@OrderBy("orders")
+	private Set<Tag> tags = new LinkedHashSet<Tag>();
 }

@@ -143,6 +143,6 @@ public interface ICrudService<T, ID extends Serializable> {
 	 * @return T
 	 */
 	T update(T o);
-	
+
 	Page<T> findAll(Pageable pageable);
 }

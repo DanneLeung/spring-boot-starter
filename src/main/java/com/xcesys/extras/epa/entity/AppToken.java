@@ -1,7 +1,12 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 任务过程数据
+ * APP用户Token记录
  * 
  * @author danne
  *
@@ -30,34 +35,41 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TT_TASK_DATA_PROCESS_ID")
-public class TaskDataProcess extends IdAuditableEntity {
+@Table(name = "TT_APP_TOKEN")
+public class AppToken extends IdAuditableEntity {
 
-	private static final long serialVersionUID = 8319422858003215190L;
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TT_TASK_ID")
-	private Task task;
+	private static final long serialVersionUID = -1544123097056081249L;
 
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TM_DATA_BAR_ID")
-	private DataBar databar;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TM_TAG_ID")
-	private Tag tag;
-	
+	private Long id;
 	/**
-	 * 值
+	 * 用户
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String dataValue;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
+	private User user;
+
 	/**
-	 * 是否报警
+	 * 最新TOKEN码
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private boolean iswarn;
+	private String token;
+
+	/**
+	 * 最后登录时间
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "LAST_LOGON_TIME")
+	private Date lastLogonTime;
+
+	/**
+	 * 过期时间
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TIMEOUT")
+	private Date timeout;
+
 }

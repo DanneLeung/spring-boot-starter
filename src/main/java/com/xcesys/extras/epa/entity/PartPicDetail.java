@@ -1,8 +1,10 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,22 +37,28 @@ import lombok.Setter;
 public class PartPicDetail extends IdAuditableEntity {
 
 	private static final long serialVersionUID = -5658966165742176791L;
+
+	@Id
+	@GeneratedValue
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Long id;
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TM_BAS_PARTS_PIC_ID")
+	@JoinColumn(name = "TM_BAS_PARTS_PIC_ID")
 	private PartPic partPic;
 	/**
 	 * 图形名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "PARTS_NAME")
-	private String partName;
+	@Column(name = "PIC_NAME")
+	private String picName;
 	/**
 	 * 图形描述
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "PARTS_DESC")
-	private String partDesc;
+	@Column(name = "PIC_DESC")
+	private String picDesc;
 	/**
 	 * 方位(1:正面;0:反面)
 	 */

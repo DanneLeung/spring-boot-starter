@@ -1,10 +1,9 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -19,54 +18,49 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * 质量过程数据
- * 
- * @author danne
- *
- */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TT_QUALITY_DATA_PROCESS")
-public class QualityDataProcess extends IdAuditableEntity {
-
-	private static final long serialVersionUID = 8319422858003215190L;
-
+@Table(name = "TS_USER")
+public class User extends IdAuditableEntity {
+	private static final long serialVersionUID = -3356325683038483403L;
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TT_QUALITY_DATA_PROCESS_ID")
-	public Long getId() {
-		return super.getId();
-	}
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
-	private DataBar databar;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_TAG_ID")
-	private Tag tag;
+	private Long id;
 	/**
-	 * 批次ID
+	 * 登录帐号
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TT_BATCH_ID")
-	private String batchId;
+	@Column(name = "ACCOUNT")
+	private String username;
 	/**
-	 * 值
+	 * 用户名
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String dataValue;
+	private String name;
+
 	/**
-	 * 是否报警
+	 * 用户密码
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "ISWARN")
-	private boolean iswarn;
+	private String password;
+	/**
+	 * 是否域用户(1:是)
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String ldapUser;
+	/**
+	 * 邮箱
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String email;
+	/**
+	 * 删除标识
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String deleted;
 }

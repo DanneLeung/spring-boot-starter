@@ -1,8 +1,10 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 报表数据
+ * 工艺过程数据
  * 
  * @author danne
  *
@@ -31,17 +33,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="TT_DATA_BAR_TAG_DATA")
-public class DataBarTagData extends IdAuditableEntity {
+@Table(name = "TT_DATA_PROCESS")
+public class DataProcess extends IdAuditableEntity {
 
-	private static final long serialVersionUID = 8319422858003215190L;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TT_TASK_DATA_PROCESS_ID")
-	public Long getId() {
-		return super.getId();
-	}
+	private static final long serialVersionUID = -5012274748925500133L;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -53,14 +48,27 @@ public class DataBarTagData extends IdAuditableEntity {
 	@JoinColumn(name = "TM_TAG_ID")
 	private Tag tag;
 
+	/**
+	 * 批次ID
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TT_TASK_ID")
-	private Task task;
+	@Column(name = "TT_BATCH_ID")
+	private String batchId;
 	/**
 	 * 值
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String dataValue;
+	/**
+	 * 是否报警
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "ISWARN")
+	private boolean iswarn;
 
+	@Id
+	@GeneratedValue
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TT_DATA_PROCESS_ID")
+	private Long id;
 }

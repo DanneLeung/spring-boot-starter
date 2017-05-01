@@ -1,11 +1,16 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
-import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 任务跟踪数据
+ * 标签
  * 
  * @author danne
  *
@@ -31,53 +36,70 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TaskTrack extends IdAuditableEntity {
-
-	private static final long serialVersionUID = 2508992068890090260L;
-
+@Table(name = "TM_TAG")
+public class Tag extends IdAuditableEntity {
+	private static final long serialVersionUID = 9067340437829608488L;
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private TaskDataProcess process;
+	@Column(name = "TM_TAG_ID")
+	private Long id;
 	/**
-	 * 任务状态
+	 * 数据类型
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String status;
-	/**
-	 * 上传截止时间
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date uploadEndTime;
+	private String type;
 
 	/**
-	 * 负责人
+	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private int worker;
+	private String name;
 	/**
-	 * 任务分派时间
+	 * 默认值
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date allocateTime;
+	@Column(name = "DEF_VALUE")
+	private String defaultValue;
 	/**
-	 * 任务提取时间
+	 * 单位
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date receiveTime;
+	private String unit;
+
 	/**
-	 * 任务操作时间
+	 * 枚举值
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date workTime;
+	private String valueCode;
+
 	/**
-	 * 任务提交时间
+	 * 检验算式
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date commitTime;
+	private String calculate;
 	/**
-	 * 设备
+	 * 检验标准值
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String remark;
+	private String standard;
+	/**
+	 * 允许空值
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String isnull;
+	/**
+	 * 是否入库
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String storage;
+	
+	
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
+			@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) })
+	private Set<DataBar> databars;
+
 }

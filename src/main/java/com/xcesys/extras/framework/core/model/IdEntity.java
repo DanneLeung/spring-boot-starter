@@ -8,29 +8,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.LazyInitializationException;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import com.xcesys.extras.framework.core.bean.PageResult;
 
 @DynamicInsert
 @DynamicUpdate
 @MappedSuperclass
-public abstract class IdEntity extends AbstractPersistable<Long> {
+public abstract class IdEntity extends AbstractEntity<Long> {
 
 	private static final long serialVersionUID = -3632024614761342356L;
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	public Long getId() {
-		return super.getId();
-	}
-
-	@Override
-	public void setId(Long id) {
-		super.setId(id);
-	}
+	// @Id
+	// @GeneratedValue
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 
 	@Override
 	public String toString() {

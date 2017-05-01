@@ -1,9 +1,8 @@
-package com.saic.epa.entity;
+package com.xcesys.extras.epa.entity;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -18,37 +17,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * 工作日例外
- * 
- * @author danne
- *
- */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TM_WORK_DATE")
-public class WorkDate extends IdAuditableEntity {
-	private static final long serialVersionUID = -805246265360988602L;
+@Table(name = "TM_BAS_VHC")
+public class Vehicle extends IdAuditableEntity {
 
+	private static final long serialVersionUID = 2194461950484681352L;
+
+	@Id
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TM_WORK_DATE_ID")
-	public Long getId() {
-		return super.getId();
-	}
+	private Long id;
 
 	/**
-	 * 0:放假 1：上班
+	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private int type;
+	private String name;
 	/**
-	 * 工作日
+	 * 说明
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date workDate;
+	private String description;
 }
