@@ -43,7 +43,7 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 
 	@ResponseBody
 	@GetMapping(value = "del/{id}")
-	public Result del(@PathVariable("id") ID id) {
+	public Result<?> del(@PathVariable("id") ID id) {
 		if (id != null) {
 			T m = getCrudService().findById(id);
 			if (m != null && m instanceof IEditable && !((IEditable) m).isEditable()) {
@@ -116,13 +116,13 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 	protected void preSave(T m, HttpServletRequest request) {
 	}
 
-	private Result result(Integer error, String... msg) {
-		return new Result(error, StringUtils.join(msg, ", "));
+	private Result<?> result(Integer error, String... msg) {
+		return new Result<String>(error, StringUtils.join(msg, ", "));
 	}
 
 	@ResponseBody
 	@PostMapping(value = { "save", "save/{id}" })
-	public Result save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request) {
+	public Result<?> save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request) {
 		// 验证错误，则保持在编辑界面
 		if (hasError(m, result)) {
 			List<ObjectError> errors = result.getAllErrors();

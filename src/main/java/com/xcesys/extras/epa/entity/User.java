@@ -46,7 +46,7 @@ public class User extends IdAuditableEntity {
 	/**
 	 * 用户密码
 	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+//	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String password;
 	/**
 	 * 是否域用户(1:是)

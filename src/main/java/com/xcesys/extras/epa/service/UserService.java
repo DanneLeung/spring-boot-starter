@@ -1,7 +1,6 @@
 package com.xcesys.extras.epa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,29 +12,31 @@ import com.xcesys.extras.framework.core.service.impl.BaseCrudService;
 @Service
 @Transactional
 public class UserService extends BaseCrudService<User, Long> {
-	@Autowired(required = false)
-	private PasswordEncoder passwordEncoder;
+	// @Autowired(r/*equired = false)
+	// private P*/asswordEncoder passwordEncoder;
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository repository;
 
 	private String encryptPassword(String password) {
-		return passwordEncoder != null ? passwordEncoder.encode(password) : password;
+		// return passwordEncoder != null ? passwordEncoder.encode(password) :
+		// password;
+		return password;
 	}
 
 	public User findByUsername(String username) {
-		return userRepository.findByUsername(username);
+		return repository.findByUsername(username);
 	}
 
 	@Override
 	public IBaseRepository<User, Long> getRepository() {
-		return userRepository;
+		return repository;
 	}
 
 	public int resetpwd(Long[] ids) {
-		return userRepository.resetpwd(ids, encryptPassword("123456"));
+		return repository.resetpwd(ids, encryptPassword("123456"));
 	}
 
 	public long countByUsername(String username) {
-		return userRepository.countByUsername(username);
+		return repository.countByUsername(username);
 	}
 }

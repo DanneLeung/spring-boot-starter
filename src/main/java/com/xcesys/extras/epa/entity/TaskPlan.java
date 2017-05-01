@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 工艺过程数据
+ * 任务规则
  * 
  * @author danne
  *
@@ -33,42 +33,61 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "TT_DATA_PROCESS")
-public class DataProcess extends IdAuditableEntity {
+@Table(name = "TM_PLAN_HEADER")
+public class TaskPlan extends IdAuditableEntity {
+	private static final long serialVersionUID = 3893664023484789028L;
 
-	private static final long serialVersionUID = -5012274748925500133L;
+	/**
+	 * 区域
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="TM_AREA_ID")
+	private Area area;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
+	@JoinColumn(name="TM_DATA_BAR_ID")
 	private DataBar databar;
 
+	/**
+	 * 名称
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_TAG_ID")
-	private Tag tag;
+	private String name;
+	/**
+	 * 周期
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String cycle;
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String work;
 
 	/**
-	 * 批次ID
+	 * 领取开始时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TT_BATCH_ID")
-	private String batchId;
+	private String receiveStartTime;
 	/**
-	 * 值
+	 * 领取截止时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String dataValue;
+	private String receiveEndTime;
 	/**
-	 * 是否报警
+	 * 上传截止时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "ISWARN")
-	private boolean iswarn;
+	private String uploadEndTime;
+	/**
+	 * 负责人
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Long worker;
 
 	@Id
 	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TT_DATA_PROCESS_ID")
+	@Column(name = "TM_PLAN_HEADER_ID")
 	private Long id;
+
 }

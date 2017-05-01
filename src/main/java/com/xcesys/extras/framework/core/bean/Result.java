@@ -6,13 +6,15 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class Result {
+public class Result<T> {
 	@NonNull
 	@JsonView(View.class)
 	private Integer error;
 	@NonNull
 	@JsonView(View.class)
 	private String msg;
+	@JsonView(View.class)
+	private T content;
 
 	public interface View {
 	}

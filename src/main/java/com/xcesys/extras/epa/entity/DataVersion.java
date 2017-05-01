@@ -17,6 +17,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * App发行包版本
+ * @author danne
+ *
+ */
 @Entity
 @DynamicInsert
 @DynamicUpdate

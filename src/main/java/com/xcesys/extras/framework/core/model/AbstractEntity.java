@@ -19,6 +19,7 @@ public abstract class AbstractEntity<PK extends Serializable> implements Persist
 	 * 
 	 * @see org.springframework.data.domain.Persistable#getId()
 	 */
+	@Override
 	public abstract PK getId();
 
 	public abstract void setId(PK id);
@@ -29,6 +30,7 @@ public abstract class AbstractEntity<PK extends Serializable> implements Persist
 	 * 
 	 * @see org.springframework.data.domain.Persistable#isNew()
 	 */
+	@Override
 	@Transient // DATAJPA-622
 	public boolean isNew() {
 		return null == getId();

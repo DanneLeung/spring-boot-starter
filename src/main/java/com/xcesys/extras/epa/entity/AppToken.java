@@ -21,6 +21,8 @@ import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -33,11 +35,12 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Table(name = "TT_APP_TOKEN")
 public class AppToken extends IdAuditableEntity {
-
+	public static final int TIMEOUT = 3600*24;
 	private static final long serialVersionUID = -1544123097056081249L;
 
 	@Id
@@ -47,6 +50,7 @@ public class AppToken extends IdAuditableEntity {
 	/**
 	 * 用户
 	 */
+	@NonNull
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
@@ -55,6 +59,7 @@ public class AppToken extends IdAuditableEntity {
 	/**
 	 * 最新TOKEN码
 	 */
+	@NonNull
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String token;
 

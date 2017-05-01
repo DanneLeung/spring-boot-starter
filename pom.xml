@@ -24,6 +24,7 @@
 		<java.version>1.8</java.version>
 		<war.plugin.version>2.4</war.plugin.version>
 		<resources.plugin.version>2.6</resources.plugin.version>
+		<springfox.version>2.6.1</springfox.version>
 	</properties>
 
 	<dependencies>
@@ -54,10 +55,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
@@ -71,10 +68,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
@@ -120,7 +113,16 @@
 			<artifactId>spring-data-jpa-datatables</artifactId>
 			<version>4.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		<dependency>
 			<groupId>com.oracle</groupId>

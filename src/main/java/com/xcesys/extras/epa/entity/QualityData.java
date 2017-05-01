@@ -34,7 +34,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "TT_QUALITY_DATA_PROCESS")
-public class QualityDataProcess extends IdAuditableEntity {
+public class QualityData extends IdAuditableEntity {
 
 	private static final long serialVersionUID = 8319422858003215190L;
 
