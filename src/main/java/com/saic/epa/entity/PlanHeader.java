@@ -2,10 +2,12 @@ package com.saic.epa.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -21,6 +23,7 @@ import lombok.Setter;
 
 /**
  * 任务规则
+ * 
  * @author danne
  *
  */
@@ -30,12 +33,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "TM_PLAN_HEADER")
 public class PlanHeader extends IdAuditableEntity {
+	private static final long serialVersionUID = 3893664023484789028L;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Override
+	@Column(name = "TM_PLAN_HEADER_ID")
+	public Long getId() {
+		return super.getId();
+	}
 
 	/**
-	 * 
+	 * 区域
 	 */
-	private static final long serialVersionUID = 3893664023484789028L;
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private Area area;
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
@@ -72,6 +88,6 @@ public class PlanHeader extends IdAuditableEntity {
 	 * 负责人
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private Date worker;
+	private Long worker;
 
 }

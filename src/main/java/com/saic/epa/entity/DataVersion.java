@@ -1,12 +1,6 @@
 package com.saic.epa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -27,36 +21,30 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="TM_AREA")
-public class Area extends IdAuditableEntity {
+@Table(name="TM_BASE_DATA_VERSION")
+public class DataVersion extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TM_AREA_ID")
-	public Long getId() {
-		return super.getId();
-	}
-
 	/**
-	 * 功能分类 1点检 2工艺 3质量
+	 * 版本号
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private int type;
+	private long version;
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String picture;
 	/**
-	 * 名称
+	 * 数据类型（apk、）
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
+	private String type;
+	
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private String fileName;
+	
 	/**
-	 * 说明
+	 * 存储路径
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String description;
+	private String filePath;
+	
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-	private Set<DataBar> databars = new HashSet<DataBar>(0);
+	private String remark;
 }

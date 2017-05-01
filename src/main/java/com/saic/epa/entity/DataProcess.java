@@ -1,9 +1,11 @@
 package com.saic.epa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -19,6 +21,7 @@ import lombok.Setter;
 
 /**
  * 工艺过程数据
+ * 
  * @author danne
  *
  */
@@ -28,22 +31,32 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "TT_DATA_PROCESS")
 public class DataProcess extends IdAuditableEntity {
 
 	private static final long serialVersionUID = -5012274748925500133L;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Override
+	@Column(name = "TT_DATA_PROCESS_ID")
+	public Long getId() {
+		return super.getId();
+	}
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "TM_DATA_BAR_ID")
 	private DataBar databar;
-	
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "TM_TAG_ID")
 	private Tag tag;
 	/**
 	 * 批次ID
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TT_BATCH_ID")
 	private String batchId;
 	/**
 	 * 值
@@ -54,5 +67,6 @@ public class DataProcess extends IdAuditableEntity {
 	 * 是否报警
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private boolean isWarn;
+	@Column(name = "ISWARN")
+	private boolean iswarn;
 }

@@ -1,10 +1,12 @@
 package com.saic.epa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -30,8 +32,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "TM_TAG")
 public class Tag extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Override
+	@Column(name = "TM_TAG_ID")
+	public Long getId() {
+		return super.getId();
+	}
+
 	/**
 	 * 数据类型
 	 */
@@ -46,6 +57,7 @@ public class Tag extends IdAuditableEntity {
 	 * 默认值
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "DEF_VALUE")
 	private String defaultValue;
 
 	/**
@@ -74,6 +86,11 @@ public class Tag extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String isnull;
+	/**
+	 * 是否入库
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Boolean storage;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToMany(fetch = FetchType.LAZY)

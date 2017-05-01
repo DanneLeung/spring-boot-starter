@@ -38,7 +38,7 @@ public class DataBar extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "TM_AREA_ID")
 	private Area area;
 	/**
 	 * 功能分类

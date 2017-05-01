@@ -17,7 +17,7 @@ import com.xcesys.extras.framework.core.bean.PageResult;
 @DynamicInsert
 @DynamicUpdate
 @MappedSuperclass
-public class IdEntity extends AbstractPersistable<Long> {
+public abstract class IdEntity extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = -3632024614761342356L;
 

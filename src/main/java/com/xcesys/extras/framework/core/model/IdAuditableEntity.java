@@ -4,6 +4,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -38,22 +39,26 @@ public abstract class IdAuditableEntity extends IdEntity {
 	private static final long serialVersionUID = 4289767748946880713L;
 
 	@CreatedBy
+	@Column(name = "CREATE_USER_NAME")
 	private String createdBy;
 
 	@CreatedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATE_DATE")
 	private Date createdDate;
 
 	@LastModifiedBy
-	private String lastModifiedBy;
+	@Column(name = "UPDATE_USER_NAME")
+	private String updatedBy;
 
 	@LastModifiedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastModifiedDate;
+	@Column(name = "UPDATE_DATE")
+	private Date updatedDate;
 	//
 	// public String getCreatedBy() {
 	// return createdBy;

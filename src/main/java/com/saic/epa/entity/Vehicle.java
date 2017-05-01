@@ -1,12 +1,7 @@
 package com.saic.epa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -27,10 +22,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="TM_AREA")
-public class Area extends IdAuditableEntity {
-	private static final long serialVersionUID = -3356325683038483403L;
+@Table(name="TM_BAS_VHC")
+public class Vehicle extends IdAuditableEntity {
 
+	private static final long serialVersionUID = 2194461950484681352L;
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Override
 	@Column(name = "TM_AREA_ID")
@@ -38,14 +33,6 @@ public class Area extends IdAuditableEntity {
 		return super.getId();
 	}
 
-	/**
-	 * 功能分类 1点检 2工艺 3质量
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private int type;
-
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String picture;
 	/**
 	 * 名称
 	 */
@@ -56,7 +43,4 @@ public class Area extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String description;
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-	private Set<DataBar> databars = new HashSet<DataBar>(0);
 }

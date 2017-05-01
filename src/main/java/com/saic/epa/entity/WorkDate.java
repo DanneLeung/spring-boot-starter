@@ -2,7 +2,9 @@ package com.saic.epa.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -18,6 +20,7 @@ import lombok.Setter;
 
 /**
  * 工作日例外
+ * 
  * @author danne
  *
  */
@@ -27,13 +30,22 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "TM_WORK_DATE")
 public class WorkDate extends IdAuditableEntity {
 	private static final long serialVersionUID = -805246265360988602L;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Override
+	@Column(name = "TM_WORK_DATE_ID")
+	public Long getId() {
+		return super.getId();
+	}
+
 	/**
-	 * 类型
+	 * 0:放假 1：上班
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String type;
+	private int type;
 	/**
 	 * 工作日
 	 */

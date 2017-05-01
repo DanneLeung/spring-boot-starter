@@ -1,12 +1,12 @@
 package com.saic.epa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -21,42 +21,49 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * APP用户Token记录
+ * 
+ * @author danne
+ *
+ */
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="TM_AREA")
-public class Area extends IdAuditableEntity {
-	private static final long serialVersionUID = -3356325683038483403L;
+@Table(name = "TT_APP_TOKEN")
+public class AppToken extends IdAuditableEntity {
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Override
-	@Column(name = "TM_AREA_ID")
-	public Long getId() {
-		return super.getId();
-	}
+	private static final long serialVersionUID = -1544123097056081249L;
 
 	/**
-	 * 功能分类 1点检 2工艺 3质量
+	 * 用户
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private int type;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
+	private User user;
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String picture;
 	/**
-	 * 名称
+	 * 最新TOKEN码
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
+	private String token;
+
 	/**
-	 * 说明
+	 * 最后登录时间
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String description;
+	@Column(name = "LAST_LOGON_TIME")
+	private Date lastLogonTime;
+
+	/**
+	 * 过期时间
+	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-	private Set<DataBar> databars = new HashSet<DataBar>(0);
+	@Column(name = "SORT")
+	private Date timeout;
+
 }

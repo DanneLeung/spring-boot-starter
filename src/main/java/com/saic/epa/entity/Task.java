@@ -2,10 +2,12 @@ package com.saic.epa.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -31,17 +33,34 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "TT_TASK")
 public class Task extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Override
+	@Column(name = "TT_TASK_ID")
+	public Long getId() {
+		return super.getId();
+	}
+
+	/**
+	 * 区域
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "TM_AREA_ID")
+	private Area area;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TM_DATA_BAR_ID")
 	private DataBar databar;
 	/**
 	 * 任务状态
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TASK_STATUS")
 	private String status;
 	/**
 	 * 工作日
@@ -68,7 +87,7 @@ public class Task extends IdAuditableEntity {
 	 * 负责人
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private int worker;
+	private Long worker;
 	/**
 	 * 任务分派时间
 	 */
