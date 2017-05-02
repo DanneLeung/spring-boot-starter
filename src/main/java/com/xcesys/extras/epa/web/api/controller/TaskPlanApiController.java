@@ -1,4 +1,4 @@
-package com.xcesys.extras.epa.web.controller;
+package com.xcesys.extras.epa.web.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +22,6 @@ import io.swagger.annotations.Api;
 public class TaskPlanApiController extends BaseApiController<TaskPlan, Long> {
 	@Autowired
 	TaskPlanService service;
-
-	@Override
-	protected TaskPlan newModel() {
-		return new TaskPlan();
-	}
 
 	@Override
 	protected ICrudService<TaskPlan, Long> getCrudService() {

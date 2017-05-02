@@ -122,7 +122,8 @@ public abstract class BaseCrudRestController<T extends IdEntity, ID extends Seri
 
 	@ResponseBody
 	@PostMapping(value = { "save", "save/{id}" })
-	public Result<?> save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result, HttpServletRequest request) {
+	public Result<?> save(Model model, @Valid @ModelAttribute("m") T m, BindingResult result,
+			HttpServletRequest request) {
 		// 验证错误，则保持在编辑界面
 		if (hasError(m, result)) {
 			List<ObjectError> errors = result.getAllErrors();

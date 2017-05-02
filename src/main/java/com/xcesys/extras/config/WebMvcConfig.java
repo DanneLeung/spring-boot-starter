@@ -1,14 +1,11 @@
 package com.xcesys.extras.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Import;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@EnableWebMvc
-// @ComponentScan(basePackages = { "com.xcesys", "springfox" })
-@Import(Swagger2Configuration.class)
+//@EnableWebMvc
+//@ComponentScan(basePackages = { "com.xcesys", "springfox" })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Value("${spring.application.environment}")
 	private String applicationEnvironment;
@@ -18,8 +15,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// super.addResourceHandlers(registry);
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		// if (applicationEnvironment.equals("production")) {
 		// registry.addResourceHandler("/static/" + version +
 		// "/**").addResourceLocations("/resources/")

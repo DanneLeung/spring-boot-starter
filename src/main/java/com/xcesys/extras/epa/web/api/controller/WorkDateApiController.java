@@ -1,4 +1,4 @@
-package com.xcesys.extras.epa.web.controller;
+package com.xcesys.extras.epa.web.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +22,6 @@ import io.swagger.annotations.Api;
 public class WorkDateApiController extends BaseApiController<WorkDate, Long> {
 	@Autowired
 	WorkDateService service;
-
-	@Override
-	protected WorkDate newModel() {
-		return new WorkDate();
-	}
 
 	@Override
 	protected ICrudService<WorkDate, Long> getCrudService() {

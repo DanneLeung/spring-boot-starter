@@ -1,4 +1,4 @@
-package com.xcesys.extras.epa.web.controller;
+package com.xcesys.extras.epa.web.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +9,7 @@ import com.xcesys.extras.epa.service.AreaService;
 import com.xcesys.extras.framework.core.service.ICrudService;
 
 import io.swagger.annotations.Api;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 区域数据RESTFUL API
@@ -23,12 +24,13 @@ public class AreaApiController extends BaseApiController<Area, Long> {
 	@Autowired
 	AreaService service;
 
-	@Override
+	@ApiIgnore
 	protected Area newModel() {
 		return new Area();
 	}
 
 	@Override
+	@ApiIgnore
 	protected ICrudService<Area, Long> getCrudService() {
 		return service;
 	}

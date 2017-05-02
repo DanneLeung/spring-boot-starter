@@ -1,4 +1,4 @@
-package com.xcesys.extras.epa.web.controller;
+package com.xcesys.extras.epa.web.api.controller;
 
 import java.util.Date;
 import java.util.UUID;
@@ -70,11 +70,6 @@ public class UserApiController extends BaseApiController<User, Long> {
 		if (!StringUtils.isBlank(oldUsername) && oldUsername.trim().equals(username))
 			return true;
 		return service.countByUsername(username) <= 0;
-	}
-
-	@Override
-	protected User newModel() {
-		return new User();
 	}
 
 	@Override
