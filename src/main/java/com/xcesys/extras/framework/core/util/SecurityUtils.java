@@ -1,13 +1,24 @@
 package com.xcesys.extras.framework.core.util;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 public class SecurityUtils {
 
-	public static Long getLoginUserId() {
-		return null;
+	public static UserDetails getLoginUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication==null)
+			return null;
+		else
+			return (UserDetails) authentication.getPrincipal();
 	}
 
 	public static String getLoginUsername() {
-		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Long getLoginUserId() {
 		return null;
 	}
 

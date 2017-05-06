@@ -1,5 +1,6 @@
 package com.xcesys.extras.epa.web.api.controller;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public class UserApiController extends BaseApiController<User, Long> {
 		appToken.setLastLogonTime(now);
 		appToken.setTimeout(DateUtils.addSeconds(now, AppToken.TIMEOUT));
 		appToken = appTokenRepository.save(appToken);
-		result.setContent(appToken.getToken());
+		result.setContent(Arrays.asList(appToken.getToken()));
 		return result;
 	}
 

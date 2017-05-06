@@ -1,6 +1,7 @@
 package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.epa.entity.converter.BooleanConverter;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
 
@@ -46,7 +48,7 @@ public class User extends IdAuditableEntity {
 	/**
 	 * 用户密码
 	 */
-//	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String password;
 	/**
 	 * 是否域用户(1:是)
@@ -62,5 +64,7 @@ public class User extends IdAuditableEntity {
 	 * 删除标识
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String deleted;
+	@Column(columnDefinition = "VARCHAR2(1)")
+	@Convert(converter = BooleanConverter.class, attributeName = "deleted")
+	private Boolean deleted = false;
 }
