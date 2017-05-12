@@ -38,7 +38,16 @@ import lombok.Setter;
 public class QualityData extends IdAuditableEntity {
 
 	private static final long serialVersionUID = 8319422858003215190L;
-	
+
+	/**
+	 * 区域
+	 */
+	// @JsonIgnore
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "TM_AREA_ID")
+	// private Area area;
+
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -67,7 +76,7 @@ public class QualityData extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "ISWARN")
-	private boolean iswarn;
+	private Boolean iswarn;
 
 	@Id
 	@GeneratedValue

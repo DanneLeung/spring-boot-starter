@@ -12,14 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -53,12 +51,12 @@ public class Area extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String name;
 
-	@JsonIgnore
+	// @JsonIgnore
 	@ManyToMany(fetch = LAZY)
 	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
 			@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) })
-	@OrderBy("ORDERS")
+	// @OrderBy("ORDERS")
 	private Set<DataBar> databars = new LinkedHashSet<DataBar>(0);
 
 	@Id

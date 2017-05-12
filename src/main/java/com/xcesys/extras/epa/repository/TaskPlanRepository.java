@@ -5,4 +5,6 @@ import com.xcesys.extras.framework.core.repository.IBaseRepository;
 
 public interface TaskPlanRepository extends IBaseRepository<TaskPlan, Long> {
 
+	Iterable<TaskPlan> findByWorker(Long id);
+
 }

@@ -94,7 +94,7 @@ public class Tag extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String storage;
-	
+
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -103,4 +103,10 @@ public class Tag extends IdAuditableEntity {
 					@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) })
 	private Set<DataBar> databars;
 
+	/**
+	 * 是否标记为删除
+	 */
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @Column(name = "MARK_FOR_DEL")
+	// private Boolean deleted;
 }

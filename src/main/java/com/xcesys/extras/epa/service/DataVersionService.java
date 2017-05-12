@@ -20,4 +20,7 @@ public class DataVersionService extends BaseCrudService<DataVersion, Long> {
 		return repository;
 	}
 
+	public Iterable<DataVersion> findMaxVersion(){
+		return repository.findMaxVersion();
+	}
 }

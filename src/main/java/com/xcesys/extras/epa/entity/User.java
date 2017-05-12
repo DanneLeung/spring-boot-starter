@@ -54,7 +54,9 @@ public class User extends IdAuditableEntity {
 	 * 是否域用户(1:是)
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String ldapUser;
+	@Column(columnDefinition = "CHAR(1)")
+	@Convert(converter = BooleanConverter.class, attributeName = "deleted")
+	private Boolean ldapUser;
 	/**
 	 * 邮箱
 	 */
@@ -64,7 +66,7 @@ public class User extends IdAuditableEntity {
 	 * 删除标识
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(columnDefinition = "VARCHAR2(1)")
+	@Column(columnDefinition = "CHAR(1)")
 	@Convert(converter = BooleanConverter.class, attributeName = "deleted")
 	private Boolean deleted = false;
 }

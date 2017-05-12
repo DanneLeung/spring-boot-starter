@@ -45,6 +45,15 @@ public class ProcessData extends IdAuditableEntity {
 	@Column(name = "TT_DATA_PROCESS_ID")
 	private Long id;
 
+	/**
+	 * 区域
+	 */
+	@JsonIgnore
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TM_AREA_ID")
+	private Area area;
+
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)

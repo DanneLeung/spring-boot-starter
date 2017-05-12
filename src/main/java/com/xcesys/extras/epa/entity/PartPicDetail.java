@@ -82,10 +82,10 @@ public class PartPicDetail extends IdAuditableEntity {
 	private String position;
 
 	/**
-	 * 是否启用
+	 * 是否标记为删除
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "MARK_FOR_DEL")
-	private int deleted;
+	private Boolean deleted;
 
 }

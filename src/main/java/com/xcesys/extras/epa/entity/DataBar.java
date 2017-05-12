@@ -1,6 +1,7 @@
 package com.xcesys.extras.epa.entity;
 
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.EAGER;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -44,7 +44,15 @@ public class DataBar extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_DATA_BAR_ID")
 	private Long id;
-
+	/**
+	 * 区域
+	 */
+	@JsonIgnore
+	@ManyToMany(fetch = LAZY)
+	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
+			@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) })
+	private Set<Area> areas;
 	/**
 	 * 功能分类
 	 */
@@ -61,11 +69,11 @@ public class DataBar extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String picture;
 
-	@JsonIgnore
+	// @JsonIgnore
 	@ManyToMany(fetch = LAZY)
 	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
 			@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
-	@OrderBy("orders")
+	// @OrderBy("orders")
 	private Set<Tag> tags = new LinkedHashSet<Tag>();
 }

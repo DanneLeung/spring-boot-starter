@@ -1,5 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ import lombok.Setter;
 
 /**
  * 车型数据模型
+ * 
  * @author danne
  *
  */
@@ -42,10 +44,18 @@ public class Vehicle extends IdAuditableEntity {
 	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String name;
+	private String code;
 	/**
-	 * 说明
+	 * 名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String description;
+	private String name;
+
+	/**
+	 * 逻辑删除
+	 */
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "MARK_FOR_DEL")
+	private Boolean deleted;
+
 }
