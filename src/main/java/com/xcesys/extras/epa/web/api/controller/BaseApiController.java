@@ -33,7 +33,7 @@ public abstract class BaseApiController<T extends IdEntity, ID extends Serializa
 
 	@ApiOperation("取得所有可用数据")
 	@ApiResponse(code = 200, message = "所有数据的集合")
-	@GetMapping("/list")
+	@GetMapping({ "", "/list" })
 	public Result<T> list() {
 		log.info(" Current User:" + getCurrentUser());
 		return success("读取数据成功", getCrudService().findAll());

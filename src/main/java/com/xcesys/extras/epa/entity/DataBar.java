@@ -1,7 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
 import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.FetchType.EAGER;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

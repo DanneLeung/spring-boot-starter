@@ -20,6 +20,22 @@ import com.xcesys.extras.framework.core.security.JwtTokenUtil;
 
 @RestController
 public class AuthenticationRestController {
+	class Token {
+		private String token;
+
+		public Token(String token) {
+			this.token = token;
+		}
+
+		public String getToken() {
+			return token;
+		}
+
+		public void setToken(String token) {
+			this.token = token;
+		}
+
+	}
 
 	@Value("${jwt.header}")
 	private String tokenHeader;
@@ -34,7 +50,7 @@ public class AuthenticationRestController {
 	// private UserDetailsService userDetailsService;
 
 	@RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
+	public Token createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws AuthenticationException {
 
 		// Perform the security
@@ -49,11 +65,11 @@ public class AuthenticationRestController {
 		final String token = jwtTokenUtil.generateToken(username);
 
 		// Return the token
-		return ResponseEntity.ok(token);
+		return new Token(token);
 	}
 
 	@RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
-	public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+	public Token refreshAndGetAuthenticationToken(HttpServletRequest request) {
 		String token = request.getHeader(tokenHeader);
 		String username = jwtTokenUtil.getUsernameFromToken(token);
 		// JwtUser user = (JwtUser)
@@ -61,9 +77,9 @@ public class AuthenticationRestController {
 
 		if (jwtTokenUtil.canTokenBeRefreshed(token)) {
 			String refreshedToken = jwtTokenUtil.refreshToken(token);
-			return ResponseEntity.ok((refreshedToken));
+			return new Token((refreshedToken));
 		} else {
-			return ResponseEntity.badRequest().body(null);
+			return new Token("");
 		}
 	}
 

@@ -1,22 +1,15 @@
 package com.xcesys.extras.epa.entity;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -95,13 +88,15 @@ public class Tag extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String storage;
 
-	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
-			@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) })
-	private Set<DataBar> databars;
+	// @JsonIgnore
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @ManyToMany(fetch = FetchType.LAZY)
+	// @JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
+	// @JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) },
+	// inverseJoinColumns = {
+	// @JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false)
+	// })
+	// private Set<DataBar> databars;
 
 	/**
 	 * 是否标记为删除

@@ -44,10 +44,13 @@ public class PartPic extends IdAuditableEntity {
 	private Long id;
 
 	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_BAS_VHC_ID")
+	@JoinColumn(name = "TM_BAS_VHC_ID", insertable = false, updatable = false)
 	private Vehicle vehicle;
+
+	@Column(name = "TM_BAS_VHC_ID")
+	private Long vehicleId;
 	/**
 	 * 
 	 */
