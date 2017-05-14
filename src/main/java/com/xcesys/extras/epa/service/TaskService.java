@@ -20,4 +20,8 @@ public class TaskService extends BaseCrudService<Task, Long> {
 		return repository;
 	}
 
+	public Iterable<Task> findByWorker(Long id) {
+		return repository.findByWorker(id);
+	}
+
 }

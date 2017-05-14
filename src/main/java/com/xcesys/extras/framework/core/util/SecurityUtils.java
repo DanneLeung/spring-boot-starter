@@ -1,5 +1,7 @@
 package com.xcesys.extras.framework.core.util;
 
+import java.util.TimeZone;
+
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,5 +29,6 @@ public class SecurityUtils {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		String password = encoder.encodePassword("123456", "");
 		System.out.println(password);
+		System.out.println(TimeZone.getDefault());
 	}
 }

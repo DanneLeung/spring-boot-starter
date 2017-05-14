@@ -45,22 +45,25 @@ public class PartPicDetail extends IdAuditableEntity {
 	private Long id;
 
 	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_BAS_PARTS_PIC_ID")
+	@JoinColumn(name = "TM_BAS_PARTS_PIC_ID", insertable = false, updatable = false)
 	private PartPic partPic;
+
+	@Column(name = "TM_BAS_PARTS_PIC_ID")
+	private Long partPicId;
 	/**
 	 * 图形名称
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "PIC_NAME")
-	private String picName;
+	private String name;
 	/**
 	 * 图形描述
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "PIC_DESC")
-	private String picDesc;
+	private String desc;
 	/**
 	 * 方位(1:正面;0:反面)
 	 */

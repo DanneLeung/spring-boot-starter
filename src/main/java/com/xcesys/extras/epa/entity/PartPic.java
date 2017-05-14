@@ -63,13 +63,13 @@ public class PartPic extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "PARTS_NAME")
-	private String partName;
+	private String name;
 	/**
 	 * 部件描述
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "PARTS_DESC")
-	private String partDesc;
+	private String desc;
 	/**
 	 * 缩略图
 	 */

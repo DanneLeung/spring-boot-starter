@@ -39,7 +39,7 @@ import lombok.Setter;
 @Table(name = "TT_TASK")
 public class Task extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;
-	
+
 	@Id
 	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
@@ -49,16 +49,22 @@ public class Task extends IdAuditableEntity {
 	 * 区域
 	 */
 	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_AREA_ID")
+	@JoinColumn(name = "TM_AREA_ID", insertable = false, updatable = false)
 	private Area area;
 
+	@Column(name = "TM_AREA_ID")
+	private Long areaId;
+
 	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
+	@JoinColumn(name = "TM_DATA_BAR_ID", insertable = false, updatable = false)
 	private DataBar databar;
+
+	@Column(name = "TM_DATA_BAR_ID")
+	private Long databarId;
 
 	/**
 	 * 任务状态
