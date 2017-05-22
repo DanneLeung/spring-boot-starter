@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -40,7 +41,8 @@ public class ProcessData extends IdAuditableEntity {
 	private static final long serialVersionUID = -5012274748925500133L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_DATA_PROCESS_ID")	
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TT_DATA_PROCESS_ID")
 	private Long id;

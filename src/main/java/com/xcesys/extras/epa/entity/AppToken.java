@@ -6,9 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -40,11 +42,12 @@ import lombok.Setter;
 @Setter
 @Table(name = "TT_APP_TOKEN")
 public class AppToken extends IdAuditableEntity {
-	public static final int TIMEOUT = 3600*24;
+	public static final int TIMEOUT = 3600 * 24;
 	private static final long serialVersionUID = -1544123097056081249L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_APP_TOKEN_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 	/**

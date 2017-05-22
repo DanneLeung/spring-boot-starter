@@ -5,6 +5,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -30,7 +31,8 @@ import lombok.Setter;
 public class User extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_USER_ID")	
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 	/**
