@@ -39,12 +39,19 @@ public abstract class BaseApiController<T extends IdEntity, ID extends Serializa
 		return success("读取数据成功", getCrudService().findAll());
 	}
 
+	@ApiOperation("创建指定的单个数据")
+	@PostMapping("/createOne")
+	public Result<T> createOne(@ApiParam(name = "data") @RequestBody T data) {
+		T obj = getCrudService().save(data);
+		return success("保存数据成功", Arrays.asList(obj));
+	}
+
 	@ApiOperation("创建指定数组、集合的数据")
 	@PostMapping("/create")
 	public Result<T> create(@ApiParam(name = "data") @RequestBody T[] data) {
 		// User user = getCurrentUser();
 		Iterable<T> iterable = getCrudService().create(Arrays.asList(data));
-		return success("读取数据成功", iterable);
+		return success("保存数据成功", iterable);
 	}
 
 	protected abstract ICrudService<T, ID> getCrudService();

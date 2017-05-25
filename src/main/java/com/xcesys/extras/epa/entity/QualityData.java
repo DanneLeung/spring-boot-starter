@@ -40,6 +40,13 @@ public class QualityData extends IdAuditableEntity {
 
 	private static final long serialVersionUID = 8319422858003215190L;
 
+	@Id
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_QUALITY_DATA_PROCESS_ID")	
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TT_QUALITY_DATA_PROCESS_ID")
+	private Long id;
+
 	/**
 	 * 区域
 	 */
@@ -52,14 +59,20 @@ public class QualityData extends IdAuditableEntity {
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
+	@JoinColumn(name = "TM_DATA_BAR_ID", insertable = false, updatable = false)
 	private DataBar databar;
+	
+	@Column(name = "TM_DATA_BAR_ID")
+	private Long databarId;
 
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_TAG_ID")
+	@JoinColumn(name = "TM_TAG_ID", insertable = false, updatable = false)
 	private Tag tag;
+	
+	@Column(name = "TM_TAG_ID")
+	private Long tagId;
 
 	/**
 	 * 批次ID
@@ -78,11 +91,4 @@ public class QualityData extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "ISWARN")
 	private Boolean iswarn;
-
-	@Id
-	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_QUALITY_DATA_PROCESS_ID")	
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TT_QUALITY_DATA_PROCESS_ID")
-	private Long id;
 }

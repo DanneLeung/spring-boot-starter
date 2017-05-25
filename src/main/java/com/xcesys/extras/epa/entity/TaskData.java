@@ -52,26 +52,38 @@ public class TaskData extends IdAuditableEntity {
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_AREA_ID")
+	@JoinColumn(name = "TM_AREA_ID", insertable = false, updatable = false)
 	private Area area;
 
+	@Column(name = "TM_AREA_ID")
+	private Long areaId;
+
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TT_TASK_ID")
+	@JoinColumn(name = "TT_TASK_ID", insertable = false, updatable = false)
 	private Task task;
 
-	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_DATA_BAR_ID")
-	private DataBar databar;
+	@Column(name = "TT_TASK_ID")
+	private Long taskId;
 
 	@JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TM_TAG_ID")
+	@JoinColumn(name = "TM_DATA_BAR_ID", insertable = false, updatable = false)
+	private DataBar databar;
+
+	@Column(name = "TM_DATA_BAR_ID")
+	private Long databarId;
+
+	@JsonIgnore
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TM_TAG_ID", insertable = false, updatable = false)
 	private Tag tag;
+
+	@Column(name = "TM_TAG_ID")
+	private Long tagId;
 
 	/**
 	 * 值
