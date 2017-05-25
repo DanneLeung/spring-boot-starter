@@ -51,7 +51,7 @@ public class ProcessData extends IdAuditableEntity {
 	 * 区域
 	 */
 	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_AREA_ID", insertable = false, updatable = false)
 	private Area area;
@@ -60,7 +60,7 @@ public class ProcessData extends IdAuditableEntity {
 	private Long areaId;
 
 	@JsonIgnore
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_DATA_BAR_ID", insertable = false, updatable = false)
 	private DataBar databar;
@@ -68,7 +68,7 @@ public class ProcessData extends IdAuditableEntity {
 	@Column(name = "TM_DATA_BAR_ID")
 	private Long databarId;
 
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_TAG_ID", insertable = false, updatable = false)
 	private Tag tag;

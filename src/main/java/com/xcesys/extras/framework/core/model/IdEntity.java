@@ -12,7 +12,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @MappedSuperclass
-public abstract class IdEntity extends AbstractEntity<Long> {
+public class IdEntity extends AbstractEntity<Long> {
 
 	private static final long serialVersionUID = -3632024614761342356L;
 
@@ -27,5 +27,15 @@ public abstract class IdEntity extends AbstractEntity<Long> {
 		} catch (LazyInitializationException e) {
 			return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append("id", getId()).toString();
 		}
+	}
+
+	@Override
+	public Long getId() {
+		return null;
+	}
+
+	@Override
+	public void setId(Long id) {
+		
 	}
 }
