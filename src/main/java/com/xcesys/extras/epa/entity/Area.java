@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -53,11 +54,12 @@ public class Area extends IdAuditableEntity {
 	private String name;
 
 	// @JsonIgnore
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToMany(fetch = LAZY)
 	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
 			@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) })
-	// @OrderBy("ORDERS")
+	@OrderColumn(name = "orders")
 	private Set<DataBar> databars = new LinkedHashSet<DataBar>(0);
 
 	@Id

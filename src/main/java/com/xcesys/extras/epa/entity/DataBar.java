@@ -2,7 +2,7 @@ package com.xcesys.extras.epa.entity;
 
 import static javax.persistence.FetchType.LAZY;
 
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -41,7 +42,7 @@ public class DataBar extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_DATA_BAR_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_DATA_BAR_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_DATA_BAR_ID")
 	private Long id;
@@ -71,10 +72,11 @@ public class DataBar extends IdAuditableEntity {
 	private String picture;
 
 	// @JsonIgnore
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@ManyToMany(fetch = LAZY)
 	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
 			@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
-	// @OrderBy("orders")
-	private Set<Tag> tags = new LinkedHashSet<Tag>();
+	@OrderColumn(name = "orders",nullable=true)
+	private List<Tag> tags;
 }
