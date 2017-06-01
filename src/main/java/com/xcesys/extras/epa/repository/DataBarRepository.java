@@ -5,4 +5,5 @@ import com.xcesys.extras.framework.core.repository.IBaseRepository;
 
 public interface DataBarRepository extends IBaseRepository<DataBar, Long> {
 
+	Iterable<DataBar> findByType(String type);
 }

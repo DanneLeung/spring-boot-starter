@@ -20,6 +20,8 @@ import com.xcesys.extras.framework.core.repository.IBaseRepository;
  *            parameterized class.
  */
 public interface ICrudService<T, ID extends Serializable> {
+	T create(T o);
+
 	/**
 	 * <p>
 	 * Creates a collection of data object.

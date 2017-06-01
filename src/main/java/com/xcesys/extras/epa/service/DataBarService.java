@@ -20,4 +20,8 @@ public class DataBarService extends BaseCrudService<DataBar, Long> {
 		return repository;
 	}
 
+	public Iterable<DataBar> findByType(String type) {
+		return repository.findByType(type);
+	}
+
 }

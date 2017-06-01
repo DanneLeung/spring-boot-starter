@@ -15,6 +15,10 @@ import com.xcesys.extras.framework.core.service.ICrudService;
 public abstract class BaseCrudService<T, ID extends Serializable> implements ICrudService<T, ID> {
 
 	@Override
+	public T create(T o) {
+		return getRepository().save(o);
+	}
+	@Override
 	public Iterable<T> create(Iterable<T> o_list) {
 		return getRepository().save(o_list);
 	}
