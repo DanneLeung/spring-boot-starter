@@ -21,7 +21,15 @@ public class TaskService extends BaseCrudService<Task, Long> {
 	}
 
 	public Iterable<Task> findByWorker(Long id) {
-		return repository.findByWorker(id);
+		return repository.findByWorkerAndStatus(id, "2");
+	}
+
+	public int claim(Long userId, Long[] ids) {
+		return repository.claim(userId, ids);
+	}
+
+	public int finish(Long userId, Long[] ids) {
+		return repository.finish(userId, ids);
 	}
 
 }

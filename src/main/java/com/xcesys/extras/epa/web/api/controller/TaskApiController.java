@@ -2,6 +2,7 @@ package com.xcesys.extras.epa.web.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,5 +38,21 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 	public Result<Task> tasks() {
 		User user = getCurrentUser();
 		return success("读取数据成功", service.findByWorker(user.getId()));
+	}
+
+	@ApiOperation("更新指定id数组对应的任务数据为已领取状态")
+	@PostMapping("/claim")
+	public Result<Task> claim(Long[] ids) {
+		User user = getCurrentUser();
+		service.claim(user.getId(), ids);
+		return success("任务数据领取状态更新成功", null);
+	}
+
+	@ApiOperation("更新指定id数组对应的任务数据为已提交状态")
+	@PostMapping("/claim")
+	public Result<Task> finish(Long[] ids) {
+		User user = getCurrentUser();
+		service.finish(user.getId(), ids);
+		return success("任务数据提交状态更新成功", null);
 	}
 }

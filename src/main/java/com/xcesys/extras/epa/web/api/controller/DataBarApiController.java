@@ -36,6 +36,7 @@ public class DataBarApiController extends BaseApiController<DataBar, Long> {
 	@ApiResponse(code = 200, message = "数据条数据的集合")
 	@GetMapping({ "/findByType" })
 	public Result<DataBar> list(String type) {
-		return success("读取数据成功", service.findByType(type));
+		Iterable<DataBar> databars = service.findByType(type);
+		return success("读取数据成功", databars);
 	}
 }
