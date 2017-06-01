@@ -16,7 +16,7 @@ public class DataBarService extends BaseCrudService<DataBar, Long> {
 	private DataBarRepository repository;
 
 	@Override
-	public IBaseRepository<DataBar, Long> getRepository() {	
+	public IBaseRepository<DataBar, Long> getRepository() {
 		return repository;
 	}
 

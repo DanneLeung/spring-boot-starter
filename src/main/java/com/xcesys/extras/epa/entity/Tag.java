@@ -36,7 +36,7 @@ public class Tag extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_TAG_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_TAG_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_TAG_ID")
 	private Long id;

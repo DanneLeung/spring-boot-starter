@@ -31,10 +31,10 @@ public class DataBarApiController extends BaseApiController<DataBar, Long> {
 	protected ICrudService<DataBar, Long> getCrudService() {
 		return service;
 	}
-	
+
 	@ApiOperation("根据类型获取对应的数据条数据")
 	@ApiResponse(code = 200, message = "数据条数据的集合")
-	@GetMapping({"/findByType" })
+	@GetMapping({ "/findByType" })
 	public Result<DataBar> list(String type) {
 		return success("读取数据成功", service.findByType(type));
 	}

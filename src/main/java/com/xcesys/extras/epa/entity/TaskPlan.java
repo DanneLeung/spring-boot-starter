@@ -41,7 +41,7 @@ public class TaskPlan extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_PLAN_HEADER_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_PLAN_HEADER_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_PLAN_HEADER_ID")
 	private Long id;

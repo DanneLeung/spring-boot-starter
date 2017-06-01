@@ -16,7 +16,7 @@ public class TaskPlanService extends BaseCrudService<TaskPlan, Long> {
 	private TaskPlanRepository repository;
 
 	@Override
-	public IBaseRepository<TaskPlan, Long> getRepository() {	
+	public IBaseRepository<TaskPlan, Long> getRepository() {
 		return repository;
 	}
 

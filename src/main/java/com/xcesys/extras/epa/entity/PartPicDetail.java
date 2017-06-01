@@ -42,7 +42,7 @@ public class PartPicDetail extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_PARTS_PIC_DTL_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_PARTS_PIC_DTL_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 

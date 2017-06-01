@@ -77,6 +77,6 @@ public class DataBar extends IdAuditableEntity {
 	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
 			@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
-	@OrderColumn(name = "orders",nullable=true)
+	@OrderColumn(name = "orders", nullable = true)
 	private List<Tag> tags;
 }

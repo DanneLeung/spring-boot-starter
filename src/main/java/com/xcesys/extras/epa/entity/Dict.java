@@ -44,7 +44,7 @@ public class Dict extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_DICTIONARY_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_DICTIONARY_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 

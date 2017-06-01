@@ -41,7 +41,7 @@ public class PartPic extends IdAuditableEntity {
 	private static final long serialVersionUID = -5658966165742176791L;
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_PARTS_PIC_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_PARTS_PIC_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 

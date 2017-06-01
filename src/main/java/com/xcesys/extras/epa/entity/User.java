@@ -32,7 +32,7 @@ public class User extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_USER_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_USER_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 	/**

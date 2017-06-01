@@ -5,5 +5,4 @@ import com.xcesys.extras.framework.core.repository.IBaseRepository;
 
 public interface TaskPlanRepository extends IBaseRepository<TaskPlan, Long> {
 
-
 }

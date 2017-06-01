@@ -41,7 +41,7 @@ public class DictType extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_DICTIONARY_TYPE_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_DICTIONARY_TYPE_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 
@@ -66,7 +66,7 @@ public class DictType extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String more;
 
-	@OneToMany(mappedBy="type")
+	@OneToMany(mappedBy = "type")
 	private Set<Dict> dicts = new HashSet<Dict>(0);
 
 }

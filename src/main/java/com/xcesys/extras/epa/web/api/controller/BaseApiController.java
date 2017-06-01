@@ -2,6 +2,7 @@ package com.xcesys.extras.epa.web.api.controller;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,12 +47,12 @@ public abstract class BaseApiController<T extends IdEntity, ID extends Serializa
 		T newData = getCrudService().create(data);
 		return success("创建数据成功", Arrays.asList(newData));
 	}
-	
+
 	@ApiOperation("创建指定数组、集合的数据")
 	@PostMapping("/create")
-	public Result<T> create(@ApiParam(name = "data") @RequestBody T[] data) {
+	public Result<T> create(@ApiParam(name = "data") @RequestBody List<T> data) {
 		// User user = getCurrentUser();
-		Iterable<T> iterable = getCrudService().create(Arrays.asList(data));
+		Iterable<T> iterable = getCrudService().create(data);
 		return success("创建数据成功", iterable);
 	}
 

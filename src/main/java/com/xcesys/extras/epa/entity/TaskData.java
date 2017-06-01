@@ -41,7 +41,7 @@ public class TaskData extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_TASK_DATA_PROCESS_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_TASK_DATA_PROCESS_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TT_TASK_DATA_PROCESS_ID")
 	private Long id;

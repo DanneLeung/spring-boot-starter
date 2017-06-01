@@ -11,7 +11,7 @@ public class SecurityUtils {
 
 	public static UserDetails getLoginUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication==null)
+		if (authentication == null)
 			return null;
 		else
 			return (UserDetails) authentication.getPrincipal();
@@ -24,7 +24,7 @@ public class SecurityUtils {
 	public static Long getLoginUserId() {
 		return null;
 	}
-	
+
 	public static void main(String[] args) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		String password = encoder.encodePassword("123456", "");

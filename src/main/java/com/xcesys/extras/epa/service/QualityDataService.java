@@ -16,7 +16,7 @@ public class QualityDataService extends BaseCrudService<QualityData, Long> {
 	private QualityDataRepository repository;
 
 	@Override
-	public IBaseRepository<QualityData, Long> getRepository() {	
+	public IBaseRepository<QualityData, Long> getRepository() {
 		return repository;
 	}
 

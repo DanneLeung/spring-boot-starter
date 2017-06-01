@@ -31,7 +31,6 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 	protected ICrudService<Task, Long> getCrudService() {
 		return service;
 	}
-	
 
 	@ApiOperation("取得当前登录用户任务数据")
 	@GetMapping("/tasks")

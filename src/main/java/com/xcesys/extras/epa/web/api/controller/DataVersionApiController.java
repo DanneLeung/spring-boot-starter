@@ -31,7 +31,7 @@ public class DataVersionApiController extends BaseApiController<DataVersion, Lon
 	protected ICrudService<DataVersion, Long> getCrudService() {
 		return service;
 	}
-	
+
 	@ApiOperation("取得当前各个类型数据最大版本号")
 	@ApiResponse(code = 200, message = "各个类型数据最大版本号")
 	@GetMapping("/maxversion")

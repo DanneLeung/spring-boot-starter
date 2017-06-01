@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// allow anonymous resource requests
 				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js",
-						"/swagger-resources/**", "/webjars/**","/**/api-docs/**")
+						"/swagger-resources/**", "/webjars/**", "/**/api-docs/**")
 				.permitAll().antMatchers(authUrl + "/**").permitAll().antMatchers("/auth/**").permitAll().anyRequest()
 				.authenticated();
 		// http://localhost:7080/swagger-resources/configuration/ui

@@ -42,7 +42,7 @@ public class QualityData extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_QUALITY_DATA_PROCESS_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_QUALITY_DATA_PROCESS_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TT_QUALITY_DATA_PROCESS_ID")
 	private Long id;
@@ -61,7 +61,7 @@ public class QualityData extends IdAuditableEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_DATA_BAR_ID", insertable = false, updatable = false)
 	private DataBar databar;
-	
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_DATA_BAR_ID")
 	private Long databarId;
@@ -71,7 +71,7 @@ public class QualityData extends IdAuditableEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_TAG_ID", insertable = false, updatable = false)
 	private Tag tag;
-	
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_TAG_ID")
 	private Long tagId;

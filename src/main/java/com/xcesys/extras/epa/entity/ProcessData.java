@@ -42,7 +42,7 @@ public class ProcessData extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_DATA_PROCESS_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TT_DATA_PROCESS_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TT_DATA_PROCESS_ID")
 	private Long id;
@@ -75,7 +75,7 @@ public class ProcessData extends IdAuditableEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TM_TAG_ID", insertable = false, updatable = false)
 	private Tag tag;
-	
+
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_TAG_ID")
 	private Long tagId;

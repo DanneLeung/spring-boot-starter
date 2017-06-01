@@ -16,11 +16,11 @@ public class DataVersionService extends BaseCrudService<DataVersion, Long> {
 	private DataVersionRepository repository;
 
 	@Override
-	public IBaseRepository<DataVersion, Long> getRepository() {	
+	public IBaseRepository<DataVersion, Long> getRepository() {
 		return repository;
 	}
 
-	public Iterable<DataVersion> findMaxVersion(){
+	public Iterable<DataVersion> findMaxVersion() {
 		return repository.findMaxVersion();
 	}
 }

@@ -16,7 +16,7 @@ public class ProcessDataService extends BaseCrudService<ProcessData, Long> {
 	private ProcessDataRepository repository;
 
 	@Override
-	public IBaseRepository<ProcessData, Long> getRepository() {	
+	public IBaseRepository<ProcessData, Long> getRepository() {
 		return repository;
 	}
 

@@ -18,6 +18,7 @@ public abstract class BaseCrudService<T, ID extends Serializable> implements ICr
 	public T create(T o) {
 		return getRepository().save(o);
 	}
+
 	@Override
 	public Iterable<T> create(Iterable<T> o_list) {
 		return getRepository().save(o_list);

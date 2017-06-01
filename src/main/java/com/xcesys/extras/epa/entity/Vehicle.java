@@ -38,7 +38,7 @@ public class Vehicle extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_VHC_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_VHC_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 

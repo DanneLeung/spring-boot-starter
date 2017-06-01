@@ -16,7 +16,7 @@ public class PartPicDetailService extends BaseCrudService<PartPicDetail, Long> {
 	private PartPicDetailRepository repository;
 
 	@Override
-	public IBaseRepository<PartPicDetail, Long> getRepository() {	
+	public IBaseRepository<PartPicDetail, Long> getRepository() {
 		return repository;
 	}
 

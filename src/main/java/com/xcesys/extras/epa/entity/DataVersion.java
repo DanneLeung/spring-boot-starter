@@ -20,6 +20,7 @@ import lombok.Setter;
 
 /**
  * App发行包版本
+ * 
  * @author danne
  *
  */
@@ -35,7 +36,7 @@ public class DataVersion extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BASE_DATA_VERSION_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BASE_DATA_VERSION_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 	/**

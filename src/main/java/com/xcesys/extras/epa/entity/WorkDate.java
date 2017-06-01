@@ -51,7 +51,7 @@ public class WorkDate extends IdAuditableEntity {
 
 	@Id
 	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_WORK_DATE_ID")	
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_WORK_DATE_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_WORK_DATE_ID")
 	private Long id;
