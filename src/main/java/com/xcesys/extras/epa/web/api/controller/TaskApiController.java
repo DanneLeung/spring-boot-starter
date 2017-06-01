@@ -49,7 +49,7 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 	}
 
 	@ApiOperation("更新指定id数组对应的任务数据为已提交状态")
-	@PostMapping("/claim")
+	@PostMapping("/finish")
 	public Result<Task> finish(Long[] ids) {
 		User user = getCurrentUser();
 		service.finish(user.getId(), ids);
