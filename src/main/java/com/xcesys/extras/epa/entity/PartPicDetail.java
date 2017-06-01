@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -40,7 +41,8 @@ public class PartPicDetail extends IdAuditableEntity {
 	private static final long serialVersionUID = -5658966165742176791L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BAS_PARTS_PIC_DTL_ID")	
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 

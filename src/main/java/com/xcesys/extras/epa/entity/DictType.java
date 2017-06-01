@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -39,7 +40,8 @@ public class DictType extends IdAuditableEntity {
 	private static final long serialVersionUID = -5005640655497740651L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TS_DICTIONARY_TYPE_ID")	
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Long id;
 
