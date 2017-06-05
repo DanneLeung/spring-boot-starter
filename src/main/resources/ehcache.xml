@@ -1,0 +1,12 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" Name="CacheManager"
+	maxBytesLocalHeap="250m">
+
+	<defaultCache timeToLiveSeconds="300"/>
+
+	<cache name="org.hibernate.cache.internal.StandardQueryCache"
+		eternal="true" />
+
+	<cache name="querycache" timeToLiveSeconds="60">
+	</cache>
+</ehcache>

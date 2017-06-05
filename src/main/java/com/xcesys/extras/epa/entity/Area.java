@@ -1,13 +1,12 @@
 package com.xcesys.extras.epa.entity;
 
-import static javax.persistence.FetchType.LAZY;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -57,7 +56,7 @@ public class Area extends IdAuditableEntity {
 
 	// @JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToMany(fetch = LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
 			@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) })

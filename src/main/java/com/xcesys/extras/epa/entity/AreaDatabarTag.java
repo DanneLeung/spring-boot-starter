@@ -57,7 +57,7 @@ public class AreaDatabarTag extends IdAuditableEntity {
 	private Integer orders;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TT_TAG_ID")
 	private Tag tag;
 }
