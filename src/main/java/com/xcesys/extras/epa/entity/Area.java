@@ -5,6 +5,7 @@ import static javax.persistence.FetchType.LAZY;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TM_AREA")
 public class Area extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;

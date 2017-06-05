@@ -1,5 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +36,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TM_PLAN_HEADER")
 public class TaskPlan extends IdAuditableEntity {
 	private static final long serialVersionUID = 3893664023484789028L;

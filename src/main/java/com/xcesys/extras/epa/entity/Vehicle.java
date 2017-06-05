@@ -1,5 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +32,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TM_BAS_VHC")
 public class Vehicle extends IdAuditableEntity {
 

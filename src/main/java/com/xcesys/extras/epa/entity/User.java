@@ -1,5 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TS_USER")
 public class User extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;

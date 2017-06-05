@@ -1,10 +1,13 @@
 package com.xcesys.extras.epa.entity;
 
 import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -20,7 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * App发行包版本
+ * 标签
  * 
  * @author danne
  *
@@ -32,36 +35,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @Cacheable
-@Table(name = "TM_BASE_DATA_VERSION")
-public class DataVersion extends IdAuditableEntity {
-	private static final long serialVersionUID = -3356325683038483403L;
-
+@Table(name = "TR_DATA_BAR_TAG")
+public class AreaDatabarTag extends IdAuditableEntity {
+	private static final long serialVersionUID = 9067340437829608488L;
 	@Id
-	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_BASE_DATA_VERSION_ID")
+	@GeneratedValue
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TR_DATA_BAR_TAG_ID")
 	private Long id;
-	/**
-	 * 版本号
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private long version;
-
-	/**
-	 * 数据类型（apk、）
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String type;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String fileName;
-
-	/**
-	 * 存储路径
-	 */
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String filePath;
+	@Column(name = "TM_AREA_ID")
+	private Long area;
 
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private String remark;
+	@Column(name = "TT_DATA_BAR_ID")
+	private Long databar;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "ORDERS")
+	private Integer orders;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TT_TAG_ID")
+	private Tag tag;
 }

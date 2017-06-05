@@ -3,6 +3,7 @@ package com.xcesys.extras.epa.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,6 +35,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TS_DICTIONARY_TYPE")
 public class DictType extends IdAuditableEntity {
 

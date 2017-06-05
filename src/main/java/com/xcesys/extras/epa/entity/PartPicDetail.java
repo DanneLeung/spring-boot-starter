@@ -1,5 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +36,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TM_BAS_PARTS_PIC_DTL")
 public class PartPicDetail extends IdAuditableEntity {
 

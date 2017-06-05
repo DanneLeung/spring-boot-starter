@@ -2,6 +2,7 @@ package com.xcesys.extras.epa.entity;
 
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,6 +38,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TT_TASK")
 public class Task extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;

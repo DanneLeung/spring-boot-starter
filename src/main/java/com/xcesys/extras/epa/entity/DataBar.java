@@ -5,6 +5,7 @@ import static javax.persistence.FetchType.LAZY;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -35,6 +36,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Cacheable
 @Table(name = "TM_DATA_BAR")
 public class DataBar extends IdAuditableEntity {
 
@@ -72,12 +74,14 @@ public class DataBar extends IdAuditableEntity {
 	private String picture;
 
 	// @JsonIgnore
+	// @ManyToMany(fetch = LAZY)
+	// @JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
+	// @JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false)
+	// }, inverseJoinColumns = {
+	// @JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
+	// @OrderColumn(name = "orders", nullable = true)
+	@Transient
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToMany(fetch = LAZY)
-	@JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
-			@JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
-	@OrderColumn(name = "orders", nullable = true)
 	private List<Tag> tags;
 
 }
