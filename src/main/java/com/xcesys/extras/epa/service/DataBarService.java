@@ -1,5 +1,7 @@
 package com.xcesys.extras.epa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +22,7 @@ public class DataBarService extends BaseCrudService<DataBar, Long> {
 		return repository;
 	}
 
-	public Iterable<DataBar> findByType(String type) {
+	public List<DataBar> findByType(String type) {
 		return repository.findByType(type);
 	}
 

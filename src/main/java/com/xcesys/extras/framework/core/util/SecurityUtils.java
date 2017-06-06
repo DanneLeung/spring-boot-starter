@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.xcesys.extras.framework.core.security.JwtUser;
+
 public class SecurityUtils {
 
 	public static UserDetails getLoginUser() {
@@ -18,10 +20,15 @@ public class SecurityUtils {
 	}
 
 	public static String getLoginUsername() {
-		return null;
+		UserDetails user = SecurityUtils.getLoginUser();
+		return user.getUsername();
 	}
 
 	public static Long getLoginUserId() {
+		UserDetails user = SecurityUtils.getLoginUser();
+		if (user instanceof JwtUser) {
+			return ((JwtUser) user).getId();
+		}
 		return null;
 	}
 

@@ -17,7 +17,7 @@ import com.xcesys.extras.framework.core.security.JwtUserFactory;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
+		
 	@Autowired
 	private UserRepository userRepository;
 
@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
 		} else {
-			return JwtUserFactory.create(user.getId(), user.getUsername(), user.getPassword(), Collections.EMPTY_LIST,
+			return JwtUserFactory.create(user.getId(), user.getUsername(), user.getPassword(), Collections.emptyList(),
 					!user.getDeleted(), user);
 		}
 	}

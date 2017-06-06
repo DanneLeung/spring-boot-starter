@@ -25,6 +25,10 @@ public class AreaDatabarTagService extends BaseCrudService<AreaDatabarTag, Long>
 	public List<AreaDatabarTag> findByAreaAndDatabar(Long area, Long databar) {
 		return repository.findByAreaAndDatabarOrderByOrders(area, databar);
 	}
+	
+	public List<AreaDatabarTag> findByDatabar( Long databar) {
+		return repository.findByDatabar(databar);
+	}
 
 	public List<AreaDatabarTag> findList() {
 		return repository.findList();
