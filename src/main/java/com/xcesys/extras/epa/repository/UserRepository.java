@@ -1,6 +1,6 @@
 package com.xcesys.extras.epa.repository;
 
-
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.xcesys.extras.epa.entity.User;
 import com.xcesys.extras.framework.core.repository.IBaseRepository;
 
+@CacheConfig(cacheNames = "querycache")
 public interface UserRepository extends IBaseRepository<User, Long> {
 
 	@Cacheable
