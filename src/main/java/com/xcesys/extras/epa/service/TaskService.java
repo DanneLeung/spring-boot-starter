@@ -28,10 +28,12 @@ public class TaskService extends BaseCrudService<Task, Long> {
 		return repository.findByWorker(id, "2", date);
 	}
 
+	@Transactional
 	public int claim(Long userId, Long[] ids) {
 		return repository.claim(userId, ids, new Date());
 	}
 
+	@Transactional
 	public int finish(Long userId, Long[] ids) {
 		return repository.finish(userId, ids, new Date());
 	}
