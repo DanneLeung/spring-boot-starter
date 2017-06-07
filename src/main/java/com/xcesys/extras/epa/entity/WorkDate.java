@@ -36,6 +36,13 @@ import lombok.Setter;
 @Table(name = "TM_WORK_DATE")
 public class WorkDate extends IdAuditableEntity {
 	private static final long serialVersionUID = -805246265360988602L;
+	
+	@Id
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_WORK_DATE_ID")
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TM_WORK_DATE_ID")
+	private Long id;
 
 	/**
 	 * 0:放假 1：上班
@@ -48,11 +55,4 @@ public class WorkDate extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private Date workDate;
-
-	@Id
-	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_WORK_DATE_ID")
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TM_WORK_DATE_ID")
-	private Long id;
 }

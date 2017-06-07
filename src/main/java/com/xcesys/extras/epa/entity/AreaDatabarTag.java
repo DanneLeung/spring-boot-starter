@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -39,7 +40,8 @@ import lombok.Setter;
 public class AreaDatabarTag extends IdAuditableEntity {
 	private static final long serialVersionUID = 9067340437829608488L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TR_DATA_BAR_TAG_ID")
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TR_DATA_BAR_TAG_ID")
 	private Long id;

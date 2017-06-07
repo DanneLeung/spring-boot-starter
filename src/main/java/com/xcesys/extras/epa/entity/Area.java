@@ -38,6 +38,13 @@ import lombok.Setter;
 @Table(name = "TM_AREA")
 public class Area extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
+	
+	@Id
+	@GeneratedValue(generator = "ID")
+	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_AREA_ID")
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@Column(name = "TM_AREA_ID")
+	private Long id;
 
 	/**
 	 * 功能分类 1点检 2工艺 3质量
@@ -62,11 +69,4 @@ public class Area extends IdAuditableEntity {
 					@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) })
 	@OrderColumn(name = "orders")
 	private Set<DataBar> databars = new LinkedHashSet<DataBar>(0);
-
-	@Id
-	@GeneratedValue(generator = "ID")
-	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_AREA_ID")
-	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@Column(name = "TM_AREA_ID")
-	private Long id;
 }
