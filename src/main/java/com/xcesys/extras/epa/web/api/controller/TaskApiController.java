@@ -44,15 +44,19 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 	@PostMapping("/claim")
 	public Result<Task> claim(Long[] ids) {
 		User user = getCurrentUser();
-		service.claim(user.getId(), ids);
-		return success("任务数据领取状态更新成功", null);
+		int updated = service.claim(user.getId(), ids);
+		Result<Task> result = success("任务数据领取状态更新成功", null);
+		result.setUpdated(updated);
+		return result;
 	}
 
 	@ApiOperation("更新指定id数组对应的任务数据为已提交状态")
 	@PostMapping("/finish")
 	public Result<Task> finish(Long[] ids) {
 		User user = getCurrentUser();
-		service.finish(user.getId(), ids);
-		return success("任务数据提交状态更新成功", null);
+		int updated = service.finish(user.getId(), ids);
+		Result<Task> result = success("任务数据提交状态更新成功", null);
+		result.setUpdated(updated);
+		return result;
 	}
 }
