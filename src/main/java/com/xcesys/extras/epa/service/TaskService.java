@@ -29,7 +29,7 @@ public class TaskService extends BaseCrudService<Task, Long> {
 	}
 
 	public int claim(Long userId, Long[] ids) {
-		return repository.claim(userId, ids, new Date());
+		return repository.claim(ids, new Date());
 	}
 
 	public int finish(Long userId, Long[] ids) {

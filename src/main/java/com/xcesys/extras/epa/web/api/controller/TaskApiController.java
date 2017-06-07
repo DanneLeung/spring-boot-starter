@@ -14,6 +14,7 @@ import com.xcesys.extras.framework.core.service.ICrudService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.java.Log;
 
 /**
  * 任务数据RESTFUL API
@@ -24,6 +25,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "任务数据")
 @RestController
 @RequestMapping("/api/task")
+@Log
 public class TaskApiController extends BaseApiController<Task, Long> {
 	@Autowired
 	TaskService service;
@@ -44,6 +46,7 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 	@PostMapping("/claim")
 	public Result<Task> claim(Long[] ids) {
 		User user = getCurrentUser();
+		log.info(" >>>>>>>>>>>>> current user" + user.toString());
 		int updated = service.claim(user.getId(), ids);
 		Result<Task> result = success("任务数据领取状态更新成功", null);
 		result.setUpdated(updated);
@@ -54,6 +57,7 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 	@PostMapping("/finish")
 	public Result<Task> finish(Long[] ids) {
 		User user = getCurrentUser();
+		log.info(" >>>>>>>>>>>>> current user" + user.toString());
 		int updated = service.finish(user.getId(), ids);
 		Result<Task> result = success("任务数据提交状态更新成功", null);
 		result.setUpdated(updated);

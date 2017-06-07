@@ -16,11 +16,11 @@ public interface TaskRepository extends IBaseRepository<Task, Long> {
 	List<Task> findByWorker(@Param("worker") Long worker, @Param("status") String status, @Param("date") String date);
 
 	@Modifying
-	@Query("update #{#entityName} set status = '3' , receiveTime= :receiveTime where worker = :userId and id in :ids")
-	int claim(@Param("userId") Long userId, @Param("ids") Long[] ids,@Param("receiveTime")Date receiveTime);
+	@Query("update #{#entityName} set status = '3' , receiveTime= :receiveTime where id in (:ids)")
+	int claim(@Param("ids") Long[] ids,@Param("receiveTime")Date receiveTime);
 
 	@Modifying
-	@Query("update #{#entityName} set status = '4', commitTime = :commitTime where worker = :userId and id in :ids")
+	@Query("update #{#entityName} set status = '4', commitTime = :commitTime where worker = :userId and id in (:ids)")
 	int finish(@Param("userId") Long userId, @Param("ids") Long[] ids, @Param("commitTime") Date commitTime);
 
 }
