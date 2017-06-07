@@ -1,6 +1,9 @@
 package com.xcesys.extras.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -26,4 +29,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		// .setCachePeriod(0);
 		// }
 	}
+
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		super.configureMessageConverters(converters);
+	}
+	
+	
 }

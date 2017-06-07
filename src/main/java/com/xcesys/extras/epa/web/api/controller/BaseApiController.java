@@ -63,6 +63,8 @@ public abstract class BaseApiController<T extends IdEntity, ID extends Serializa
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public @ResponseBody Result exceptionHandler(HttpServletRequest request, HttpServletResponse response,
 			Exception e) {
+		e.printStackTrace();
+		log.severe(e.getLocalizedMessage());
 		if (e instanceof ApplicationException) {
 			return error(1, e.getLocalizedMessage());
 		} else {

@@ -1,8 +1,11 @@
 package com.xcesys.extras.epa.web.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +17,7 @@ import com.xcesys.extras.framework.core.service.ICrudService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.java.Log;
+import io.swagger.annotations.ApiParam;
 
 /**
  * 任务数据RESTFUL API
@@ -25,7 +28,7 @@ import lombok.extern.java.Log;
 @Api(value = "任务数据")
 @RestController
 @RequestMapping("/api/task")
-@Log
+//@Log
 public class TaskApiController extends BaseApiController<Task, Long> {
 	@Autowired
 	TaskService service;
@@ -44,9 +47,8 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 
 	@ApiOperation("更新指定id数组对应的任务数据为已领取状态")
 	@PostMapping("/claim")
-	public Result<Task> claim(Long[] ids) {
+	public Result<Task> claim(@ApiParam(name = "ids") @RequestBody(required = true) List<Long> ids) {
 		User user = getCurrentUser();
-		log.info(" >>>>>>>>>>>>> current user" + user.toString());
 		int updated = service.claim(user.getId(), ids);
 		Result<Task> result = success("任务数据领取状态更新成功", null);
 		result.setUpdated(updated);
@@ -55,9 +57,8 @@ public class TaskApiController extends BaseApiController<Task, Long> {
 
 	@ApiOperation("更新指定id数组对应的任务数据为已提交状态")
 	@PostMapping("/finish")
-	public Result<Task> finish(Long[] ids) {
+	public Result<Task> finish(@ApiParam(name = "ids") @RequestBody(required = true) List<Long> ids) {
 		User user = getCurrentUser();
-		log.info(" >>>>>>>>>>>>> current user" + user.toString());
 		int updated = service.finish(user.getId(), ids);
 		Result<Task> result = success("任务数据提交状态更新成功", null);
 		result.setUpdated(updated);

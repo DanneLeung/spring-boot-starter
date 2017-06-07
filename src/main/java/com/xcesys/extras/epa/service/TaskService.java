@@ -1,6 +1,7 @@
 package com.xcesys.extras.epa.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,11 @@ public class TaskService extends BaseCrudService<Task, Long> {
 		return repository.findByWorker(id, "2", date);
 	}
 
-	public int claim(Long userId, Long[] ids) {
-		return repository.claim(ids, new Date());
+	public int claim(Long userId, List<Long> ids) {
+		return repository.claim(userId, ids, new Date());
 	}
 
-	public int finish(Long userId, Long[] ids) {
+	public int finish(Long userId, List<Long> ids) {
 		return repository.finish(userId, ids, new Date());
 	}
 
