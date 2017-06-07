@@ -12,8 +12,8 @@ import com.xcesys.extras.framework.core.repository.IBaseRepository;
 
 public interface TaskRepository extends IBaseRepository<Task, Long> {
 
-	@Query("select c from #{#entityName} c where worker = :worker and status=:status and receiveStartTime<=:date and receiveEndTime>:date")
-	List<Task> findByWorker(@Param("worker") Long worker, @Param("status") String status, @Param("date") String date);
+	@Query("select c from #{#entityName} c where worker = :worker and work = :date and receiveStartTime<=:time and receiveEndTime>:time and status=:status ")
+	List<Task> findByWorker(@Param("worker") Long worker, @Param("status") String status, @Param("date") String date, @Param("time") String time);
 
 	@Modifying
 	@Query("update #{#entityName} set status = '3' , receiveTime= :receiveTime where worker = :userId and id in (:ids)")

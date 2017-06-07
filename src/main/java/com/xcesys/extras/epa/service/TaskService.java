@@ -25,8 +25,9 @@ public class TaskService extends BaseCrudService<Task, Long> {
 	}
 
 	public Iterable<Task> findByWorker(Long id) {
-		String date = DateFormatUtils.format(System.currentTimeMillis(), "HH:mm");
-		return repository.findByWorker(id, "2", date);
+		String date = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
+		String time = DateFormatUtils.format(new Date(), "HH:mm");
+		return repository.findByWorker(id, "2", date, time);
 	}
 
 	public int claim(Long userId, List<Long> ids) {
