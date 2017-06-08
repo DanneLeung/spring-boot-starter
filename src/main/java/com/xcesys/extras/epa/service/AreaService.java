@@ -1,5 +1,7 @@
 package com.xcesys.extras.epa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,10 @@ public class AreaService extends BaseCrudService<Area, Long> {
 	@Override
 	public IBaseRepository<Area, Long> getRepository() {
 		return repository;
+	}
+
+	public List<Area> findAllById(Long areaId) {
+		return repository.findAllById();
 	}
 
 }

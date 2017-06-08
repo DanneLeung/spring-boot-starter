@@ -1,10 +1,14 @@
 package com.xcesys.extras.epa.entity;
 
+import static javax.persistence.FetchType.LAZY;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -12,6 +16,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xcesys.extras.framework.core.bean.PageResult;
 import com.xcesys.extras.framework.core.model.IdAuditableEntity;
@@ -34,7 +39,7 @@ import lombok.Setter;
 @Setter
 @Cacheable
 @Table(name = "TM_TAG")
-public class Tag extends IdAuditableEntity {
+public class Tag extends IdAuditableEntity implements Comparable<Tag> {
 	private static final long serialVersionUID = 9067340437829608488L;
 	@Id
 	@GeneratedValue(generator = "ID")
@@ -42,6 +47,15 @@ public class Tag extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	@Column(name = "TM_TAG_ID")
 	private Long id;
+
+	@JsonIgnore
+	@ManyToOne(fetch = LAZY)
+	@JoinColumn(name = "TM_DATA_BAR_ID", insertable = false, updatable = false)
+	private DataBar databar;
+
+	@Column(name = "TM_DATA_BAR_ID")
+	private Long databarId;
+
 	/**
 	 * 数据类型
 	 */
@@ -91,6 +105,14 @@ public class Tag extends IdAuditableEntity {
 	 */
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String storage;
+
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	private Integer orders;
+
+	@Override
+	public int compareTo(Tag o) {
+		return (this.orders == null ? 0 : this.orders) - (o.orders == null ? 0 : o.orders);
+	}
 
 	// @JsonIgnore
 	// @JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })

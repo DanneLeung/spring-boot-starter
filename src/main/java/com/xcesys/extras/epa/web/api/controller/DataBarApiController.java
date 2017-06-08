@@ -1,6 +1,5 @@
 package com.xcesys.extras.epa.web.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xcesys.extras.epa.entity.AreaDatabarTag;
 import com.xcesys.extras.epa.entity.DataBar;
-import com.xcesys.extras.epa.entity.Tag;
-import com.xcesys.extras.epa.service.AreaDatabarTagService;
 import com.xcesys.extras.epa.service.DataBarService;
 import com.xcesys.extras.framework.core.bean.Result;
 import com.xcesys.extras.framework.core.service.ICrudService;
@@ -32,8 +28,6 @@ import io.swagger.annotations.ApiResponse;
 public class DataBarApiController extends BaseApiController<DataBar, Long> {
 	@Autowired
 	DataBarService service;
-	@Autowired
-	AreaDatabarTagService databarTagService;
 
 	@Override
 	protected ICrudService<DataBar, Long> getCrudService() {
@@ -48,15 +42,6 @@ public class DataBarApiController extends BaseApiController<DataBar, Long> {
 		if (databars == null || databars.size() <= 0) {
 			return success("读取数据成功", databars);
 		}
-		DataBar databar = databars.get(0);
-		List<Tag> tags = new ArrayList<Tag>();
-		List<AreaDatabarTag> list = databarTagService.findByDatabar(databar.getId());
-		if (list != null && !list.isEmpty()) {
-			for (AreaDatabarTag dt : list) {
-				tags.add(dt.getTag());
-			}
-		}
-		databar.setTags(tags);
 		return success("读取数据成功", databars);
 	}
 }

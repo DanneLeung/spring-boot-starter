@@ -2,20 +2,20 @@ package com.xcesys.extras.epa.entity;
 
 import static javax.persistence.FetchType.LAZY;
 
-import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -38,7 +38,7 @@ import lombok.Setter;
 @Setter
 @Cacheable
 @Table(name = "TM_DATA_BAR")
-public class DataBar extends IdAuditableEntity {
+public class DataBar extends IdAuditableEntity implements Comparable<DataBar> {
 
 	private static final long serialVersionUID = -5012274748925500133L;
 
@@ -52,11 +52,12 @@ public class DataBar extends IdAuditableEntity {
 	 * 区域
 	 */
 	@JsonIgnore
-	@ManyToMany(fetch = LAZY)
-	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
-			@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) })
-	private Set<Area> areas;
+	@ManyToOne(fetch = LAZY)
+	@JoinColumn(name = "TM_AREA_ID", insertable = false, updatable = false)
+	private Area area;
+
+	@Column(name = "TM_AREA_ID")
+	private Long areaId;
 	/**
 	 * 功能分类
 	 */
@@ -73,15 +74,16 @@ public class DataBar extends IdAuditableEntity {
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
 	private String picture;
 
-	// @JsonIgnore
-	// @ManyToMany(fetch = LAZY)
-	// @JoinTable(name = "TR_DATA_BAR_TAG", joinColumns = {
-	// @JoinColumn(name = "TT_DATA_BAR_ID", nullable = false, updatable = false)
-	// }, inverseJoinColumns = {
-	// @JoinColumn(name = "TT_TAG_ID", nullable = false, updatable = false) })
-	// @OrderColumn(name = "orders", nullable = true)
-	@Transient
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	private List<Tag> tags;
+	private Integer orders;
 
+	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "databar")
+	@OrderBy("orders")
+	private SortedSet<Tag> tags;
+
+	@Override
+	public int compareTo(DataBar o) {
+		return (this.orders == null ? 0 : this.orders) - (o.orders == null ? 0 : o.orders);
+	}
 }

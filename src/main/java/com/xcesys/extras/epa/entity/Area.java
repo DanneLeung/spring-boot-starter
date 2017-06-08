@@ -1,7 +1,6 @@
 package com.xcesys.extras.epa.entity;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.SortedSet;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -9,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,7 +35,7 @@ import lombok.Setter;
 @Table(name = "TM_AREA")
 public class Area extends IdAuditableEntity {
 	private static final long serialVersionUID = -3356325683038483403L;
-	
+
 	@Id
 	@GeneratedValue(generator = "ID")
 	@SequenceGenerator(name = "ID", sequenceName = "SEQ_TM_AREA_ID")
@@ -63,10 +60,7 @@ public class Area extends IdAuditableEntity {
 
 	// @JsonIgnore
 	@JsonView(value = { DataTablesOutput.View.class, PageResult.View.class })
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "TR_AREA_DATA_BAR", joinColumns = {
-			@JoinColumn(name = "TM_AREA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "TM_DATA_BAR_ID", nullable = false, updatable = false) })
-	@OrderColumn(name = "orders")
-	private Set<DataBar> databars = new LinkedHashSet<DataBar>(0);
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "area")
+	@OrderBy("orders")
+	private SortedSet<DataBar> databars;
 }
