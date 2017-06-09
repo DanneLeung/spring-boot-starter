@@ -13,10 +13,11 @@ public class SecurityUtils {
 
 	public static UserDetails getLoginUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null)
+		if (authentication == null) {
 			return null;
-		else
+		} else {
 			return (UserDetails) authentication.getPrincipal();
+		}
 	}
 
 	public static String getLoginUsername() {

@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +25,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xcesys.extras.epa.entity.User;
 import com.xcesys.extras.framework.core.bean.PageResult;
 
 import lombok.Getter;
@@ -38,9 +41,13 @@ public abstract class IdAuditableEntity extends IdEntity {
 
 	private static final long serialVersionUID = 4289767748946880713L;
 
+	@ManyToOne
 	@CreatedBy
+	@JoinColumn(name = "CREATE_USER_ID")
+	private User createdBy;
+
 	@Column(name = "CREATE_USER_NAME")
-	private String createdBy;
+	private String createdByUsername;
 
 	@CreatedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -49,9 +56,13 @@ public abstract class IdAuditableEntity extends IdEntity {
 	@Column(name = "CREATE_DATE")
 	private Date createdDate;
 
+	@ManyToOne
 	@LastModifiedBy
+	@JoinColumn(name = "UPDATE_USER_ID")
+	private User updatedBy;
+
 	@Column(name = "UPDATE_USER_NAME")
-	private String updatedBy;
+	private String updatedByUsername;
 
 	@LastModifiedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -59,71 +70,20 @@ public abstract class IdAuditableEntity extends IdEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATE_DATE")
 	private Date updatedDate;
-	//
-	// public String getCreatedBy() {
-	// return createdBy;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.springframework.data.domain.Auditable#getCreatedDate()
-	// */
-	// public DateTime getCreatedDate() {
-	//
-	// return null == createdDate ? null : new DateTime(createdDate);
-	// }
-	//
-	// public String getLastModifiedBy() {
-	// return lastModifiedBy;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.springframework.data.domain.Auditable#getLastModifiedDate()
-	// */
-	// public DateTime getLastModifiedDate() {
-	//
-	// return null == lastModifiedDate ? null : new DateTime(lastModifiedDate);
-	// }
-	//
-	// public void setCreatedBy(String createdBy) {
-	// this.createdBy = createdBy;
-	// }
-	//
-	// public void setCreatedDate(Date createdDate) {
-	// this.createdDate = createdDate;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see
-	// * org.springframework.data.domain.Auditable#setCreatedDate(org.joda.time
-	// * .DateTime)
-	// */
-	// public void setCreatedDate(final DateTime createdDate) {
-	//
-	// this.createdDate = null == createdDate ? null : createdDate.toDate();
-	// }
-	//
-	// public void setLastModifiedBy(String lastModifiedBy) {
-	// this.lastModifiedBy = lastModifiedBy;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see
-	// * org.springframework.data.domain.Auditable#setLastModifiedDate(org.joda
-	// * .time.DateTime)
-	// */
-	// public void setLastModifiedDate(final DateTime lastModifiedDate) {
-	//
-	// this.lastModifiedDate = null == lastModifiedDate ? null :
-	// lastModifiedDate.toDate();
-	// }
+
+	public void setCreatedBy(User user) {
+		this.createdBy = user;
+		if (user != null) {
+			this.createdByUsername = user.getUsername();
+		}
+	}
+
+	public void setUpdateBy(User user) {
+		this.updatedBy = user;
+		if (user != null) {
+			this.updatedByUsername = user.getUsername();
+		}
+	}
 
 	@Override
 	public String toString() {

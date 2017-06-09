@@ -146,7 +146,7 @@ public abstract class BaseController {
 			return userId;
 		} else {
 			String username = getLoggedInUsername();
-			User user = null;// userService.findByUsername(username);
+			User user = userService.findByUsername(username);
 			if (user != null) {
 				return user.getId();
 			}
