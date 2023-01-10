@@ -4,7 +4,7 @@ Introduction
 
 Framework
 ---------
-- Spring Boot (v1.5.2)
+- Spring Boot (2.7.5)
 
     >Takes an opinionated view of building production-ready Spring applications. Spring Boot favors convention over configuration and is designed to get you up and running as quickly as possible.
 

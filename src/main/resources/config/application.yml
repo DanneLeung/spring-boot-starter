@@ -1,0 +1,149 @@
+server:
+  shutdown: graceful
+  forward-headers-strategy: native
+  #use-forward-headers: true
+  tomcat:
+    remoteip:
+      protocol-header: X-Forwarded-Proto
+      remote_ip_header: X-Forwarded-For
+      port-header: X-Forwarded-Port
+  servlet:
+    #context-path: /admin
+    session:
+      cookie:
+        http-only: true
+        #secure: true
+        max-age: 1800
+        name: springboot-session
+
+application:
+  name: springboot
+  version: '@project.version@'
+  static: /static
+  static-url: /static
+  template: /templates
+  theme:
+    root: /static
+    name: lte
+    uri: ${application.theme.root}/${application.theme.name}
+  menu:
+    enabled: true
+    main: root.admin
+  file:
+    rootUrl: ${application.webroot:}
+    location: ../upload/
+spring:
+  application:
+    name: ${application.name}
+  profiles:
+    active: localhost
+  messages:
+    basename: messages,com/xcesys/extras/system/messages,org/springframework/security/messages
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 50MB
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: /resources/,classpath:/META-INF/resources/webjars,classpath:/resources/,classpath:/templates/,classpath:/reports/,classpath:/themes/,classpath:/static/,file:${application.file.location}
+      cache:
+        period: 7200
+        cachecontrol:
+          max-age: 7200
+          no-cache: false
+      chain:
+        cache: true
+        strategy:
+          fixed:
+            paths: ${application.theme}/js/app
+            version: ${application.version}
+            enabled: true
+        enabled: true
+  thymeleaf:
+    mode: HTML
+    cache: false
+    prefix: classpath:/views/${application.theme.name}/
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  datasource:
+    druid:
+      db-type: MYSQL
+      min-idle: 0
+      max-active: 50
+      #       max-wait: 3000
+      test-while-idle: true
+      min-evictable-idle-time-millis: 60000
+      time-between-eviction-runs-millis: 60000
+      validation-query: select 1
+      test-on-borrow: true
+      database: MYSQL
+      driver-class-name: net.sf.log4jdbc.DriverSpy
+      url: jdbc:log4jdbc:mysql://47.100.231.51:3306/boot?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true
+      username: boot
+      password: boot
+  jpa:
+    show-sql: false
+    format_sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        cache:
+          use_second_level_cache: true
+          use_query_cache: false
+          region:
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+        javax:
+          cache:
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+            uri: ${spring.cache.jcache.config}
+        hbm2ddl:
+          auto: update
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+  data:
+    redis:
+      repositories:
+        enabled: false
+  cache:
+    jcache:
+      provider: org.ehcache.jsr107.EhcacheCachingProvider
+      config: classpath:ehcache.xml
+    redis:
+      provider: org.springframework.data.redis.cache.RedisCacheManager
+      time-to-live: 180000
+    type: jcache
+  session:
+    store-type: redis
+    redis:
+      namespace: ${application.name}
+    jdbc:
+      table-name: session # Name of database table used to store sessions.
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 1
+  security:
+    login: /login
+    logout: /logout
+    url:
+      permitAll: /static/**,/**/*.html,/**/*.css,/**/*.js,/**/*.js.map,/**/*.jpg,/**/*.png,/**/*.json,/h2-console/**,/druid/**,/mappings**,/refresh**,/env**,/info**,/heapdump**,/beans**,/trace**,/archaius**,/health**,/dump**,/loggers**,/features,/hystrix**,/service-**,/autoconfig**,/configprops**,/metrics**,/auditevents**,/logfile**,/actuator/**,/wx/pay/**
+
+logging:
+  file:
+    name: ../logs/${spring.application.name}.log
+  level:
+    root: INFO
+    org.springframework:
+      security: INFO
+      boot.actuate.audit.listener.AuditListener: DEBUG
+    jdbc:
+      audit: FATAL
+      resultset: FATAL
+      sqlonly: FATAL

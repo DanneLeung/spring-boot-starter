@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE" th:text="${applicationTitle}">Spring Boot Starter | Page Title</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+	<meta name="description" content="" />
+	<!-- TODO: Add description -->
+	<meta name="author" content="" />
+	<!-- TODO: Add author -->
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" th:href="@{|${theme}/favicon.ico|}" />
+	<!-- TODO: Add favicon -->
+
+	<!-- Stylesheets -->
+	<th:block th:switch="${applicationEnvironment}">
+		<th:block th:case="'production'">
+			<!-- Application -->
+
+		</th:block>
+		<th:block th:case="*">
+		</th:block>
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" th:href="@{|${theme}/bootstrap/css/bootstrap.min.css|}" href="bootstrap/css/bootstrap.min.css" />
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<!-- Theme style -->
+		<link rel="stylesheet" th:href="@{|${theme}/dist/css/AdminLTE.min.css|}" href="/themes/lte/dist/css/AdminLTE.min.css" />
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" th:href="@{|${theme}/dist/css/skins/_all-skins.min.css|}" href="/themes/lte/dist/css/skins/_all-skins.min.css"
+		/>
+		<!-- iCheck -->
+		<link rel="stylesheet" th:href="@{|${theme}/plugins/iCheck/square/blue.css|}" href="/themes/lte/plugins/iCheck/square/blue.css"
+		/>
+		<link rel="stylesheet" th:href="@{|${theme}/plugins/toastr/toastr.min.css|}" href="/themes/lte/plugins/toastr/toastr.min.css"
+		/>
+		<link rel="stylesheet" th:href="@{|${theme}/plugins/datatables/dataTables.bootstrap.css|}" href="//cdn.bootcss.com/datatables/1.10.11/css/dataTables.bootstrap.min.css"
+		/>
+		<link rel="stylesheet" th:href="@{|${theme}/dist/css/app.css|}" href="/themes/lte/dist/css/app.css" />
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<script th:inline="javascript">
+			var theme = /*[[${theme}]]*/ '';
+			var opts = {
+				"language": {
+					"url": theme + '/plugins/datatables/Chinese.json'
+				},
+				autoWidth: false,
+				lengthChange: false,
+				searching: false,
+				processing: false,
+				serverSide: true,
+				stateSave: true
+			};
+		</script>
+	</th:block>
+
+	<th:block layout:fragment="styles" />
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- Navbar -->
+		<th:block th:include="fragments/navbar :: navbar" />
+
+		<th:block th:include="fragments/sidebar :: sidebar" />
+		<div class="content-wrapper">
+			<!-- Content -->
+			<th:block layout:fragment="content" />
+		</div>
+
+		<!-- Footer -->
+		<th:block th:include="fragments/footer :: footer" />
+
+		<!-- 	<div class="bottom-right-container"> -->
+		<!-- 		<th:block th:include="fragments/debuginfo :: debuginfo" /> -->
+		<!-- 	</div> -->
+	</div>
+	<!-- JavaScripts -->
+	<th:block th:switch="${applicationEnvironment}">
+		<th:block th:case="'production'">
+			<!-- Application -->
+		</th:block>
+		<th:block th:case="*">
+		</th:block>
+	</th:block>
+
+	<!-- jQuery 2.2.3 -->
+	<script th:src="@{|${theme}/plugins/jQuery/jquery-2.2.3.min.js|}" src="/themes/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script th:src="@{|${theme}/plugins/jQueryUI/jquery-ui.min.js|}" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script>
+	<!-- Bootstrap 3.3.6 -->
+	<script th:src="@{|${theme}/bootstrap/js/bootstrap.min.js|}" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- Bootbox -->
+	<script th:src="@{|${theme}/plugins/bootbox/bootbox.min.js|}" src="/themes/lte/plugins/bootbox/bootbox.min.js"></script>
+	<!-- Slimscroll -->
+	<script th:src="@{|${theme}/plugins/slimScroll/jquery.slimscroll.min.js|}" src="/themes/lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script th:src="@{|${theme}/plugins/fastclick/fastclick.min.js|}" src="/themes/lte/plugins/fastclick/fastclick.min.js"></script>
+	<script th:src="@{|${theme}/plugins/toastr/toastr.min.js|}" src="/themes/lte/plugins/toastr/toastr.min.js"></script>
+	<!-- iCheck -->
+	<script th:src="@{|${theme}/plugins/iCheck/icheck.min.js|}" src="/themes/lte/plugins/iCheck/icheck.min.js"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{|${theme}/dist/js/app.min.js|}" src="/themes/lte/dist/js/app.min.js"></script>
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+	<script type="text/javascript" th:inline="javascript">
+		$(document).ready(
+			function () {
+				toastr.options = {
+					"closeButton": true
+				}
+				var info = /*[[${info}]]*/ "";
+				var error = /*[[${error}]]*/ "";
+				var success = /*[[${success}]]*/ "";
+				var warning = /*[[${warning}]]*/ "";
+				if (info)
+					toastr.info(info);
+				if (error)
+					toastr.error(error);
+				if (success)
+					toastr.success(success);
+				if (warning)
+					toastr.warning(warning);
+
+				// icheck
+				$('input').iCheck({
+					checkboxClass: 'icheckbox_square-blue',
+					radioClass: 'iradio_square-blue',
+					increaseArea: '20%' // optional
+				});
+				//datatable 
+				$('body').on('draw.dt', 'table', function () {
+					$(this).parents('div:hidden').fadeIn();
+					$(this).find('input:checkbox').iCheck({
+						checkboxClass: 'icheckbox_square-blue',
+						radioClass: 'iradio_square-blue',
+						increaseArea: '20%' // optional
+					});
+				});
+
+				$('body').on(
+					'click',
+					'a.selectAll',
+					function (e) {
+						$(this).parents('table').find(
+								'tbody input:checkbox')
+							.iCheck('toggle');;
+					});
+			});
+	</script>
+	<!-- Page JavaScripts -->
+	<th:block layout:fragment="scripts" />
+
+</body>
+
+</html>

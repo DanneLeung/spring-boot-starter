@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layouts/layout">
+<head>
+	<title>系统用户</title>
+</head>
+<th:block layout:fragment="styles">
+</th:block>
+
+<body>
+	<th:block layout:fragment="content">
+		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='系统用户', subtext='管理系统中用户数据，并且可以对用户进行角色授权'" />
+		<section class="content">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">系统用户</h3>
+					<div class="box-tools">
+						<a class="btn btn-sm btn-primary" th:href="@{/system/user/add}"><i
+							class="fa fa-fw fa-plus"></i><span th:text="创建新用户"></span></a>
+					</div>
+				</div>
+				<div class="box-body">
+				</div>
+			</div>
+		</section>
+	</th:block>
+	<th:block layout:fragment="scripts">
+		<script th:src="@{|${theme}/dist/js/jquery.spring-friendly.js|}" src="/themes/lte/dist/js/jquery.spring-friendly.js"></script>
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(function () {
+						
+			});
+		</script>
+	</th:block>
+</body>
+
+</html>

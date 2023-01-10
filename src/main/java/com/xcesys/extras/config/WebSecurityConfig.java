@@ -1,36 +1,32 @@
 package com.xcesys.extras.config;
 
+import com.xcesys.extras.framework.core.springsecurity.SpringDataTokenRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.xcesys.extras.framework.core.springsecurity.SpringDataTokenRepositoryImpl;
-
 @Configuration
-// @EnableWebSecurity
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	static final String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
-	@Autowired
-	UserDetailsService userDetailsService;
+  static final String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
+  @Autowired
+  UserDetailsService userDetailsService;
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		// @formatter:off
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    // @formatter:off
 		http
 				// .headers()
 				// TODO: (REWRITE) This enables opening javamelody in an iframe,
@@ -43,15 +39,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// .anyRequest()
 				// .requiresInsecure()
 				// .and()
-				.authorizeRequests()
+				.headers().frameOptions().sameOrigin()
+				.and().sessionManagement().sessionFixation().migrateSession()
+				.and().authorizeRequests()
+				.antMatchers("/static/**","**/*.js","**/*.css").permitAll()
 				// .expressionHandler(webSecurityExpressionHandler())
-				.antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/database/**")
-				.access("hasRole('DEVELOPER') and !isProductionEnvironment()").antMatchers("/javamelody/**")
-				.access("hasRole('DEVELOPER')").anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.permitAll().usernameParameter("username").passwordParameter("password").failureUrl("/login/fail")
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/database/**").access("hasRole('DEVELOPER') and !isProductionEnvironment()")
+				.antMatchers("/javamelody/**").access("hasRole('DEVELOPER')")
+				.anyRequest().authenticated()
+				.and().formLogin().loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password").failureUrl("/login/fail")
 				.defaultSuccessUrl("/login/success").and().logout().logoutUrl("/logout")
-				.logoutSuccessUrl("/logout/success").invalidateHttpSession(true).and().rememberMe()
-				.tokenRepository(springDataTokenRepository()).useSecureCookie(true).and().exceptionHandling()
+				.logoutSuccessUrl("/logout/success").invalidateHttpSession(true)
+//				.and().rememberMe().tokenRepository(springDataTokenRepository()).useSecureCookie(true)
+				.and().exceptionHandling()
 				// .accessDeniedPage("/error")
 				.and()
 				// .anonymous()
@@ -65,13 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// .expressionHandler(webSecurityExpressionHandler())
 				// .antMatchers("/switchuserto").hasRole("ROOT")
 				// .and()
-				.csrf().disable().httpBasic();
+				.csrf().disable().httpBasic().disable();
 	}
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/static/**").antMatchers("/static-*/**");
-	}
 
 	// @Bean
 	// public CustomWebSecurityExpressionHandler webSecurityExpressionHandler()

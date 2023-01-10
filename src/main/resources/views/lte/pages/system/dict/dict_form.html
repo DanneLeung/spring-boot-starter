@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layouts/layout">
+
+<head>
+	<title>编辑系统字典</title>
+</head>
+<th:block layout:fragment="styles">
+</th:block>
+
+<body>
+	<th:block layout:fragment="content">
+		<th:block th:include="fragments/pageheader :: pageheader" th:with="header='编辑系统字典', subtext='编辑指定字典数据'" />
+		<section class="content">
+			<div class="box box-primary">
+				<div class="box-header">	
+					<h3 class="box-title">编辑系统字典</h3>
+					<div class="box-tools"></div>
+				</div>
+				<div class="box-body">
+					<form id="dictForm" name="dictForm" th:action="@{|/system/dict/save${m.id==null?'':'/' + m.id}|}" method="post"
+					  class="form-horizontal" novalidate="novalidate">
+						<input id="id" type="hidden" name="id" th:value="${m.id}" />
+						<input id="typeId" type="hidden" name="typeId" th:value="${typeId}" />
+						<input id="_csrf" type="hidden" name="_csrf" value=""
+						/>
+						<div class="form-group">
+							<label class="control-label col-sm-2 required">名称</label>
+							<div class="col-sm-8">
+								<input id="name" name="name" th:value="${m.name}" class="form-control required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2 required">值</label>
+							<div class="col-sm-8">
+								<input id="value" name="value" min="1" type="text" th:value="${m.value}" class="form-control required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2 required">排序</label>
+							<div class="col-sm-8">
+								<input id="sort" name="sort" min="1" type="number" th:value="${m.sort}" class="form-control required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">描述</label>
+							<div class="col-sm-8">
+								<input id="description" name="description" th:value="${m.description}" class="form-control" />
+							</div>
+						</div>
+						<hr />
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-8">
+								<a class="btn btn-default" th:href="@{|/system/dict/${typeId}|}"> <i class="fa fa-fw fa-reply"></i> 返回
+								</a>
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-fw  fa-save"></i> 保存
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</th:block>
+	<th:block layout:fragment="scripts">
+		<script th:replace="fragments/validatejs :: validate" />
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(
+				function () {
+					/* form init  validation*/
+					var oldName = /*[[${m.name}]]*/ '';
+					var form = $("#dictForm");
+
+					// 提交当前活动的form，多个tab时候需要知道当前的tab
+					$(":submit", "#buttons").on("click", function (e) {
+						form.submit();
+					});
+
+					// JQuery validate 插件看文档
+					// form validation
+					form.validate({
+						rules: {
+							name: {
+								remote: "/system/dict/unique/"+ /*[[${typeId}]]*/"" + "?oldName=" +	oldName
+							}
+						},
+						messages: {
+							name: {
+								remote: "该名称的字典已存在!"
+							}
+						}
+					});
+				});
+		</script>
+	</th:block>
+</body>
+
+</html>

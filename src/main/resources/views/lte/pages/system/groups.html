@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:dt="http://github.com/dandelion/datatables"
+      layout:decorate="layouts/layout">
+    <head>
+        <title>Groups</title>
+    </head>
+    <body>
+
+        <th:block layout:fragment="content">
+            <th:block th:include="fragments/pageheader :: pageheader" th:with="header='Groups', subtext=''"/>
+
+            <table id="groups" class="table table-striped" dt:table="true" dt:sort="true" dt:filter="false" dt:lengthChange="false">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Groupname</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="group : ${groups}">
+                        <td th:text="${group.id}">2</td>
+                        <td th:text="${group.groupname}">admin</td>
+                        <td th:text="${group.groupRoles}">admin</td>
+                    </tr>
+                </tbody>
+            </table>
+        </th:block>
+
+    </body>
+</html>
